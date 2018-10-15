@@ -6,24 +6,24 @@ Handel immer schneller und der Einfluss von Konzernen wie Apple, Google und Face
 Dem entgegen steht eine wachsende Gemeinschaft von Menschen, die davon überzeugt sind, dass digitale 
 Werkzeuge der gesamten Menschheit nutzen müssen, die sogenannte Open Source-Community. 
 Den Verfechtern des Ansatzes quelloffener Software ist es zu verdanken, dass auch Menschen mit großem 
-Ehrgeiz aber beschränkten finanziellen Mitteln (oder einem beschränkten Zugang zu sozialen Netzwerken 
+Ehrgeiz aber beschränkten finanziellen Mitteln (oder einem beschränkten Zugang zu sozialem Kapital im Bourdieu'schen Sinne 
 sowie formaler Bildung) die Möglichkeit besitzen, diesen Wandel aktiv mitzugestalten und ihren eigenen 
 Weg zu beschreiten. Ebenso verfolgen viele Mitglieder dieser Gruppe das Ziel, die digitale Zukunft der 
 Erde sicher zu gestalten und alle Menschen an dessen Entwicklung teilhaben zu lassen.
 Eine Galionsfigur dieser Bewegung ist Linus Torvalds. Der gebürtige Finne ist der Entwickler des Linux-Kernels (1), 
 welcher heute die Grundlage unzähliger Betriebssysteme bildet und zu einer der am weitesten verbreiteten 
-Software-Entwicklungen weltweit zählt (2). Dieser Kernel ist immer frei verfügbar und sein Code öffentlich im 
+Software-Entwicklungen weltweit zählt (2). Dieser Kernel ist schon immer kostenlos verfügbar und sein Code öffentlich im 
 Internet einsehbar (3).
 Auch die Entwicklung von Git, einem Versionskontrollsystem, das die Entwicklung von Software nachvollziehbar macht, 
 ist auf Torvalds zurückzuführen. Eine Vielzahl von Software-Entwicklern Weltweit nutzen Git tagtäglich, 
 um ihre Kreationen von der ersten Idee bis zur Serienreife zu überwachen, um mit anderen Entwicklern zusammen 
 zu arbeiten, und um nicht zuletzt oft auch diese Entwicklungen über Services wie github.com und bitbucket.com öffentlich 
 nachvollziehbar und transparent zu gestalten. 
-Man kann Torvalds mit fug und recht einen der Vorreiter einer (be)frei(t)en digitalen Welt nennen. Natürlich ist mit 
+Man kann Torvalds mit Fug und Recht einen der Vorreiter einer (be)frei(t)en digitalen Welt nennen. Natürlich ist mit 
 quelloffener Software nicht allen Problemen der sogenannten 'Digitalisierung' beizukommen. Selbst wenn alle Quelltexte 
 jeglicher Computerprogramme für die Öffentlichkeit problemlos einsehbar wären, so ist noch lange nicht sicher, dass 
 Menschen diese auch verstehen und nachvollziehen können. Außerdem kann frei zugänglicher Quellcode jederzeit für düstere 
-Ziele wie schadsoftware und digitale Kriegsführung genutzt werden. Jedoch trägt Open Source einen nicht zu unterschätzenden Beitrag zur Chancengleichheit und zur fairen Verteilung von Wissen 
+Ziele wie Schadsoftware und digitale Kriegsführung missbraucht werden. Jedoch trägt Open Source einen nicht zu unterschätzenden Beitrag zur Chancengleichheit und zur fairen Verteilung von Wissen 
 für alle Menschen auf diesem Planeten bei. Durch Mittel wie Linux und Git, aber auch durch die von ihnen transportierte 
 Mentalität ihres Erfinders Linus Torvalds, wird dies möglich.
 
