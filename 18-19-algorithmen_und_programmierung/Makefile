@@ -2,6 +2,6 @@
 #yet to be completed and tested
 
 helloworld: helloworld.o
-	cc std=c99 -Wall helloworld.c -o helloworld
+	cc -std=c99 -Wall helloworld.c -o helloworld
 helloworld.o: helloworld.c
 
