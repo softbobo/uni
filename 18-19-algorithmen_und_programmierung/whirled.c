@@ -17,9 +17,8 @@ int main(int carg, const char **varg){
 
 const char *whirled(const char * const str)
 {
-    unsigned long long str_length = input_length(str, 0);
-    printf("kontrolle. eingegebener string: \"%s\"; 
-    länge des strings: \"%lld\"\n", str, str_length);
+    unsigned long long str_length = input_length(str[0], 0);
+    printf("kontrolle. eingegebener string: \"%s\", laenge des strings: \"%lld\"\n", str, str_length);
     //kontroll-ausgabe -> ist string korrekt übergeben worden und stimmt seine länge?
     return 0;
 }
@@ -27,10 +26,11 @@ const char *whirled(const char * const str)
 unsigned long long input_length(const char * const p_str, unsigned long long length)
 
 {
+    const char *copy_str[] = p_str;
     // SEG FAULT DA VERMUTLICH ZEIGER FALSCH INITIALISIERT
     //const char * copy_str = p_str;
-    if(*p_str != '\0')
-    return  input_length(p_str, length+1);
+    if(*copy_str[] != '\0')
+    return  input_length(copy_str, length+1);
     else return  length;
 
 }

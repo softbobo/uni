@@ -1,6 +1,7 @@
+//uebung 14.11.2018 - vergleicht zwei strings
+//string-matching
+
 #include<stdio.h>
-
-
 
 int search(char* heuhaufen, char* nadel, int len1, int len2)
 {

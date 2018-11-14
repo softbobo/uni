@@ -10,6 +10,7 @@ getwellsoon
 value
 whirled
 tigersearch
+cheese
 
 #ignore vscode specifics
 /.vscode/
@@ -20,3 +21,6 @@ tigersearch
 #ignore archives
 *.zip
 *.tar
+
+#ignore temporary exercises
+/temp_*/*
