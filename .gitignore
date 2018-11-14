@@ -1,0 +1,22 @@
+
+
+#ignore binaries
+whilegame
+euclid
+helloworld
+functions
+squareroot
+getwellsoon
+value
+whirled
+tigersearch
+
+#ignore vscode specifics
+/.vscode/
+
+#ignore swapfiles
+*.swp
+
+#ignore archives
+*.zip
+*.tar
