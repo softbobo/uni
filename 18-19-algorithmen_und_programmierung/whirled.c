@@ -6,7 +6,7 @@ void *malloc(unsigned long);
 const char *whirled(const char * const str); //task defined by function
 
 unsigned long long input_length(const char * const p_str, unsigned long long length); 
-const char* taz(const char* const str, char* new_str, unsigned long long i);
+const char* taz(const char* const str, char* new_str, unsigned long long i, unsigned long long pos);
 
 
 int main(int carg, const char **varg){
@@ -28,7 +28,7 @@ const char *whirled(const char * const str)
     //debug-feature - are args handed over correctly?
     
     char *new_str = (char*) malloc(str_length); //new array to twist that shit
-    const char* output = taz(str, new_str, str_length); //function call for result - check if correct
+    const char* output = taz(str, new_str, str_length, 0); //function call for result - check if correct
     
     return output;
 }
@@ -47,7 +47,7 @@ unsigned long long input_length(const char * const p_str, unsigned long long len
     return 0;
 }
 
-const char* taz(const char* const str, char* new_str, unsigned long long i)
+const char* taz(const char* const str, char * new_str, unsigned long long i, unsigned long long pos)
 {/*whirles that string 'round like taz the tasmanian devil
  takes input-string recursively; number of recursive steps is determined by index 'i'
  which is equivalent to the length of the input string 'str'. then iterates over every
@@ -58,28 +58,21 @@ const char* taz(const char* const str, char* new_str, unsigned long long i)
     printf("kontrolle. string 1: \"%s\". ", str);
     printf("index: \"%lld\".\n", i);
     //debug-feature: all args correct?
-
-    unsigned long long pos = 0; //increments for every recursive step taz() does 
-    int temp=0; //temporary value for calculation
     
     if(i==0) //exit-feature
         return new_str;
     
     //for CAPITALS
     else if((65<=str[i]) && (str[i]<=90)){
-        temp = 65-(int)str[i];
-        new_str[pos]=90+temp;
-        pos++;
-        printf("step \"%lld\" current new string: \"%s\". \n", pos, new_str);
+        new_str[pos]=90+(65-(int)str[i]);
+        //printf("step \"%lld\" current new string: \"%s\". \n", pos, new_str);
     }
     
     //for small letters 
     else if((97<=str[i]) && (str[i]<=122)){
-        temp = 97-(int)str[i];
-        new_str[pos]=122+temp;
-        pos++;
-        printf("step \"%lld\" current new string: \"%s\". \n", pos, new_str);
+        new_str[pos]=122+(97-(int)str[i]);
+        //printf("step \"%lld\" current new string: \"%s\". \n", pos, new_str);
     }
 
-    return taz(str, new_str, i-1);
+    return taz(str, new_str, i-1, pos+1);
 }
