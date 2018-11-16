@@ -1,3 +1,4 @@
+
 /* AuP WS 2018/19, bewertete Aufgabe 3 */
 
 int printf(const char * restrict, ...);
@@ -14,11 +15,10 @@ int main(int carg, const char **varg){
     if (carg != 2) 
     return -1; 
     
-    printf("Die verwürfelte Version von \"%s\" ist \"%s\".\n", 
-    varg[1],whirled(varg[1]));
-    
+    printf("Die verwürfelte Version von \"%s\" ist \"%s\".\n", varg[1], whirled(varg[1]));
     return 0; 
 }
+
 
 const char *whirled(const char * const str)
 {
@@ -27,8 +27,8 @@ const char *whirled(const char * const str)
     printf("kontrolle. eingegebener string: \"%s\", laenge des strings: \"%lld\"\n", str, str_length);
     //debug-feature - are args handed over correctly?
     
-    char *new_str = (char*) malloc(str_length); //new array to twist that shit
-    const char* output = taz(str, new_str, str_length, 0); //function call for result - check if correct
+    char *new_str = (char*)malloc(str_length+1); //new array to twist that shit
+    const char* output = taz(str, new_str, str_length-1, 0); //function call for result - check if correct
     
     return output;
 }
@@ -55,24 +55,24 @@ const char* taz(const char* const str, char * new_str, unsigned long long i, uns
  variable pos, which starts from 0 and is the index of the output string 'str_new'.
  depending on the ascii code of respective char at every step, the new char gets assigned
  a new ascii value from the opposite of the alphabet. */
-    printf("kontrolle. string 1: \"%s\". ", str);
-    printf("index: \"%lld\".\n", i);
+    printf("To taz: \"%s\", index: %llu, char at index: %c\n", str, i, str[i]);
     //debug-feature: all args correct?
     
-    if(i==0) //exit-feature
+    //exit-feature
+    if(str[pos]==0){ 
         return new_str;
-    
-    //for CAPITALS
-    else if((65<=str[i]) && (str[i]<=90)){
-        new_str[pos]=90+(65-(int)str[i]);
+    }//for CAPITALS
+    else if(str[i] >= 65 && str[i] <= 90){
+        new_str[pos] = 65 + (90 - str[i]);
         //printf("step \"%lld\" current new string: \"%s\". \n", pos, new_str);
-    }
-    
-    //for small letters 
-    else if((97<=str[i]) && (str[i]<=122)){
-        new_str[pos]=122+(97-(int)str[i]);
+    }//for small letters 
+    else if(str[i] >= 97 && str[i] <= 122){
+        new_str[pos] = 97 + (122 - str[i]);
         //printf("step \"%lld\" current new string: \"%s\". \n", pos, new_str);
+    }//all other chars
+    else{
+        new_str[pos] = str[i];
     }
-
+    //printf("Tazzed: \"%s\"\n", new_str);
     return taz(str, new_str, i-1, pos+1);
 }
