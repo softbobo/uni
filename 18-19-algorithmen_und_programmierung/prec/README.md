@@ -7,3 +7,4 @@ The comma is represented by a comma ',', not by a dot '.'.
 The dot can be used as an optional sign to better readability of big numbers.
 Numbers may be signed. Per default, numbers are positive.
 The output should contain only the calculated result, w/o any 'odd zeros', followed by a newline '/n'.
+The code may only be decoded in ASCII.
