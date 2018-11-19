@@ -26,3 +26,6 @@ pointerex_3
 
 #ignore temporary exercises
 /temp_*/*
+
+#ignore .pdf's
+*.pdf
