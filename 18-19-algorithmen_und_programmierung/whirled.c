@@ -24,10 +24,10 @@ const char *whirled(const char * const str)
 {
     unsigned long long len = input_length(str,0); //determine input-length
 
-    printf("kontrolle. eingegebener string: \"%s\", laenge des strings: \"%lld\"\n", str, len);
+    //printf("kontrolle. eingegebener string: \"%s\", laenge des strings: \"%lld\"\n", str, len);
     //debug-feature - are args handed over correctly?
     
-    char *new_str = (char*)malloc(len); //new array to twist that shit
+    char *new_str = (char*)malloc(len+1); //new array to twist that shit
     const char* output = taz(str, new_str, len-1, 0); //function call for result - check if correct
     
     return output;
@@ -52,7 +52,7 @@ const char* taz(const char* const old_str, char * new_str, unsigned long long i,
  variable j, which starts from 0 and is the index of the output string 'str_new'.
  depending on the ascii code of respective char at every step, the new char gets assigned
  a new ascii value from the opposite of the alphabet. */
-    printf("To taz: \"%s\", index: %llu, char at index: %c\n", old_str, i, old_str[i]);
+    //printf("To taz: \"%s\", index: %llu, char at index: %c\n", old_str, i, old_str[i]);
     //debug-feature: all args correct?
     
     //exit-feature
@@ -61,11 +61,11 @@ const char* taz(const char* const old_str, char * new_str, unsigned long long i,
     }//for CAPITALS
     else if(old_str[i] >= 65 && old_str[i] <= 90){
         new_str[j] = 65 + (90 - old_str[i]);
-        printf("step \"%llu\" current new char: %c. \n", j, new_str[j]);
+        //printf("step \"%llu\" current new char: %c. \n", j, new_str[j]);
     }//for small letters 
     else if(old_str[i] >= 97 && old_str[i] <= 122){
         new_str[j] = 97 + (122 - old_str[i]);
-        printf("step \"%llu\" current new char: %c. \n", j, new_str[j]);
+        //printf("step \"%llu\" current new char: %c. \n", j, new_str[j]);
     }//all other chars
     else{
         new_str[j] = old_str[i];
