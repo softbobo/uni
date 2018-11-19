@@ -17,6 +17,7 @@ pointerex_3
 prec
 #ignore vscode specifics
 /.vscode/
+uni.code-workspace
 
 #ignore swapfiles
 *.swp
