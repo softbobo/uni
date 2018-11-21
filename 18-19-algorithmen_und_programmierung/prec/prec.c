@@ -36,37 +36,42 @@ int main(int argc, char **argv){
     return 0;
 }
 
-char* single_str(char **str_old, char* str_new, int max, int j){
+char* single_str(char **str_old, char* str_new, int max){
     /*single_str takes all input-strings and puts them into one long single array
     and gives that back to main()*/
 
     int h;
     for(h = 1; h<=max; h++){
-        char* temp_arr = str_old[h];
-        int i;
-        for(i = 1; i<=max; i++){
-            switch(temp_arr[i]){
-                case '0':
-                case '1':                               //intentional fallthrough here
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                case '.':
-                case ',':
-                case '+':
-                case '-': temp_arr[i] = str_new[j];     //return-string only gets populated with 'wanted' chars
-                    break;
-                case '/0': return str_new;              //exit when array reaches end
-                    break;
-                default: j=j;                           /*default case to 'do nothing' when the index reaches some
-                                                        'unwanted' char. really necessary? implemented correctly?*/
+        char* temp_arr_1 = str_old[h];                      //populate temp_arr_1 with the single string of **argv
+        char* temp_arr_2 = sizeof(temp_arr_1);              //while temp_arr_1 is the 'uncleaned' string, temp_arr_2 is its 'cleaned' version
+        int i, j;
+        for(i = 0; temp_arr_1[i] != '/0'; i++){             //parse through temp_arr
+                switch(temp_arr[i]){
+                    case '0':
+                    case '1':                               //intentional fallthrough here
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                    case '.':
+                    case ',':
+                    case '+':
+                    case '-': {
+                        temp_arr_2[j] = temp_arr_2[j];
+                        j++;}                                   //return-string only gets populated with 'wanted' chars
+                        break;
+                    default: j=j;                           /*default case to 'do nothing' when the index reaches some
+                                                            'unwanted' char. really necessary? implemented correctly?*/
+               }
+            return temp_arr_2;                              
             }
+        str_new += temp_arr_2;                              //cleaned versions of single strings get added to one big long string
         }
-    }
-}   
+    return str_new;
+}
+
 
