@@ -18,5 +18,6 @@ Zum einen soll die Matrix als graphische Repräsentation der gefliesten Wand dar
 
 ### Abgabe
 Lediglich die Datei _beleg.cpp_ soll, unarchiviert, über http://if-belege.informatik.tu-chemnitz.de/ bis zum 13.01.2019 hochgeladen werden. Der Zugang zu dieser URL funktioniert nur über VPN und Campusnetz. Getestet werden kann die Kompilierbarkeit per ssh unter rotuma.informatik.tu-chemnitz.de .
+Die Formalen Parameter müssen zwingend eingehalten werden
 
 Alle Informationen auch unter https://www.tu-chemnitz.de/informatik/friz/Grundl-Inf/Beleg/texte/beleg118.php
