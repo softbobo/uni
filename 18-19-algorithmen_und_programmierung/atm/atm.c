@@ -13,7 +13,8 @@ int main(int argc, char **argv){
   int req = atoi(argv[1]);                  //read in required amount
   int a,b,c,d;                        //values for amount of every bill
   int rest = 0;                          //remaining amount after each division
-  if(req <= 0 || req >= 2000 || req % 5 != 0)
+  if(req <= 0 || req >= 2000 || req % 5 != 0){
+    printf('0')
     return 0;
   else{
     a = req/50;
