@@ -2,9 +2,10 @@ typedef struct charset {
   unsigned char bits[7];
 } charset_t;
 
-typedef enum { CS_UNION,  // Vereinigung
-	       CS_CUT,    // Schnitt
-	       CS_SYMDIFF // Symmetrische Differenz 
+typedef enum { 
+	CS_UNION,  // Vereinigung
+	CS_CUT,    // Schnitt
+	CS_SYMDIFF // Symmetrische Differenz 
 } csopt_t;
 
 charset_t *charset_new(const char* elements);
