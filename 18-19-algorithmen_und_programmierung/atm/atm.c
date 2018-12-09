@@ -14,8 +14,7 @@ int main(int argc, char **argv){
   int a,b,c,d;                        //values for amount of every bill
   int rest = 0;                          //remaining amount after each division
   if(req <= 0 || req >= 2000 || req % 5 != 0){
-    printf("%d \n", 0);
-    return 0;
+    printf("%c \n", '0');
   }
   else{
     a = req/50;
