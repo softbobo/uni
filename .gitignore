@@ -1,5 +1,3 @@
-
-
 #ignore binaries
 whilegame
 euclid
@@ -16,6 +14,7 @@ pointerex_2
 pointerex_3
 prec
 atm/atm
+charset/charset
 #ignore vscode specifics
 /.vscode/
 uni.code-workspace
@@ -32,3 +31,6 @@ uni.code-workspace
 
 #ignore .pdf's
 *.pdf
+
+#ignore compiling-error txt
+err.txt
