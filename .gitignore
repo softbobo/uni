@@ -14,7 +14,7 @@ pointerex_2
 pointerex_3
 prec
 atm/atm
-charset/charset
+charset
 #ignore vscode specifics
 /.vscode/
 uni.code-workspace
