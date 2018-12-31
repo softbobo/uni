@@ -15,6 +15,7 @@ pointerex_3
 prec
 atm/atm
 charset
+ringshift
 #ignore vscode specifics
 /.vscode/
 uni.code-workspace
