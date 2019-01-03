@@ -2,12 +2,12 @@
 
 This cheatsheet is an extension for the docs provided by Andreas Mueller and Ariane Jacobs for the lectures in Informatik I at TU Chemnitz in Winter 2018/19. It is meant to provide information on all C++ syntax and functions used in the lecture and then some. No guarantee for correctness of any kind is given. The document was written by Softbobo.
 
-### Commentaries
+### Comments
 
 ` /* This is a 
 Multi-Line comment*/ `
 
-`//This comment ends at the end of the Line`\
+`//This comment ends at the end of the Line`
 ### Datatypes
 
 Integers: `int`\
@@ -26,6 +26,13 @@ This is used to include files (e.g. headers/libraries) `#include<cmath.h>`
 ### Variables
 
 Declare an int: `int var;` \
+&ensp;&ensp;attributes (stand-alones) for `int` are: `unsigned`,`short`, `long`, and `long long`\
+&ensp;&ensp;find the numeric limits of a certain type on your system:/
+&ensp;&ensp;```c++
+numeric_limits<type>::min(); or max()``` 
+&ensp;&ensp;memory used by a certain data type is/
+&ensp;&ensp;```c++ sizeof(type);```
+
 Declare multiple floats: `float var_1, var_2, var_3;` \
 Declare a char and initialize with a distinct value: `char letter = 'z';`
 
