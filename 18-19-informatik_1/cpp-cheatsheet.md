@@ -24,7 +24,6 @@ This is used to include files (e.g. headers/libraries) `#include<cmath>`
 'using' is the keyword to declare a namespace for the whole file: `using namespace std`;
 
 ### Variables
-
 Declare an int: `int var;` \
 &ensp;&ensp;attributes (stand-alones) for `int` are: `unsigned`,`short`, `long`, and `long long`\
 &ensp;&ensp;find the numeric limits of a certain type on your system (library: <limits>):/
@@ -39,11 +38,28 @@ Declare multiple floats: `float var_1, var_2, var_3;` \
 Declare a char and initialize with a distinct value: `char letter = 'z';`
 
 ### Basic I/O
-
-To include the relevant library: `#include<iostream>`\
+The relevant library: `iostream`\
 Output formatted text: `cout << "Write your Text here";`\
 Simple user input to a variable (must be declared beforehand): `cin >> var;`\
 Linebreak: `endl;`
+
+### Conditionals
+Conditionals take an expression and evaluate if it's true or false. 
+
+#### If/Else
+'If' doesn't always need an 'Else' but vice-versa 'Else' can't exist without an 'If'.
+The condition to evaluate is always in brackets '()'. If there is more than one condition
+you concatenate those with logic operators. If there is more than one statement to execute
+(code to execute after an 'If' or 'Else' if it evaltuates to true) it needs to be in curly 
+braces. Syntax:
+
+```c++
+if(var_1 > var_2 && var_2 >= var_3)
+{
+    cout << "var_1 is the biggest value" << endl;
+    cout << "I will add var_3 to var_2" << endl;
+    var_2 += var_3; 
+}
 
 ### Operators
 
@@ -62,7 +78,6 @@ Increment/decrement var_1 by 1 __before__ adding its value to var_2: `var_2 += +
  
 #### Logic Operators
 
-Logic AND: `
 
 #### Relational Operators
 
@@ -74,5 +89,7 @@ Is var_1 greater or equal to var_2: `var_1 >= var_2`\
 Is var_1 unequal to var_2: `var_1 != var_2`\
 
 #### Bitwise Operators
+
+### Namespaces
 
 
