@@ -10,7 +10,7 @@ struct fliese{
 ```
 
 ### Eingabe:
-Breite sowie Länge des Raumes sind auf __max 8m__ festgelegt, Breite und Länge der Fliesen auf __min 10 cm__. Fugen sind zu vernachlässigen. Wand- sowie Fliesengröße werde vom User festgelegt. Die Ausrichtung der Fliesen orientiert sich an der Ecke oben links. Fliesen sind entweder quasratisch. Falls sie nicht quadratisch sein sollten, beginnt jede zweite Fliesenreihe mit einer halben Fliese. Außerdem ist bei nichtquadratischen Fliesen die Breite einer Fliese (x-Achse) immer ein _ganzzahliges Vielfaches_ ihrer Länge (y-Achse).
+Breite sowie Länge des Raumes sind auf __max 8m__ festgelegt, Breite und Länge der Fliesen auf __min 10 cm__. Fugen sind zu vernachlässigen. Wand- sowie Fliesengröße werde vom User festgelegt. Die Ausrichtung der Fliesen orientiert sich an der Ecke oben links. Fliesen sind entweder quadratisch. Falls sie nicht quadratisch sein sollten, beginnt jede zweite Fliesenreihe mit einer halben Fliese. Außerdem ist bei nichtquadratischen Fliesen die Breite einer Fliese (x-Achse) immer ein _ganzzahliges Vielfaches_ ihrer Länge (y-Achse).
 Die Fliesen selbst kosten 0,01€/cm², wobei jedoch nur ganze Fliesen oder Pakete á 10 Fliesen erhältlich sind, die wiederum 75% der Summe des Einzelpreises der 10 Fliesen kosten.
 
 ### Ausgabe:
