@@ -16,6 +16,7 @@ prec
 atm/atm
 charset
 ringshift
+beleg
 #ignore vscode specifics
 /.vscode/
 uni.code-workspace
