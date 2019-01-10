@@ -3,6 +3,9 @@
 Listing of useful commands mainly for the POSIX-compliant software on Linux Systems.
 No guarantee for factual correctness is given.
 
+## dd
+dd is capable of copying and converting files according to specified operands. to use it to create a live usb distro from an .iso type:
+```sudo dd bs=4M if=/path/to/iso/file of=path/to/usb/key status=progress```
 ## fdisk
 List all partitions (including mounted): `sudo fdisk -l` 
 ## OpenSSH
