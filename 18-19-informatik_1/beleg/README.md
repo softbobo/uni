@@ -21,3 +21,11 @@ Lediglich die Datei _beleg.cpp_ soll, unarchiviert, über http://if-belege.infor
 Die Formalen Parameter müssen zwingend eingehalten werden
 
 Alle Informationen auch unter https://www.tu-chemnitz.de/informatik/friz/Grundl-Inf/Beleg/texte/beleg118.php
+
+### Test Cases
+1. input okay, fliesen quadratisch                              -> wand 400x400, fliesen 20x20
+                                                                -> gewünschter output: 20x20 matrix, jeder eintrag '1 | 1'
+2. input okay, fliesen nicht quadratisch:                       -> wand 400x400, fliesen 40x20
+                                                                -> gewünschter output: 10x20 matrix, jeder eintrag in zeilen mit ungerader nummer '1 | 1', jeder erste und letzte eintrag in zeilen mit gerader nummer lautet '0.5 | 1'
+3. input okay, letzte fliesenzeile hat keine ganzzahlige höhe:  
+4. input okay, fliesen quadratisch aber letzte spalte keine ganzzahl:   
