@@ -5,13 +5,13 @@ Student: Robert Schulze, Matrikelnummer: 555625 */
 
 /* next steps:
 - write check if temp_y is an int multiple of temp_x in tile_in()
-- write array_allocator(), that takes args - wall and tile - from main() and returns an array
-- how to allocate array correctly and pass correctly?
-- free() array correctly
-- do i really need long long as iterators?
+- why do i need to enter parameters several times (the same value) when input is wrong and func starts again
+- check max iteration in printing function, doesnt work for floats
+- enhance allocator for y-axis
+- unify max iterators in allocating and printing functions
 - check back for() terminating conditions and unify max iteration length
-- write array_printer(), that takes array from main() and prints array to console 
 - how to determine ends of each "line of tiles" (aka 2nd array dimension)
+- floats on this system have 4 Bytes (5 decimals) -> how do i array_size the output right?
 - remove all debug printouts
 */
 
@@ -25,8 +25,8 @@ struct fliese{
 
 struct fliese* tile_in(struct fliese *p_tile);
 struct fliese* wall_in(struct fliese *p_wall);
-struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum, long long size);
-void array_printer(struct fliese** raum, long long size);
+struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum);
+void array_printer(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum);
 
 int main(void){
     
@@ -38,19 +38,19 @@ int main(void){
     wall_in(p_wall);
     cout << "Debug-Output. Wandbreite: " << p_wall->x << " Wandhoehe: " << p_wall->y << endl;   //delete before handing in
     
-    const long long rows = (p_wall->x/p_tile->x);
-    const long long cols = (p_wall->y/p_tile->y);
+    const int rows = (p_wall->x/p_tile->x + 1);
+    cout << "Debug-Output. Anzahl Zeilen: " << rows << endl;   //delete before handing in
+    const int cols = (p_wall->y/p_tile->y + 1);
+    cout << "Debug-Output. Anzahl Spalten: " << cols << endl;   //delete before handing in
     struct fliese** raum = new struct fliese*[rows];
     for(int i = 0; i < rows; i++) {                                                            //allocate array dynamically
         raum[i] = new fliese[cols];
     }
-    cout << "Debug-Output. Struct-Größe in Byte " << sizeof(fliese) << endl;                    //delete befor handing in
-    cout << "Debug-Output. Array-Größe in Byte " << sizeof(raum[rows][cols]) << endl;                       //delete before handing in
-    
-    array_allocator(p_tile, p_wall, raum, (p_wall->y/p_tile->y));
+
+    array_allocator(p_tile, p_wall, raum);
     
     cout << "Der Verlegeplan für die eingegebenen Masze sieht wie folgt aus: " << endl;
-    array_printer(raum, (p_wall->y/p_tile->y));
+    array_printer(p_tile, p_wall, raum);
 
     free(p_tile);
     free(p_wall);
@@ -78,7 +78,7 @@ struct fliese* tile_in(fliese *p_tile) {
             cout << "Error: Fliesenlaenge muss mindestens 10 cm betragen!" << endl;
             tile_in(p_tile);
         }
-//        else if((temp_y - (long long)temp_y == 0)) { //is this a correct check if y is an int?
+//        else if((temp_y - (int)temp_y == 0)) { //is this b correct check if y is an int?
 //            cout << "Error: Fliesenlaenge muss ein ganzzahliges Vielfaches der Breite sein!" << endl;
 //            tile_in(p_tile);
 //        }
@@ -113,26 +113,39 @@ struct fliese* wall_in(struct fliese *p_wall) {
     return p_wall;
 }
 
-struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  struct fliese** raum, long long size) {
-    if(p_tile->x == p_tile->y) {
-        //fill array if tile length and height are equal
-        for(long long i = 0; i < (p_wall->x / p_tile->x); i++) {
-            cout << "allocated " << i << " line" << endl;
-            for(long long j = 0; j <= size; j++) {
-                raum[i][j].x = 1;
-                raum[i][j].y = 1;
+struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  struct fliese** raum) {
+    if(p_tile->y == p_tile->x) {                          //fill array if tile length and height are equal
+        float dim_y = p_wall->y;
+        for(int i = 0, a = 0; a < p_wall->y; a+= p_tile->y, i++) {
+            float dim_x = p_wall->x;                      //create local variable that shrinks with each allocated 'tile'
+            for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
+                if(dim_x >= p_tile->x) {
+                    raum[i][j].x = 1;
+                    dim_x -= p_tile->x;
+                }
+                else {
+                    raum[i][j].x = dim_x/p_tile->x;         //allocate last tile, if a full one doesn't fit
+                    dim_x -= p_tile->x;
+                }
+                if(dim_y >= p_tile->y) {
+                    raum[i][j].y = 1;
+                }
+                else {
+                    raum[i][j].y = dim_y/p_tile->y;
+                }
             }
+        dim_y -= p_tile->y;                                 //decrement the remaining height of the wall with every allocated row
         }
     }
-
     return raum;
 }
 
-void array_printer(struct fliese** raum, long long size) {
-    for(long long i = 0; raum[i]; i++) {
-            for(long long j = 0; j < size ; j++) {
+void array_printer(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum) {
+    //prints array iterating through each row
+    for(int i = 0; raum[i]; i++) {
+            for(int j = 0, a = p_wall->x ; a >= 0; a-= p_tile->x, j++) {
                 cout << raum[i][j].x << " " << raum[i][j].y << " | ";
             }
         cout << endl;
-        }
+        } 
 }
