@@ -29,3 +29,5 @@ Alle Informationen auch unter https://www.tu-chemnitz.de/informatik/friz/Grundl-
                                                                 -> gewünschter output: 10x20 matrix, jeder eintrag in zeilen mit ungerader nummer '1 | 1', jeder erste und letzte eintrag in zeilen mit gerader nummer lautet '0.5 | 1'
 3. input okay, letzte fliesenzeile hat keine ganzzahlige höhe:  
 4. input okay, fliesen quadratisch aber letzte spalte keine ganzzahl:   
+5. edge case: input okay, fliesen quadratisch, wand/fliesen maximal: 
+6. input okay, fliesen und wand nicht quadratisch:
