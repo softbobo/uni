@@ -4,14 +4,12 @@ Student: Robert Schulze, Matrikelnummer: 555625 */
 // task defined in README
 
 /* next steps:
-- get rid of segfault for rectangular walls
-- implement input prompt to print out array with changed sides
-- check back on tot number of needed tiles (not an int for floating point inputs of tile sizes)
 - write check if temp_y is an int multiple of temp_x in tile_in()
-- why do i need to enter parameters several times (the same value) when input is wrong and func starts again
 - enhance allocator for non-squared tiles (half a tile every 2nd row)
 - floats on this system have 4 Bytes (5 decimals) -> how do i array_size the output right?
 - remove all debug printouts
+- implement input prompt to print out array with changed sides
+- why do i need to enter parameters several times (the same value) when input is wrong and func starts again
 */
 
 #include<iostream>
@@ -42,8 +40,7 @@ int main(void){
     struct fliese** raum = new struct fliese*[rows];
     for(int i = 0; i < rows; i++) {                                                            //allocate array dynamically
         raum[i] = new fliese[cols];
-    }
-    cout << "debug - number of rows: " << rows << " cols: " << cols << endl;
+    };
 
     array_allocator(p_tile, p_wall, raum);
     
@@ -60,7 +57,13 @@ int main(void){
     for(int i = 0; i < rows_new; i++) {                                                         
         raum_new[i] = new fliese[cols_new];
     }
-    cout << "debug out. new array has rows: " << rows_new << " cols: " << cols_new << endl;
+    
+    //char prompt;
+    //cout << "Um vorhergehende Funktionen noch einmal mit um 90 Grad gedrehten Fliesen durchzufuehren, bitte 'j' druecken." << endl;
+    //cout << "Andernfalls 'n' druecken." << endl;
+    //cin >> prompt;
+    //if(prompt != 'j')
+    //    return 0;
     cout << "Folgende Ergebnisse erhaelt man nach Drehung der Fliesen um 90 Grad (also vertauschen von Laenge und Breite)." << endl;
     array_allocator(p_tile_new, p_wall, raum_new);
     array_printer(p_tile_new, p_wall, raum_new);
@@ -133,29 +136,23 @@ struct fliese* wall_in(struct fliese *p_wall) {
 }
 
 struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  struct fliese** raum) {
-    float dim_y = p_wall->y;
-        cout << "debug. entered allocating func" << endl; 
+    float dim_y = p_wall->y; 
         for(int i = 0, a = 0; a < p_wall->y; a += p_tile->y, i++) {
             float dim_x = p_wall->x;                      //create local variable that shrinks with each allocated 'tile'
-            cout << "debug. entered first allocating loop." << endl;
             for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
                 if(dim_x >= p_tile->x) {
                     raum[i][j].x = 1;
                     dim_x -= p_tile->x;
-                    cout << "aalocated val " << raum[i][j].x << " at position " << i << "," << j << endl;
                 }
                 else {
                     raum[i][j].x = dim_x/p_tile->x;         //allocate last tile, if a full one doesn't fit
                     dim_x -= p_tile->x;
-                    cout << "aalocated val " << raum[i][j].x << " at position " << i << "," << j << endl;
                 }
                 if(dim_y >= p_tile->y) {
                     raum[i][j].y = 1;
-                    cout << "aalocated val " << raum[i][j].x << " at position " << i << "," << j << endl;
                 }
                 else {
                     raum[i][j].y = dim_y/p_tile->y;
-                    cout << "aalocated val " << raum[i][j].x << " at position " << i << "," << j << endl;
                 }
             }
         dim_y -= p_tile->y; 
@@ -165,6 +162,7 @@ struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  s
 
 void array_printer(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum) {
     //prints array iterating through each row
+    cout << cout.precision(3);
     for(int i = 0, a = 0; a < p_wall->y; a+= p_tile->y, i++) {
             for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
                 if(raum[i][j].x > 0 && raum[i][j].y > 0)
@@ -178,6 +176,7 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     /*this function takes measures of tiles and room to calc the area, calcs the total number
     of tiles via iterating over the raum array, and then compares prices to print out the cheapest
     (and why so)*/
+    cout << cout.precision(3);
     const float price_cm2 = 0.01;
     float wall_area = p_wall->x * p_wall->y;
     float tile_area = p_tile->x * p_tile->y;
@@ -190,8 +189,8 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
                 sum_tiles += raum[i][j].x * raum[i][j].y;
             }
         }
-    if(sum_tiles - (int)sum_tiles > 0)                          //if the sum of tiles needed is not an int, increment it
-        sum_tiles += (int)sum_tiles++;
+    if(sum_tiles - (int)sum_tiles > 0)                          //if the sum of tiles needed is not an int, add 1 minus whatever is behind the dot
+        sum_tiles += 1 - (sum_tiles - (int)sum_tiles);
     cout << "Die Gesamtzahl der benoetigten Fliesen beträgt: " << sum_tiles << endl;
 
     int num_packages = sum_tiles/10;
