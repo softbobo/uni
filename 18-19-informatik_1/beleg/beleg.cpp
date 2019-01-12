@@ -5,6 +5,8 @@ Student: Robert Schulze, Matrikelnummer: 555625 */
 
 /* next steps:
 - get rid of segfault for rectangular walls
+- implement input prompt to print out array with changed sides
+- check back on tot number of needed tiles (not an int for floating point inputs of tile sizes)
 - write check if temp_y is an int multiple of temp_x in tile_in()
 - why do i need to enter parameters several times (the same value) when input is wrong and func starts again
 - enhance allocator for non-squared tiles (half a tile every 2nd row)
@@ -35,12 +37,13 @@ int main(void){
     struct fliese *p_wall = new fliese;
     wall_in(p_wall);
     
-    const int rows = (p_wall->x/p_tile->x + 1);
-    const int cols = (p_wall->y/p_tile->y + 1);
+    const int cols = (p_wall->x/p_tile->x + 2);
+    const int rows = (p_wall->y/p_tile->y + 2);
     struct fliese** raum = new struct fliese*[rows];
     for(int i = 0; i < rows; i++) {                                                            //allocate array dynamically
         raum[i] = new fliese[cols];
     }
+    cout << "debug - number of rows: " << rows << " cols: " << cols << endl;
 
     array_allocator(p_tile, p_wall, raum);
     
@@ -51,14 +54,14 @@ int main(void){
     //allocate new tile and new array with changed parameters, call prev funcs again
     struct fliese* p_tile_new = new fliese;
     parameter_changer(p_tile, p_tile_new);
-    const int rows_new = (p_wall->x/p_tile_new->x + 1);
-    const int cols_new = (p_wall->y/p_tile_new->y + 1);
+    const int cols_new = (p_wall->x/p_tile_new->x + 2);
+    const int rows_new = (p_wall->y/p_tile_new->y + 2);
     struct fliese** raum_new = new struct fliese*[rows_new];
     for(int i = 0; i < rows_new; i++) {                                                         
         raum_new[i] = new fliese[cols_new];
     }
     cout << "debug out. new array has rows: " << rows_new << " cols: " << cols_new << endl;
-    cout << "Folgende Ergebnisse erhält man nach Drehung der Fliesen um 90 Grad (also vertauschen von Laenge und Breite)." << endl;
+    cout << "Folgende Ergebnisse erhaelt man nach Drehung der Fliesen um 90 Grad (also vertauschen von Laenge und Breite)." << endl;
     array_allocator(p_tile_new, p_wall, raum_new);
     array_printer(p_tile_new, p_wall, raum_new);
     price_compare(p_tile_new, p_wall, raum_new);
@@ -130,52 +133,33 @@ struct fliese* wall_in(struct fliese *p_wall) {
 }
 
 struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  struct fliese** raum) {
-    if(p_tile->y == p_tile->x) {                          //fill array if tile length and height are equal
-        float dim_y = p_wall->y;
+    float dim_y = p_wall->y;
+        cout << "debug. entered allocating func" << endl; 
         for(int i = 0, a = 0; a < p_wall->y; a += p_tile->y, i++) {
             float dim_x = p_wall->x;                      //create local variable that shrinks with each allocated 'tile'
+            cout << "debug. entered first allocating loop." << endl;
             for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
                 if(dim_x >= p_tile->x) {
                     raum[i][j].x = 1;
                     dim_x -= p_tile->x;
+                    cout << "aalocated val " << raum[i][j].x << " at position " << i << "," << j << endl;
                 }
                 else {
                     raum[i][j].x = dim_x/p_tile->x;         //allocate last tile, if a full one doesn't fit
                     dim_x -= p_tile->x;
+                    cout << "aalocated val " << raum[i][j].x << " at position " << i << "," << j << endl;
                 }
                 if(dim_y >= p_tile->y) {
                     raum[i][j].y = 1;
+                    cout << "aalocated val " << raum[i][j].x << " at position " << i << "," << j << endl;
                 }
                 else {
                     raum[i][j].y = dim_y/p_tile->y;
+                    cout << "aalocated val " << raum[i][j].x << " at position " << i << "," << j << endl;
                 }
             }
-        dim_y -= p_tile->y;                                 //decrement the remaining height of the wall with every allocated row
-        }
-    }
-    else {                          //fill array if tile length and height are equal
-        float dim_y = p_wall->y;
-        for(int i = 0, a = 0; a < p_wall->y; a+= p_tile->y, i++) {
-            float dim_x = p_wall->x;                      //create local variable that shrinks with each allocated 'tile'
-            for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
-                if(dim_x >= p_tile->x) {
-                    raum[i][j].x = 1;
-                    dim_x -= p_tile->x;
-                }
-                else {
-                    raum[i][j].x = dim_x/p_tile->x;         //allocate last tile, if a full one doesn't fit
-                    dim_x -= p_tile->x;
-                }
-                if(dim_y >= p_tile->y) {
-                    raum[i][j].y = 1;
-                }
-                else {
-                    raum[i][j].y = dim_y/p_tile->y;
-                }
-            }
-        dim_y -= p_tile->y;                                 //decrement the remaining height of the wall with every allocated row
-        }
-    }
+        dim_y -= p_tile->y; 
+       }                                 //decrement the remaining height of the wall with every allocated row
     return raum;
 }
 
@@ -222,12 +206,12 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     cout << "Ein Paket á 10 Fliesen kostet: " << price_cm2 * tile_area * 10 * 0.75 << " Euro" << endl;
    
     if(price_single < price_lot) {
-        cout << "Die guenstigeree Alternative ist es, die Fliesen einzeln zu kaufen." << endl;
-        cout << "Der Gesamtpreis der benötigten Fliesen beträgt dann " << price_single << " Euro." << endl; 
+        cout << "Die guenstigere Alternative ist es, die Fliesen einzeln zu kaufen." << endl;
+        cout << "Der Gesamtpreis der benötigten Fliesen betraegt dann " << price_single << " Euro." << endl; 
     }
     else {
-        cout << "Die günstigste Alternative ist es, die Fliesen in Paketen zu kaufen." << endl;
-        cout << "Der Gesamtpreis der benötigten Fliesen beträgt dann " << price_lot << " Euro." << endl;
+        cout << "Die guenstigere Alternative ist es, die Fliesen in Paketen zu kaufen." << endl;
+        cout << "Der Gesamtpreis der benoetigten Fliesen betraegt dann " << price_lot << " Euro." << endl;
     }
 }
 
