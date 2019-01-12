@@ -121,21 +121,22 @@ struct fliese* wall_in(struct fliese *p_wall) {
 }
 
 struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  struct fliese** raum) {
-    if(p_tile->x > p_tile->y) {    
+    //this one's smelly for sure, but didn't know how to implement it better
+    if(p_tile->x != p_tile->y) {                           //when x-axis is bigger than y-axis, every odd row has to start with a half tile
         float dim_y = p_wall->y; 
         for(int i = 0, a = 0; a < p_wall->y; a += p_tile->y, i++) {
             float dim_x = p_wall->x;                      //create local variable that shrinks with each allocated 'tile'
             for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
-                if((dim_x >= p_tile->x) && (i % 2 != 1)) {
-                    raum[i][j].x = 1;
+                if((dim_x >= p_tile->x) && (i % 2 == 0) && ((i % 2 == 1) && (j != 0))) {   //every even (and zeroeth) row start with a full tile
+                    raum[i][j].x = 1;                                                      //and all other tiles except the first one in odd rows
                     dim_x -= p_tile->x;
                 }
-                if((dim_x >= p_tile->x) && (i % 2 == 1) && (j == 0)) {
+                else if((dim_x >= p_tile->x) && (i % 2 == 1) && (j == 0)) {                 //first tile in odd rows
                     raum[i][j].x = 0.5;
                     dim_x -= (p_tile->x * 0.5);
                 }
                 else {
-                    raum[i][j].x = dim_x/p_tile->x;         //allocate last tile, if a full one doesn't fit
+                    raum[i][j].x = dim_x/p_tile->x;                                         //allocate last tile, if a full one doesn't fit
                     dim_x -= p_tile->x;
                 }
                 if(dim_y >= p_tile->y) {
@@ -147,7 +148,30 @@ struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  s
             }
         dim_y -= p_tile->y; //decrement the remaining height of the wall with every allocated row
        }
-    }                                 
+    } 
+    if(p_tile->x == p_tile->y) {                           //when x-axis is bigger than y-axis, every odd row has to start with a half tile
+        float dim_y = p_wall->y; 
+        for(int i = 0, a = 0; a < p_wall->y; a += p_tile->y, i++) {
+            float dim_x = p_wall->x;                      //create local variable that shrinks with each allocated 'tile'
+            for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
+                if(dim_x >= p_tile->x) {   
+                    raum[i][j].x = 1;                                                      
+                    dim_x -= p_tile->x;
+                }
+                else {
+                    raum[i][j].x = dim_x/p_tile->x;                                         
+                    dim_x -= p_tile->x;
+                }
+                if(dim_y >= p_tile->y) {
+                    raum[i][j].y = 1;
+                }
+                else {
+                    raum[i][j].y = dim_y/p_tile->y;
+                }
+            }
+        dim_y -= p_tile->y; //decrement the remaining height of the wall with every allocated row
+       } 
+    }                               
     return raum;
 }
 
