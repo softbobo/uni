@@ -195,19 +195,20 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     int num_packages = sum_tiles/10;
     if((int)sum_tiles % 10 > 0)                                 //add one package, if the number of tiles is not divisible by ten
         num_packages++;                                         //since we do integer division there and the decimals get cut off
+    cout << "Das entspricht einer Anzahl von " << num_packages << " Paketen." << endl;
 
-    float price_single = ((int)sum_tiles + 1) * price_cm2;
-    float price_lot = num_packages * price_cm2;
+    float price_single = sum_tiles * price_cm2 * tile_area;
+    float price_lot = num_packages * tile_area * 7.5 * price_cm2;
 
     cout << "Eine einzelne Fliese kostet: " << price_cm2 * tile_area << " Euro" << endl;
     cout << "Ein Paket á 10 Fliesen kostet: " << price_cm2 * tile_area * 10 * 0.75 << " Euro" << endl;
    
     if(price_single < price_lot) {
         cout << "Die günstigste Alternative ist es, die Fliesen einzeln zu kaufen." << endl;
-        cout << "Der Gesamtpreis der benötigten Fliesen beträgt dann: " << price_single << endl; 
+        cout << "Der Gesamtpreis der benötigten Fliesen beträgt dann " << price_single << " Euro." << endl; 
     }
     else {
         cout << "Die günstigste Alternative ist es, die Fliesen in Paketen zu kaufen." << endl;
-        cout << "Der Gesamtpreis der benötigten Fliesen beträgt dann: " << price_lot << endl;
+        cout << "Der Gesamtpreis der benötigten Fliesen beträgt dann: " << price_lot << " Euro." endl;
     }
 }
