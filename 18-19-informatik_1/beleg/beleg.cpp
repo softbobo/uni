@@ -5,11 +5,9 @@ Student: Robert Schulze, Matrikelnummer: 555625 */
 
 /* next steps:
 - get rid of segfault for rectangular walls
-- write check in input for wallsizes of 0 or smaller
 - write check if temp_y is an int multiple of temp_x in tile_in()
 - why do i need to enter parameters several times (the same value) when input is wrong and func starts again
 - enhance allocator for non-squared tiles (half a tile every 2nd row)
-- write price_compare() that iterates over array, calcs number of tiles and outputs cheapest price
 - floats on this system have 4 Bytes (5 decimals) -> how do i array_size the output right?
 - remove all debug printouts
 */
@@ -27,6 +25,7 @@ struct fliese* wall_in(struct fliese *p_wall);
 struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum);
 void array_printer(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum);
 void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum);
+struct fliese* parameter_changer(struct fliese* p_tile, struct fliese* p_tile_new);
 
 int main(void){
     
@@ -47,8 +46,22 @@ int main(void){
     
     cout << "Der Verlegeplan für die eingegebenen Masze sieht wie folgt aus: " << endl;
     array_printer(p_tile, p_wall, raum);
-
     price_compare(p_tile, p_wall, raum);
+
+    //allocate new tile and new array with changed parameters, call prev funcs again
+    struct fliese* p_tile_new = new fliese;
+    parameter_changer(p_tile, p_tile_new);
+    const int rows_new = (p_wall->x/p_tile_new->x + 1);
+    const int cols_new = (p_wall->y/p_tile_new->y + 1);
+    struct fliese** raum_new = new struct fliese*[rows_new];
+    for(int i = 0; i < rows_new; i++) {                                                         
+        raum_new[i] = new fliese[cols_new];
+    }
+    cout << "debug out. new array has rows: " << rows_new << " cols: " << cols_new << endl;
+    cout << "Folgende Ergebnisse erhält man nach Drehung der Fliesen um 90 Grad (also vertauschen von Laenge und Breite)." << endl;
+    array_allocator(p_tile_new, p_wall, raum_new);
+    array_printer(p_tile_new, p_wall, raum_new);
+    price_compare(p_tile_new, p_wall, raum_new);
 
     free(p_tile);
     free(p_wall);
@@ -56,6 +69,11 @@ int main(void){
         delete [] raum[i];
     } 
     delete [] raum;
+    free(p_tile_new);
+    for(int i = 0; i < rows_new; i++) {      //free array iteratively as well                                                      //delete array dynamically
+        delete [] raum_new[i];
+    } 
+    delete [] raum_new;
     return 0;
 }
 
@@ -90,8 +108,8 @@ struct fliese* wall_in(struct fliese *p_wall) {
     float wall_width = 0, wall_height = 0;                     
     cout << "Bitte die Breite der Wand in Metern eingeben: " << endl;
     cin >> wall_width;
-        if(wall_width > 8) {
-            cout << "Error: Die Wandbreite darf maximal 8m betragen!" << endl;
+        if(wall_width > 8 || wall_width <= 0) {
+            cout << "Error: Die Wandbreite darf maximal 8m und muss mehr als 0m betragen!" << endl;
             wall_in(p_wall);
         }
         else {
@@ -100,8 +118,8 @@ struct fliese* wall_in(struct fliese *p_wall) {
         }
     cout << "Bitte die Hoehe der Wand in Metern eingeben: " << endl;
     cin >> wall_height; 
-        if(wall_height > 8) {
-            cout << "Error: Die Wandhoehe darf maximal 8m betragen!" << endl;
+        if(wall_height > 8 || wall_height < 0) {
+            cout << "Error: Die Wandhoehe darf maximal 8m und muss mehr als 0m betragen!" << endl;
             wall_in(p_wall);
         }
         else {
@@ -114,7 +132,7 @@ struct fliese* wall_in(struct fliese *p_wall) {
 struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  struct fliese** raum) {
     if(p_tile->y == p_tile->x) {                          //fill array if tile length and height are equal
         float dim_y = p_wall->y;
-        for(int i = 0, a = 0; a < p_wall->y; a+= p_tile->y, i++) {
+        for(int i = 0, a = 0; a < p_wall->y; a += p_tile->y, i++) {
             float dim_x = p_wall->x;                      //create local variable that shrinks with each allocated 'tile'
             for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
                 if(dim_x >= p_tile->x) {
@@ -183,7 +201,7 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     cout << "debug out. tile area is cm²" << tile_area << endl;
 
     float sum_tiles = 0;
-    for(int i = 0, a = 0; a < p_wall->y; a+= p_tile->y, i++) {                              //calculates the tot number of tiles needed via the sum of the respective fractions of whole tiles
+    for(int i = 0, a = 0; a < p_wall->y; a+= p_tile->y, i++) {  //calculates the tot number of tiles needed via the sum of the respective fractions of whole tiles
             for(int j = 0, b = 0 ; b < p_wall->x; b+= p_tile->x, j++) {
                 sum_tiles += raum[i][j].x * raum[i][j].y;
             }
@@ -204,11 +222,20 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     cout << "Ein Paket á 10 Fliesen kostet: " << price_cm2 * tile_area * 10 * 0.75 << " Euro" << endl;
    
     if(price_single < price_lot) {
-        cout << "Die günstigste Alternative ist es, die Fliesen einzeln zu kaufen." << endl;
+        cout << "Die guenstigeree Alternative ist es, die Fliesen einzeln zu kaufen." << endl;
         cout << "Der Gesamtpreis der benötigten Fliesen beträgt dann " << price_single << " Euro." << endl; 
     }
     else {
         cout << "Die günstigste Alternative ist es, die Fliesen in Paketen zu kaufen." << endl;
-        cout << "Der Gesamtpreis der benötigten Fliesen beträgt dann: " << price_lot << " Euro." endl;
+        cout << "Der Gesamtpreis der benötigten Fliesen beträgt dann " << price_lot << " Euro." << endl;
     }
+}
+
+struct fliese* parameter_changer(struct fliese* p_tile, struct fliese* p_tile_new) {
+    /*this function is simple: it creates a temporary pointer that points to swap the values p_tile->x
+    and p_tile->y are pointing to, to make the same calculations with tiles turned around 90 degrees*/
+    p_tile_new->x = p_tile->y;
+    p_tile_new->y = p_tile->x;
+    cout << "debug out. new values are x: " << p_tile_new->x << " y: " << p_tile_new->y << endl;
+    return p_tile_new;
 }
