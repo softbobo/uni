@@ -127,7 +127,11 @@ struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  s
         for(int i = 0, a = 0; a < p_wall->y; a += p_tile->y, i++) {
             float dim_x = p_wall->x;                      //create local variable that shrinks with each allocated 'tile'
             for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
-                if((dim_x >= p_tile->x) && (i % 2 == 0) && ((i % 2 == 1) && (j != 0))) {   //every even (and zeroeth) row start with a full tile
+                if((dim_x >= p_tile->x) && (i % 2 == 0)) {   //every even (and zeroeth) row start with a full tile
+                    raum[i][j].x = 1;                                                      //and all other tiles except the first one in odd rows
+                    dim_x -= p_tile->x;
+                }
+                else if ((dim_x >= p_tile->x) && (i % 2 == 1) && (j != 0)) {
                     raum[i][j].x = 1;                                                      //and all other tiles except the first one in odd rows
                     dim_x -= p_tile->x;
                 }
@@ -177,7 +181,7 @@ struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  s
 
 void array_printer(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum) {
     //prints array iterating through each row
-    cout.precision(3);
+    cout.precision(2);
     for(int i = 0, a = 0; a < p_wall->y; a+= p_tile->y, i++) {
             for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
                 if(raum[i][j].x > 0 && raum[i][j].y > 0)
@@ -191,12 +195,10 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     /*this function takes measures of tiles and room to calc the area, calcs the total number
     of tiles via iterating over the raum array, and then compares prices to print out the cheapest
     (and why so)*/
-    cout.precision(3);
+    cout.precision(2);
     const float price_cm2 = 0.01;
     float wall_area = p_wall->x * p_wall->y;
     float tile_area = p_tile->x * p_tile->y;
-    cout << "debug out. wall area is cm²" << wall_area << endl;
-    cout << "debug out. tile area is cm²" << tile_area << endl;
 
     float sum_tiles = 0;
     for(int i = 0, a = 0; a < p_wall->y; a+= p_tile->y, i++) {  //calculates the tot number of tiles needed via the sum of the respective fractions of whole tiles
