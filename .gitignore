@@ -17,6 +17,7 @@ atm/atm
 charset
 ringshift
 beleg
+cutpoints
 #ignore vscode specifics
 /.vscode/
 uni.code-workspace
