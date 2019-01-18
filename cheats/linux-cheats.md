@@ -8,6 +8,9 @@ dd is capable of copying and converting files according to specified operands. t
 ```sudo dd bs=4M if=/path/to/iso/file of=path/to/usb/key status=progress```
 ## fdisk
 List all partitions (including mounted): `sudo fdisk -l` 
+## pacman
+__Remove__ a package with depencies (if those are not used by other packages): 
+```pacman -Rs [package_name]```
 ## OpenSSH
 Log into remote: ```ssh {user}@{server}```  
 Log out normally: Close the shell with `exit`  
