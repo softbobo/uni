@@ -4,9 +4,6 @@ Student: Robert Schulze, Matrikelnummer: 555625 */
 // task defined in README 
 
 /* known issues:
-+ Bei quadratischer Fliese (60cm) im Raum (x=2.4m) erlogt falsche
-Berechnung: Ausgabe der folgenden 1. zeile "  1    1    |  1    1    |  1    1    |  1    1    |2.5e-07   1  ".
--> runden gegen 0.01?
 + Bei nicht quadratischer Fliese fehlen an einigen Stellen Fliesen.
 + Berechneter Gesamtpreis entspricht nicht der günstigsten Variante.
 - preis/cm² auf genau 0.01 festlegen
@@ -37,9 +34,10 @@ int main(void){
     struct fliese *p_wall = new fliese;
     wall_in(p_wall);
     
-    const int cols = (p_wall->x/p_tile->x + 2);
-    const int rows = (p_wall->y/p_tile->y + 2);
+    const int cols = (p_wall->x/p_tile->x + 1);
+    const int rows = (p_wall->y/p_tile->y + 1);
     struct fliese** raum = new struct fliese*[rows];
+    cout << "debug. rows " << rows << " cols " << cols << endl;
     for(int i = 0; i < rows; i++) {                                                            //allocate array dynamically
         raum[i] = new fliese[cols];
     };
@@ -52,8 +50,9 @@ int main(void){
     //allocate new tile and new array with changed parameters, call prev funcs again
     struct fliese* p_tile_new = new fliese;
     parameter_changer(p_tile, p_tile_new);
-    const int cols_new = (p_wall->x/p_tile_new->x + 2);
-    const int rows_new = (p_wall->y/p_tile_new->y + 2);
+    const int cols_new = (p_wall->x/p_tile_new->x + 1);
+    const int rows_new = (p_wall->y/p_tile_new->y + 1);
+    cout << "debug. rows new " << rows_new << " cols new " << cols_new << endl;
     struct fliese** raum_new = new struct fliese*[rows_new];
     for(int i = 0; i < rows_new; i++) {                                                         
         raum_new[i] = new fliese[cols_new];
@@ -189,10 +188,11 @@ void array_printer(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     //prints array iterating through each row
     for(int i = 0, a = 0; a < p_wall->y; a+= p_tile->y, i++) {
             for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
-                if(raum[i][j].x > 0 && raum[i][j].y > 0)
-                cout.precision(2);
-                cout << fixed << raum[i][j].x << " ";
-                cout << fixed << raum[i][j].y << " | ";
+                if(raum[i][j].x > 0.009 && raum[i][j].y > 0.009) {
+                    cout.precision(2);
+                    cout << fixed << raum[i][j].x << " ";
+                    cout << fixed << raum[i][j].y << " | "; 
+                    }
             }
         cout << endl;
         } 
