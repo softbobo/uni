@@ -3,9 +3,15 @@ Dozierende: Dr. Andreas Müller, Ariane Jacobs
 Student: Robert Schulze, Matrikelnummer: 555625 */
 // task defined in README 
 
-/* next steps:
-- enhance allocator for non-squared tiles (half a tile every 2nd row)
-- remove all debug printouts
+/* known issues:
++ Bei quadratischer Fliese (60cm) im Raum (x=2.4m) erlogt falsche
+Berechnung: Ausgabe der folgenden 1. zeile "  1    1    |  1    1    |  1    1    |  1    1    |2.5e-07   1  ".
+-> runden gegen 0.01?
++ Bei nicht quadratischer Fliese fehlen an einigen Stellen Fliesen.
++ Berechneter Gesamtpreis entspricht nicht der günstigsten Variante.
++ Ausgabe der Matrix ist nicht korrekt formatiert
+- test on remote machine
+- clean up code afterwards
 */
 
 #include<iostream>
@@ -85,7 +91,7 @@ struct fliese* tile_in(fliese *p_tile) {
         }
     cout << "Bitte die Laenge der Fliesen in cm eingeben: " << endl;
     cin >> temp_y;
-        if(temp_x < 10) {
+        if(temp_y < 10) {
             cout << "Error: Fliesenlaenge muss mindestens 10 cm betragen!" << endl;
             tile_in(p_tile);
         }
@@ -181,11 +187,15 @@ struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  s
 
 void array_printer(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum) {
     //prints array iterating through each row
-    cout.precision(2);
     for(int i = 0, a = 0; a < p_wall->y; a+= p_tile->y, i++) {
             for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
                 if(raum[i][j].x > 0 && raum[i][j].y > 0)
-                cout << raum[i][j].x << " " << raum[i][j].y << " | ";
+                cout.precision(2);
+                cout.width(4);
+                cout << raum[i][j].x << " ";
+                cout.precision(2);
+                cout.width(4);
+                cout << raum[i][j].y << " | ";
             }
         cout << endl;
         } 
