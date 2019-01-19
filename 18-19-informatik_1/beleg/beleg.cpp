@@ -191,11 +191,8 @@ void array_printer(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
             for(int j = 0, b = 0; b < p_wall->x; b += p_tile->x, j++) {
                 if(raum[i][j].x > 0 && raum[i][j].y > 0)
                 cout.precision(2);
-                cout.width(4);
-                cout << raum[i][j].x << " ";
-                cout.precision(2);
-                cout.width(4);
-                cout << raum[i][j].y << " | ";
+                cout << fixed << raum[i][j].x << " ";
+                cout << fixed << raum[i][j].y << " | ";
             }
         cout << endl;
         } 
@@ -205,6 +202,7 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     /*this function takes measures of tiles and room to calc the area, calcs the total number
     of tiles via iterating over the raum array, and then compares prices to print out the cheapest
     (and why so)*/
+    cout.precision(2);
     const float price_cm2 = 0.01F;
     float wall_area = p_wall->x * p_wall->y;
     float tile_area = p_tile->x * p_tile->y;
@@ -217,27 +215,29 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
         }
     if(sum_tiles - (int)sum_tiles > 0)                          //if the sum of tiles needed is not an int, add 1 minus whatever is behind the dot
         sum_tiles += 1 - (sum_tiles - (int)sum_tiles);
-    cout << "Die Wand hat eine Groesze von " << cout.precision(2) << wall_area << " cm^2" << " und eine einzelne Fliese ist " << tile_area << " cm^2 grosz." << endl;
-    cout << "Die Gesamtzahl der dafür benoetigten Fliesen beträgt: " << cout.precision(2) << sum_tiles << endl;
+    cout << "Die Wand hat eine Groesze von "  << fixed << wall_area << " cm^2" << " und eine einzelne Fliese ist " << tile_area << " cm^2 grosz." << endl;
+    cout << "Die Gesamtzahl der dafür benoetigten Fliesen beträgt: " << fixed << sum_tiles << endl;
 
     int num_packages = sum_tiles/10;
     if((int)sum_tiles % 10 > 0)                                 //add one package, if the number of tiles is not divisible by ten
         num_packages++;                                         //since we do integer division there and the decimals get cut off
     cout << "Das entspricht einer Anzahl von " << num_packages << " Paketen." << endl;
 
-    float price_single = sum_tiles * price_cm2 * tile_area;
-    float price_lot = num_packages * tile_area * 7.5 * price_cm2;
+    float price_tile = tile_area * price_cm2;
+    float price_package = price_tile * 7.5;
+    float price_single = sum_tiles * price_tile;
+    float price_lot = num_packages * price_package;
 
-    cout << "Eine einzelne Fliese kostet: " << price_cm2 * tile_area << " Euro" << endl;
-    cout << "Ein Paket mit 10 Fliesen kostet: " << cout.precision(2) << price_cm2 * tile_area * 10 * 0.75 << " Euro" << endl;
+    cout << "Eine einzelne Fliese kostet: " << fixed << price_tile << " Euro" << endl;
+    cout << "Ein Paket mit 10 Fliesen kostet: " << fixed << price_package << " Euro" << endl;
    
-    if(price_single < price_lot) {á
+    if(price_single < price_lot) {
         cout << "Die guenstigere Alternative ist es, die Fliesen einzeln zu kaufen." << endl;
-        cout << "Der Gesamtpreis der benoetigten Fliesen betraegt dann " << cout.precision(2) << price_single << " Euro." << endl; 
+        cout << "Der Gesamtpreis der benoetigten Fliesen betraegt dann " << fixed << price_single << " Euro." << endl; 
     }
     else {
         cout << "Die guenstigere Alternative ist es, die Fliesen in Paketen zu kaufen." << endl;
-        cout << "Der Gesamtpreis der benoetigten Fliesen betraegt dann " << cout.precision(2) << price_lot << " Euro." << endl;
+        cout << "Der Gesamtpreis der benoetigten Fliesen betraegt dann " << fixed << price_lot << " Euro." << endl;
     }
 }
 
