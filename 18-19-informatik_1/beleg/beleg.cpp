@@ -9,7 +9,7 @@ Berechnung: Ausgabe der folgenden 1. zeile "  1    1    |  1    1    |  1    1  
 -> runden gegen 0.01?
 + Bei nicht quadratischer Fliese fehlen an einigen Stellen Fliesen.
 + Berechneter Gesamtpreis entspricht nicht der günstigsten Variante.
-+ Ausgabe der Matrix ist nicht korrekt formatiert
+- preis/cm² auf genau 0.01 festlegen
 - test on remote machine
 - clean up code afterwards
 */
@@ -205,8 +205,7 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     /*this function takes measures of tiles and room to calc the area, calcs the total number
     of tiles via iterating over the raum array, and then compares prices to print out the cheapest
     (and why so)*/
-    cout.precision(1);
-    const float price_cm2 = 0.01;
+    const float price_cm2 = 0.01F;
     float wall_area = p_wall->x * p_wall->y;
     float tile_area = p_tile->x * p_tile->y;
 
@@ -218,8 +217,8 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
         }
     if(sum_tiles - (int)sum_tiles > 0)                          //if the sum of tiles needed is not an int, add 1 minus whatever is behind the dot
         sum_tiles += 1 - (sum_tiles - (int)sum_tiles);
-    cout << "Die Wand hat eine Groesze von " << cout.precision(2) << wall_area << " cm^2" << " und eine einzele Fliese ist " << tile_area << " cm^2 grosz." << endl;
-    cout << "Die Gesamtzahl der dafür benoetigten Fliesen beträgt: " << sum_tiles << endl;
+    cout << "Die Wand hat eine Groesze von " << cout.precision(2) << wall_area << " cm^2" << " und eine einzelne Fliese ist " << tile_area << " cm^2 grosz." << endl;
+    cout << "Die Gesamtzahl der dafür benoetigten Fliesen beträgt: " << cout.precision(2) << sum_tiles << endl;
 
     int num_packages = sum_tiles/10;
     if((int)sum_tiles % 10 > 0)                                 //add one package, if the number of tiles is not divisible by ten
@@ -230,11 +229,11 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     float price_lot = num_packages * tile_area * 7.5 * price_cm2;
 
     cout << "Eine einzelne Fliese kostet: " << price_cm2 * tile_area << " Euro" << endl;
-    cout << "Ein Paket á 10 Fliesen kostet: " << cout.precision(2) << price_cm2 * tile_area * 10 * 0.75 << " Euro" << endl;
+    cout << "Ein Paket mit 10 Fliesen kostet: " << cout.precision(2) << price_cm2 * tile_area * 10 * 0.75 << " Euro" << endl;
    
-    if(price_single < price_lot) {
+    if(price_single < price_lot) {á
         cout << "Die guenstigere Alternative ist es, die Fliesen einzeln zu kaufen." << endl;
-        cout << "Der Gesamtpreis der benötigten Fliesen betraegt dann " << cout.precision(2) << price_single << " Euro." << endl; 
+        cout << "Der Gesamtpreis der benoetigten Fliesen betraegt dann " << cout.precision(2) << price_single << " Euro." << endl; 
     }
     else {
         cout << "Die guenstigere Alternative ist es, die Fliesen in Paketen zu kaufen." << endl;
