@@ -11,6 +11,7 @@ double min(double a, double b) {
 int main() {
     double a = 0, b = 0;
     cout << "Bitte zwei Zahlen eingeben: " << endl;
-    cin >> "Die größere Zahl von beiden lautet: " >> min(a,b) >> endl;
+    cin >> a >> b;
+    cout << "Die groeßere Zahl von beiden lautet: " << min(a,b) << endl;
     return 0;
 }
