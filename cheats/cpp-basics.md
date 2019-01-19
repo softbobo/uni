@@ -1,7 +1,8 @@
-## C++ Cheats
 
 This cheatsheet is an extension for the docs provided by Andreas Mueller and Ariane Jacobs for the lectures in Informatik I at TU Chemnitz in Winter 2018/19. It is meant to provide information on all C++ syntax and functions used in the lecture and then some. No guarantee for correctness of any kind is given. The document was written by Softbobo.
 
+### Escape
+First things first: The escape character is a BACKSLASH `\`!
 ### Comments
 
 ` /* This is a 
@@ -54,13 +55,35 @@ you concatenate those with logic operators. If there is more than one statement 
 braces. Syntax:
 
 ```c++
-if(var_1 > var_2 && var_2 >= var_3)
+if(var_1 > var_2 && var_2 > var_3)
 {
     cout << "var_1 is the biggest value" << endl;
     cout << "I will add var_3 to var_2" << endl;
     var_2 += var_3; 
 }
 
+else if(var_2 < var_3)
+    cout << "var_3 is bigger than var_2" << endl;
+
+else
+    cout << "var_2 is the biggest value" << endl;
+```
+
+Be careful to separate the conditions if you only want one condition to execute. You can also have 
+fallthroughs with `If` and `Else` when multiple condition evaluate to TRUE. If you are not able
+or too lazy to fully think your conditions through (so only one is TRUE at any given time), you may use
+the `break` statement tell the compiler it shall stop evaluating the scope the program is currently in
+and continue executing the scope above.
+
+```c++
+if(var_1 > var_2)
+{
+    cout << "var_1 is greater var_2!" << endl;
+    break;
+}
+else
+    cout << "whatever..." << endl;
+```
 ### Operators
 
 #### Arithemtic Operators
