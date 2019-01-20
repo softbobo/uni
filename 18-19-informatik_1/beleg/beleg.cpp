@@ -4,9 +4,9 @@ Student: Robert Schulze, Matrikelnummer: 555625 */
 // task defined in README 
 
 /* known issues:
-+ Bei nicht quadratischer Fliese fehlen an einigen Stellen Fliesen.
 + Berechneter Gesamtpreis entspricht nicht der günstigsten Variante.
 - preis/cm² auf genau 0.01 festlegen
+- run through all tests
 - test on remote machine
 - clean up code afterwards
 */
@@ -22,7 +22,7 @@ struct fliese{
 struct fliese* tile_in(struct fliese *p_tile);
 struct fliese* wall_in(struct fliese *p_wall);
 struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum);
-void array_printer(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum, const int cols, const int rows);
+void array_printer(struct fliese** raum, const int cols, const int rows);
 void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum);
 struct fliese* parameter_changer(struct fliese* p_tile, struct fliese* p_tile_new);
 
@@ -43,7 +43,7 @@ int main(void){
     array_allocator(p_tile, p_wall, raum);
     
     cout << "Der Verlegeplan für die eingegebenen Masze sieht wie folgt aus: " << endl;
-    array_printer(p_tile, p_wall, raum, cols, rows);
+    array_printer(raum, cols, rows);
     price_compare(p_tile, p_wall, raum);
 
     //allocate new tile and new array with changed parameters, call prev funcs again
@@ -58,7 +58,7 @@ int main(void){
     
     cout << "Folgende Ergebnisse erhaelt man nach Drehung der Fliesen um 90 Grad (also vertauschen von Laenge und Breite)." << endl;
     array_allocator(p_tile_new, p_wall, raum_new);
-    array_printer(p_tile_new, p_wall, raum_new, cols_new, rows_new);
+    array_printer(raum_new, cols_new, rows_new);
     price_compare(p_tile_new, p_wall, raum_new);
 
     delete p_tile;
@@ -130,27 +130,21 @@ struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  s
         for(int i = 0, a = 0; a < p_wall->y; a += p_tile->y, i++) {
             float dim_x = p_wall->x;                      //create local variable that shrinks with each allocated 'tile'
             for(int j = 0; dim_x > 0; j++) {
-                cout << "debug. the remaining wall size on the x axis is" << dim_x << endl;
                 if((dim_x >= p_tile->x) && (i % 2 == 0)) {                                  //every even (and zeroeth) row start with a full tile
-                    cout << "cond 1" << endl;
                     raum[i][j].x = 1;                                                       //and all other tiles except the first one in odd rows
                     dim_x -= p_tile->x;
                 }
                 else if ((dim_x >= p_tile->x) && (i % 2 == 1) && (j != 0)) {
-                    cout << "cond 2" << endl;
                     raum[i][j].x = 1;                                                       //and all other tiles except the first one in odd rows
                     dim_x -= p_tile->x;
                 }
                 else if((dim_x >= p_tile->x) && (i % 2 == 1) && (j == 0)) {                 //first tile in odd rows
-                    cout << "cond 3" << endl;
                     raum[i][j].x = 0.5;
                     dim_x -= (p_tile->x * 0.5);
                 }
                 else if(dim_x < p_tile->x) {
-                    cout << "cond 4" << endl;
                     raum[i][j].x = (dim_x/p_tile->x);                                         //allocate last tile, if a full one doesn't fit
                     dim_x -= (p_tile->x * raum[i][j].x);
-                    cout << "x-value at last tile " << raum[i][j].x << endl;
                 }
                 if(dim_y >= p_tile->y) {
                     raum[i][j].y = 1;
@@ -188,7 +182,7 @@ struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  s
     return raum;
 }
 
-void array_printer(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum, const int cols, const int rows) {
+void array_printer(struct fliese** raum, const int cols, const int rows) {
     //prints array iterating through each row
     for(int i = 0; i < rows ; i++) {
             for(int j = 0; j < cols; j++) {
@@ -211,12 +205,7 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     float wall_area = p_wall->x * p_wall->y;
     float tile_area = p_tile->x * p_tile->y;
 
-    float sum_tiles = 0;
-    for(int i = 0, a = 0; a < p_wall->y; a+= p_tile->y, i++) {  //calculates the tot number of tiles needed via the sum of the respective fractions of whole tiles
-            for(int j = 0, b = 0 ; b < p_wall->x; b+= p_tile->x, j++) {
-                sum_tiles += raum[i][j].x * raum[i][j].y;
-            }
-        }
+    float sum_tiles = wall_area / tile_area;
     if(sum_tiles - (int)sum_tiles > 0)                          //if the sum of tiles needed is not an int, add 1 minus whatever is behind the dot
         sum_tiles += 1 - (sum_tiles - (int)sum_tiles);
     cout << "Die Wand hat eine Groesze von "  << fixed << wall_area << " cm^2" << " und eine einzelne Fliese ist " << tile_area << " cm^2 grosz." << endl;
