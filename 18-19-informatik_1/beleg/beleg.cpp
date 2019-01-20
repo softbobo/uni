@@ -210,7 +210,7 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
         for(int j = 0; j < cols; j++) {
             float temp_size = raum[i][j].x * raum[i][j].y;
             cout << "temp size of tile is " << temp_size << endl;
-            if(temp_size <= 0.5)
+            if(temp_size <= (1 - (sum_tiles - (int)sum_tiles)))
                 sum_tiles += temp_size;
             else
                 sum_tiles++;
