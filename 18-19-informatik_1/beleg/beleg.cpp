@@ -125,10 +125,10 @@ struct fliese* wall_in(struct fliese *p_wall) {
 
 struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall,  struct fliese** raum) {
     //this one's smelly for sure, but didn't know how to implement it better
-    if(p_tile->x != p_tile->y) {                           //when x-axis is bigger than y-axis, every odd row has to start with a half tile
+    if(p_tile->x != p_tile->y) {                                                            //when x-axis is bigger than y-axis, every odd row has to start with a half tile
         float dim_y = p_wall->y; 
         for(int i = 0, a = 0; a < p_wall->y; a += p_tile->y, i++) {
-            float dim_x = p_wall->x;                      //create local variable that shrinks with each allocated 'tile'
+            float dim_x = p_wall->x;                                                        //create local variable that shrinks with each allocated 'tile'
             for(int j = 0; dim_x > 0; j++) {
                 if((dim_x >= p_tile->x) && (i % 2 == 0)) {                                  //every even (and zeroeth) row start with a full tile
                     raum[i][j].x = 1;                                                       //and all other tiles except the first one in odd rows
@@ -209,7 +209,6 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < cols; j++) {
             float temp_size = raum[i][j].x * raum[i][j].y;
-            cout << "temp size of tile is " << temp_size << endl;
             if(temp_size <= (1 - (sum_tiles - (int)sum_tiles)))
                 sum_tiles += temp_size;
             else
@@ -221,24 +220,29 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     cout << "Die Wand hat eine Groesze von "  << fixed << wall_area << " cm^2" << " und eine einzelne Fliese ist " << tile_area << " cm^2 grosz." << endl;
     cout << "Die Gesamtzahl der dafür benoetigten Fliesen beträgt: " << fixed << sum_tiles << endl;
 
-    int num_packages = sum_tiles/10;
-    if((int)sum_tiles % 10 > 0)                                 //add one package, if the number of tiles is not divisible by ten
-        num_packages++;                                         //since we do integer division there and the decimals get cut off
-    cout << "Das entspricht einer Anzahl von " << num_packages << " Paketen." << endl;
-
+    float num_packages = sum_tiles/10;
     if(tile_area - (int)tile_area > 0) 
         tile_area += 1 - (tile_area - (int)tile_area);
     float price_tile = tile_area * price_cm2;
     float price_package = price_tile * 7.5;
     float price_single = sum_tiles * price_tile;
+    float price_mixed = ((int)num_packages * price_package) + ((num_packages - (int)num_packages) * price_tile * 10);
+
+    if((int)sum_tiles % 10 > 0)                                 //add one package, if the number of tiles is not divisible by ten
+        num_packages++;                                         //since we do integer division there and the decimals get cut off
     float price_lot = num_packages * price_package;
 
     cout << "Eine einzelne Fliese kostet: " << fixed << price_tile << " Euro" << endl;
     cout << "Ein Paket mit 10 Fliesen kostet: " << fixed << price_package << " Euro" << endl;
    
-    if(price_single < price_lot) {
+    if(price_single < price_mixed && price_single < price_lot) {
         cout << "Die guenstigere Alternative ist es, die Fliesen einzeln zu kaufen." << endl;
         cout << "Der Gesamtpreis der benoetigten Fliesen betraegt dann " << fixed << price_single << " Euro." << endl; 
+    }
+    else if(price_mixed < price_lot) {
+        cout << "Die guenstigere Alternative ist es, die Fliesen in einer Mischung aus Paketen und einzelnen zu kaufen." << endl;
+        cout << "Der Einkaufskorb setzt sich dann zusammen aus " << (int)(sum_tiles/10) << " Paketen und " << ((int)sum_tiles % 10) << " einzelnen Fliesen." << endl;
+        cout << "Der Gesamtpreis der benoetigten Fliesen betraegt dann " << fixed << price_mixed << " Euro." << endl;
     }
     else {
         cout << "Die guenstigere Alternative ist es, die Fliesen in Paketen zu kaufen." << endl;
