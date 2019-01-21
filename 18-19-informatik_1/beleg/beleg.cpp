@@ -202,23 +202,25 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     (and why so)*/
     cout.precision(2);
     const float price_cm2 = 0.01F;
-    float wall_area = p_wall->x * p_wall->y;
     float tile_area = p_tile->x * p_tile->y;
 
-    float sum_tiles;
+    float sum_tiles = 0.0;
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < cols; j++) {
-            float temp_size = raum[i][j].x * raum[i][j].y;
+            float temp_size = (raum[i][j].x * raum[i][j].y);
+            temp_size += 0.005;
+            temp_size = (int)(temp_size * 100);
+            temp_size /= 100;
             if(temp_size <= (1 - (sum_tiles - (int)sum_tiles)))
                 sum_tiles += temp_size;
             else
                 sum_tiles++;
         }
     }
+    cout << sum_tiles << endl;
     if(sum_tiles - (int)sum_tiles > 0)                          //if the sum of tiles needed is not an int, add 1 minus whatever is behind the dot
         sum_tiles += 1 - (sum_tiles - (int)sum_tiles);
-    cout << "Die Wand hat eine Groesze von "  << fixed << wall_area << " cm^2" << " und eine einzelne Fliese ist " << tile_area << " cm^2 grosz." << endl;
-    cout << "Die Gesamtzahl der dafür benoetigten Fliesen beträgt: " << fixed << sum_tiles << endl;
+    cout << "Die Gesamtzahl der benoetigten Fliesen beträgt: " << fixed << sum_tiles << endl;
 
     float num_packages = sum_tiles/10;
     if(tile_area - (int)tile_area > 0) 
@@ -228,9 +230,10 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     float price_single = sum_tiles * price_tile;
     float price_mixed = ((int)num_packages * price_package) + ((num_packages - (int)num_packages) * price_tile * 10);
 
-    if((int)sum_tiles % 10 > 0)                                 //add one package, if the number of tiles is not divisible by ten
-        num_packages++;                                         //since we do integer division there and the decimals get cut off
-    float price_lot = num_packages * price_package;
+    float num_packages_rounded = num_packages;
+    if(num_packages_rounded - (int)num_packages_rounded > 0)                                 //add one package, if the number of tiles is not divisible by ten
+        num_packages_rounded += 1 - (num_packages_rounded - (int)num_packages_rounded);                                         //since we do integer division there and the decimals get cut off
+    float price_lot = num_packages_rounded * price_package;
 
     cout << "Eine einzelne Fliese kostet: " << fixed << price_tile << " Euro" << endl;
     cout << "Ein Paket mit 10 Fliesen kostet: " << fixed << price_package << " Euro" << endl;
@@ -244,7 +247,7 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
         cout << "Der Einkaufskorb setzt sich dann zusammen aus " << (int)(sum_tiles/10) << " Paketen und " << ((int)sum_tiles % 10) << " einzelnen Fliesen." << endl;
         cout << "Der Gesamtpreis der benoetigten Fliesen betraegt dann " << fixed << price_mixed << " Euro." << endl;
     }
-    else {
+    else if(price_lot < price_mixed) {
         cout << "Die guenstigere Alternative ist es, die Fliesen in Paketen zu kaufen." << endl;
         cout << "Der Gesamtpreis der benoetigten Fliesen betraegt dann " << fixed << price_lot << " Euro." << endl;
     }
