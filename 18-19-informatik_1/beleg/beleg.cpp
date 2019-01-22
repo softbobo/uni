@@ -23,7 +23,7 @@ struct fliese* tile_in(struct fliese *p_tile);
 struct fliese* wall_in(struct fliese *p_wall);
 struct fliese** array_allocator(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum);
 void array_printer(struct fliese** raum, const int cols, const int rows);
-void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum, const int rows, const int cols);
+void price_compare(struct fliese* p_tile, struct fliese** raum, const int rows, const int cols);
 struct fliese* parameter_changer(struct fliese* p_tile, struct fliese* p_tile_new);
 
 int main(void){
@@ -44,7 +44,7 @@ int main(void){
     
     cout << "Der Verlegeplan für die eingegebenen Masze sieht wie folgt aus: " << endl;
     array_printer(raum, cols, rows);
-    price_compare(p_tile, p_wall, raum, rows, cols);
+    price_compare(p_tile, raum, rows, cols);
 
     //allocate new tile and new array with changed parameters, call prev funcs again
     struct fliese* p_tile_new = new fliese;
@@ -59,7 +59,7 @@ int main(void){
     cout << "Folgende Ergebnisse erhaelt man nach Drehung der Fliesen um 90 Grad (also vertauschen von Laenge und Breite)." << endl;
     array_allocator(p_tile_new, p_wall, raum_new);
     array_printer(raum_new, cols_new, rows_new);
-    price_compare(p_tile_new, p_wall, raum_new, rows_new, cols_new);
+    price_compare(p_tile_new, raum_new, rows_new, cols_new);
 
     delete p_tile;
     delete p_wall;
@@ -196,7 +196,7 @@ void array_printer(struct fliese** raum, const int cols, const int rows) {
         } 
 }
 
-void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese** raum, const int rows, const int cols) {
+void price_compare(struct fliese* p_tile, struct fliese** raum, const int rows, const int cols) {
     /*this function takes measures of tiles and room to calc the area, calcs the total number
     of tiles via iterating over the raum array, and then compares prices to print out the cheapest
     (and why so)*/
@@ -217,7 +217,6 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
                 sum_tiles++;
         }
     }
-    cout << sum_tiles << endl;
     if(sum_tiles - (int)sum_tiles > 0)                          //if the sum of tiles needed is not an int, add 1 minus whatever is behind the dot
         sum_tiles += 1 - (sum_tiles - (int)sum_tiles);
     cout << "Die Gesamtzahl der benoetigten Fliesen beträgt: " << fixed << sum_tiles << endl;
@@ -238,7 +237,7 @@ void price_compare(struct fliese* p_tile, struct fliese* p_wall, struct fliese**
     cout << "Eine einzelne Fliese kostet: " << fixed << price_tile << " Euro" << endl;
     cout << "Ein Paket mit 10 Fliesen kostet: " << fixed << price_package << " Euro" << endl;
    
-    if(price_single < price_mixed && price_single < price_lot) {
+    if(price_single <= price_mixed && price_single < price_lot) {
         cout << "Die guenstigere Alternative ist es, die Fliesen einzeln zu kaufen." << endl;
         cout << "Der Gesamtpreis der benoetigten Fliesen betraegt dann " << fixed << price_single << " Euro." << endl; 
     }
