@@ -15,6 +15,9 @@ __Remove__ a package with depencies (if those are not used by other packages):
 Log into remote: ```ssh {user}@{server}```  
 Log out normally: Close the shell with `exit`  
 Force-log out: `Enter` and then `~.` 
+## scp - Secure Copy
+scp is used to move files back and forth between local and remote machines. to copy a file from local to remote use
+`scp /path/to/source user@remote:/path/to/remote/folder`
 ## tar
 to untar a tar.gz (tarred and gzipped) file, four command-line options are recommended:
 `x` extract
