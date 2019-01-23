@@ -6,3 +6,4 @@ typedef struct {
     char *arr; } basedNumber; 
 
 unsigned int sumOfBasedNumbers (basedNumber bn[], unsigned int size);
+unsigned base_convert(basedNumber num);
