@@ -3,9 +3,9 @@ This node includes code snippets I'll add as I learn. Mostly that's to better gr
 
 ## Standard Library
 
-### <string>
+### string
 
-### <vector>
+### vector
 A vector is an automatically allocated array. It facilitates its use but does have a little overhead (compared to C-arrays or `std::array`). It has a memory-optimized version for bools, where each element takes 1 bit only. Time complexity is constant for random access and adding/removing elements at the arrays end and linear to the arrays end for adding/removing stuff for any other position in the array.
 
 ## Dynamic Memory Allocation
