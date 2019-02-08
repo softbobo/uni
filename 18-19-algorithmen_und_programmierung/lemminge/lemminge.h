@@ -1,21 +1,22 @@
 //header file for the lemminge task, for func declarations
 
-//#include<stdlib.h>
 #include<stdio.h>
 
-typedef struct pole {
+/* to do:
+- initialize next-pointer to NULL (throws error?) */
+
+typedef struct {
 //all the poles represented in a singly linked list;
     unsigned pos;                   //height of every horizontal pole
     unsigned left;                  //left end
     unsigned right;                 //right end
-    struct pole *next = NULL;       //next list entry              
-};
+    struct pole* next;              //next list entry              
+} pole;
 
-typedef struct board {
+typedef struct{
     /* this is the overarching datastructure, has the total number of lemmings and a pointer
     to the first list entry */
-    unsigned le_ming;               //tot number of horizontal poles/lemmings, first number of input
-    struct pole *first;
-};
+    unsigned le_ming;               //tot number of vertical poles/lemmings, first number of input
+    struct pole* head;
+} board;
 
-struct board* input(void);
