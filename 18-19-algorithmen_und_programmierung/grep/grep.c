@@ -31,28 +31,30 @@ return result
 */
 
 /* time complexity in Big O:
+Die Funktion hat 
 */
 
 // implementation in C:
 
+#include"grp.h"
+
 int* grep(const char* pattern, const char* text) {
-    int length_pattern = length(pattern);
-    int length_text = length(text);
+    int length_pattern = lngth(pattern);
+    int length_text = lngth(text);
     int temp;
     int j = 0, k = 0;
     int* result = (int*)malloc((length_text/length_pattern) * sizeof(int));
 
-    for(int i = 0; text[i] < (length_text + 1); i++) {
-        if(j == 0 && (text[i] == pattern[j]) || (text[i] == '?')) {
-            temp = i;
-            j++; }
-        if(j != 0 && j != length_pattern && (text[i] == pattern[j]) || (text[i] == '?')) 
-            j++; 
-        if(j == length_pattern && (text[i] == pattern[j]) || (text[i] == '?')) {
-            result[k] = temp;
-            k++;
-            temp = 0;
-            j = 0; }
+    for(int i = 0; i < (length_text + 1); i++) {
+        if(text[i] == pattern[j] || text[i] == '?') {
+            if(j == 0) {
+                temp = i; }
+            else if(j == length_pattern) {
+                result[k] = temp;
+                k++;
+            }
+            j++;
+        }
         else {
             j = 0;
             temp = 0;
@@ -61,7 +63,7 @@ int* grep(const char* pattern, const char* text) {
     return result;
 }
 
-int length(const char* string) {
+int lngth(const char* string) {
     int length = 0;
     for(int i = 0; string[i] != '\0'; i++)
         length++;
