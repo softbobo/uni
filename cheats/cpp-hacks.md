@@ -40,3 +40,46 @@ delete [] example;
 ```
 this info is mostly from here https://gsamaras.wordpress.com/code/dynamic-2d-array-in-c/ 
 and https://stackoverflow.com/questions/983244/is-this-deallocation-correct/983259#983259
+
+## Sorting
+### sort()
+This is the sorting algorithm of the C++ Standard Library. Its first two args are simply pointers to the beginning and end of the sorting. The third one is a little trickier. In this case, it takes a pointer to a boolean function which defines the parameter to sort after. This function takes two adresses (the two args to compare) and returns true, wheter one of those is greater than the other.
+```C++
+#include<algorithm>                     //has the sort() algo
+
+using namespace std;
+
+struct example {
+    int num;
+    char name[20];
+    bool is_it;
+}
+
+bool sort_by_number(const example &a, const example &b) {
+    return a.num < b.num;
+    //returns TRUE if the pair is already sorted in ascending order; else returns false and changes those
+}
+
+int main() {
+    example* ex_list = new example[10];
+    // enter list entries
+    sort(list, list+10, sort_by_number);
+    // print out list entries sorted by number
+    // delete, return etc
+}
+```
+The info on sort() is derived from here: http://www.cplusplus.com/articles/NhA0RXSz/
+
+### Simple Bubblesort
+A simple Bubblesort implementation in C++ might look like this:
+``` C++
+/* In Bubblesort you have to traverse the array n-1 times, where n is equal to the count of elements of the array. Also, the greatest elemtent always goes to the back in each iteration, therefore the search area decreases by 1 with each interation */
+int* bsort_arr(int* arr, int size) {
+    for(int i = size, i > 0; i--) {
+        for(int j = 0, j < i, j++) {
+            if(arr[j] > arr[j+1])
+                swap(arr, i, i+1);
+        }
+    }
+}
+```
