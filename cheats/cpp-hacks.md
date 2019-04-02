@@ -1,12 +1,19 @@
 # C++ Hacks
 This node includes code snippets I'll add as I learn. Mostly that's to better grasp the working mode of library functions and workarounds. No guarantee for correctness is given.
 
-## Standard Library
+## Basic Algos 
+### Swap
+``` C++
+void swap(int* arr, int lpos, int rpos) {
+    /*takes the array, left and right operand to swap and swaps them*/
+    int temp = arr[lpos];
+    arr[lpos] = arr[rpos];
+    arr[rpos] = temp; 
 
-### string
-
-### vector
-A vector is an automatically allocated array. It facilitates its use but does have a little overhead (compared to C-arrays or `std::array`). It has a memory-optimized version for bools, where each element takes 1 bit only. Time complexity is constant for random access and adding/removing elements at the arrays end and linear to the arrays end for adding/removing stuff for any other position in the array.
+    /*also works with void swap(int* lhs, int* rhs), then you gotta pass the adresses
+    (e.g. &rhs) in the calling function*/
+}
+```
 
 ## Dynamic Memory Allocation
 ### Dynamically allocate a 2D Array
@@ -41,6 +48,31 @@ delete [] example;
 this info is mostly from here https://gsamaras.wordpress.com/code/dynamic-2d-array-in-c/ 
 and https://stackoverflow.com/questions/983244/is-this-deallocation-correct/983259#983259
 
+## Recursion
+### Ackermann Function
+``` C++
+//don't try this for m > 3 or n > 3 on a conventional machine
+long long ack(unsigned m, unsigned n) {
+    if(m == 0) return n + 1;
+    else if(n == 0 && m > 0) return ack(m-1, 1);
+    else return ack(m-1, ack(m, n-1));
+}
+```
+### Euclidean Algorithm 
+``` C++
+//returns greatest common divisor for two Integers, simple implementation
+//works in C, too
+int euclid(int a, int b) {
+    if(a == 0) return b;                    //simple error handling here
+    if(b == 0) return a;
+
+    if(a == b) return a;                    //recursion end
+
+    if(a > b) return euclid(a - b, b);
+    else return euclid(a, b-a);
+}
+```
+
 ## Sorting
 ### sort()
 This is the sorting algorithm of the C++ Standard Library. Its first two args are simply pointers to the beginning and end of the sorting. The third one is a little trickier. In this case, it takes a pointer to a boolean function which defines the parameter to sort after. This function takes two adresses (the two args to compare) and returns true, wheter one of those is greater than the other.
@@ -73,7 +105,9 @@ The info on sort() is derived from here: http://www.cplusplus.com/articles/NhA0R
 ### Simple Bubblesort
 A simple Bubblesort implementation in C++ might look like this:
 ``` C++
-/* In Bubblesort you have to traverse the array n-1 times, where n is equal to the count of elements of the array. Also, the greatest elemtent always goes to the back in each iteration, therefore the search area decreases by 1 with each interation */
+/* In Bubblesort you have to traverse the array n-1 times, where n is equal to the count of elements of the array.
+Also, the greatest elemtent always goes to the back in each iteration, therefore the search area decreases by 1 
+with each interation */
 int* bsort_arr(int* arr, int size) {
     for(int i = size, i > 0; i--) {
         for(int j = 0, j < i, j++) {
@@ -81,5 +115,63 @@ int* bsort_arr(int* arr, int size) {
                 swap(arr, i, i+1);
         }
     }
+}
+```
+## I/O
+### Basic Text I/O
+`iostream` is the header you want
+pay attention to the directions the filestream operators are pointing to!
+``` C++
+// print text (ASCII!) to stdout
+cout << "Print text!";
+// let the user input sth, say the value of an int variable
+int var;
+cin >> var;
+// make a newline, flush the ourstream at the same time
+cout << "flushit" << endl; 
+```
+
+### Formatting your Output
+`iomanip` has functions dedicated to make your output prettier 
+``` C++
+// change output field width
+cout << setw(5) << "out" << endl;
+// set floating-point precision (number of decimals after the point)
+cout << setprecision(3) << 3.7862 / 0.0023;
+// set the base for an integer that is is to be converted to (e.g. binary, octal)
+cout << setbase(2) << 24;
+
+```
+
+The relevant library is `fstream` which inherits all methods and classes from `iostream`.
+### Copying a File to Another File
+``` C++
+#include<fstream>
+
+using namespace std;
+
+int main() {
+    //open input for reading and output for writing
+    ifstream input("iname.txt");
+    ofstream output("oname.txt");
+    
+    //check, if opening was successful (beter do for both files seperately)
+    if(!input.is_open() || !output.is_open()) {
+        cout << "Cannot open input or output file" << endl;
+        exit(1);
+    }
+
+    char c;
+
+    //copy char by char
+    while(input.get(c)) {
+        output.put(c)
+    }
+
+    //after closing both streams get flushed and can be used anew
+    input.close();
+    output.close();
+
+    return 0;
 }
 ```
