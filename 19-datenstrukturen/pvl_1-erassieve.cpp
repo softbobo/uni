@@ -44,9 +44,8 @@ int main() {
 
 /* simple: function takes user input and checks, if the entered value is 
 within the bounds of 8-byte unsigned integers (at least two) */
-uint64_t* ers_input() {
+uint64_t ers_input() {
     uint64_t n = 0;
-    uint64_t* p_n = &n;
 
     cout << "Please enter the maximum value n" << endl;
     cin >> n;
@@ -57,5 +56,5 @@ uint64_t* ers_input() {
         return ers_input();
     }
 
-    return p_n;
+    return n;
 }
