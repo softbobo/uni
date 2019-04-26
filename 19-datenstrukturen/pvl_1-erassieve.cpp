@@ -23,7 +23,7 @@ d)  - find a function that finds the minimal upper border in time complexity
         - allocates bool-array for n vals (and its pointer to pass it around)
         - initialize whole array with false - true will all strokes
     - input() function:
-        - allocates var and pointer for n
+        - allocates var for n
         - checks recursively for validity of input value
     - 
 */
@@ -39,7 +39,14 @@ d)  - find a function that finds the minimal upper border in time complexity
 using namespace std;
 
 int main() {
+    uint64_t n = ers_input();
+    bool* sieve = new bool[n];
 
+    for(uint64_t i = 0; i <= n; i++) {
+        sieve[i] = false;
+    }
+
+    return 0;
 }
 
 /* simple: function takes user input and checks, if the entered value is 
