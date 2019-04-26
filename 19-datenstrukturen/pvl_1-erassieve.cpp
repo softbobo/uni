@@ -22,10 +22,11 @@ d)  - find a function that finds the minimal upper border in time complexity
     - main() function:
         - allocates bool-array for n vals (and its pointer to pass it around)
         - initialize whole array with false - true will all strokes
-    - input() function:
+    - ers_input() function:
         - allocates var for n
         - checks recursively for validity of input value
-    - 
+    - ers_count_prime() function:
+        - counts all the true-vals in the array, returns their count
 */
 
 /* questions:
@@ -42,9 +43,7 @@ int main() {
     uint64_t n = ers_input();
     bool* sieve = new bool[n];
 
-    for(uint64_t i = 0; i <= n; i++) {
-        sieve[i] = false;
-    }
+    for(uint64_t i = 0; i <= n; i++) { sieve[i] = false; }
 
     return 0;
 }
@@ -64,4 +63,13 @@ uint64_t ers_input() {
     }
 
     return n;
+}
+
+uint64_t ers_count_prime(bool sieve[], uint64_t n) {
+    uint64_t count = 0;
+    
+    for(int i = 2; i <= n; i++) { if(sieve[i]) count++; }
+
+    cout << "debug: count of primes: " << count << endl;
+    return count;
 }
