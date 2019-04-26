@@ -68,7 +68,7 @@ uint64_t ers_input() {
 uint64_t ers_count_prime(bool sieve[], uint64_t n) {
     uint64_t count = 0;
     
-    for(int i = 2; i <= n; i++) { if(sieve[i]) count++; }
+    for(uint64_t i = 2; i <= n; i++) { if(sieve[i]) count++; }
 
     cout << "debug: count of primes: " << count << endl;
     return count;
