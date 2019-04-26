@@ -13,8 +13,31 @@ d)  - find a function that finds the minimal upper border in time complexity
     of function a)
 */
 
+/* catch:
+    - set max (uintmax) and min (2) for n 
+
+*/
+
+/* algo:
+    - main() function:
+        - allocates bool-array for n vals (and its pointer to pass it around)
+        - initialize whole array with false - true will all strokes
+    - input() function:
+        - allocates var and pointer for n
+        - checks recursively for validity of input value
+    - 
+*/
+
+/* questions:
+    - plotting method doesn't matter? or is GNUPLOT mandatory?
+    - may we use libs (like cmath)?
+*/
+
 #include<iostream>
+#include"pvl_1-erassieve.h"
+
+using namespace std;
 
 int main() {
-    
+
 }
