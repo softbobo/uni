@@ -41,3 +41,21 @@ using namespace std;
 int main() {
 
 }
+
+/* simple: function takes user input and checks, if the entered value is 
+within the bounds of 8-byte unsigned integers (at least two) */
+uint64_t* ers_input() {
+    uint64_t n = 0;
+    uint64_t* p_n = &n;
+
+    cout << "Please enter the maximum value n" << endl;
+    cin >> n;
+
+    if(n < 2 || n > UINT64_MAX) {
+        cout << "Error. Entered value must be greater than two and ";
+        cout << "smaller than 18446744073709551615." << endl;
+        return ers_input();
+    }
+
+    return p_n;
+}
