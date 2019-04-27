@@ -45,6 +45,8 @@ int main() {
 
     for(uint64_t i = 0; i <= n; i++) { sieve[i] = false; }
 
+    ers_count_prime(sieve, n);
+
     return 0;
 }
 
