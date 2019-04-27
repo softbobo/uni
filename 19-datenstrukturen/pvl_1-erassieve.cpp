@@ -27,11 +27,17 @@ d)  - find a function that finds the minimal upper border in time complexity
         - checks recursively for validity of input value
     - ers_count_prime() function:
         - counts all the true-vals in the array, returns their count
+
+    - ers_output() function:
+        - prints n, p, s, rightbound 
+        
 */
 
 /* questions:
     - plotting method doesn't matter? or is GNUPLOT mandatory?
     - may we use libs (like cmath)?
+    - what is meant by "für jedes n ist jeweils eine neue zeile zu beginnen" (b)?
+    - logarithmische skalen (c)? 
 */
 
 #include<iostream>
@@ -45,7 +51,7 @@ int main() {
 
     for(uint64_t i = 0; i <= n; i++) { sieve[i] = false; }
 
-    ers_count_prime(sieve, n);
+    ers_count_prime(sieve, n);                              //temp function call, for testing purpose
 
     return 0;
 }
@@ -67,11 +73,14 @@ uint64_t ers_input() {
     return n;
 }
 
+
+/* counts all the 'trues' in the array - this is the number of primes in the
+given interval */
 uint64_t ers_count_prime(bool sieve[], uint64_t n) {
     uint64_t count = 0;
     
     for(uint64_t i = 2; i <= n; i++) { if(sieve[i]) count++; }
 
-    cout << "debug: count of primes: " << count << endl;
+    cout << "debug: count of primes: " << count << endl;                //temp print, removed later
     return count;
 }
