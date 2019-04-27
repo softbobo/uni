@@ -25,11 +25,17 @@ d)  - find a function that finds the minimal upper border in time complexity
     - ers_input() function:
         - allocates var for n
         - checks recursively for validity of input value
+    - ers_strike():
+        - heart of this program, finds all primes in the gven interval
+        - 
+    - ers_prime_check():
+        - checks, if a given number is prime or not
+    - ers_output() function:
+        - calls ers_count_prime(), return val is p 
+        - prints n, p, s, rightbound 
     - ers_count_prime() function:
         - counts all the true-vals in the array, returns their count
 
-    - ers_output() function:
-        - prints n, p, s, rightbound 
         
 */
 
@@ -37,21 +43,26 @@ d)  - find a function that finds the minimal upper border in time complexity
     - plotting method doesn't matter? or is GNUPLOT mandatory?
     - may we use libs (like cmath)?
     - what is meant by "für jedes n ist jeweils eine neue zeile zu beginnen" (b)?
-    - logarithmische skalen (c)? 
+    - "logarithmische skalen" (c)? 
 */
 
 #include<iostream>
 #include"pvl_1-erassieve.h"
+#include<cmath>
 
 using namespace std;
 
 int main() {
-    uint64_t n = ers_input();
-    bool* sieve = new bool[n];
+    uint64_t max = ers_input() + 1;
+    bool* sieve = new bool[max];
 
-    for(uint64_t i = 0; i <= n; i++) { sieve[i] = false; }
+    /* initialise all values of the array to true except the first two -
+    vals, which are not prime, will be changed to false later in ers_strike() */ 
+    sieve[0] = false;
+    sieve[1] = false;
+    for(uint64_t i = 0; i <= max; i++) { sieve[i] = true; }
 
-    ers_count_prime(sieve, n);                              //temp function call, for testing purpose
+    ers_count_prime(sieve, max);                              //temp function call, for testing purpose
 
     return 0;
 }
@@ -59,27 +70,42 @@ int main() {
 /* simple: function takes user input and checks, if the entered value is 
 within the bounds of 8-byte unsigned integers (at least two) */
 uint64_t ers_input() {
-    uint64_t n = 0;
+    uint64_t max = 0;
 
     cout << "Please enter the maximum value n" << endl;
-    cin >> n;
+    cin >> max;
 
-    if(n < 2 || n > UINT64_MAX) {
+    if(max < 2 || max > UINT64_MAX) {
         cout << "Error. Entered value must be greater than two and ";
         cout << "smaller than 18446744073709551615." << endl;
         return ers_input();
     }
 
-    return n;
+    return max;
+}
+
+/* probably single most important function in here:
+    - counts the number of strikes (multiples count multiple times)
+
+ */
+bool* ers_strike(bool sieve[], uint64_t max) {
+    uint64_t strike_count = 0;
+
+
+    for(uint64_t i = 2; i <= sqrt(max); i++) {
+        for(uint64_t j = i*i; j <= sqrt(max); j++) {
+
+        }
+    }
 }
 
 
 /* counts all the 'trues' in the array - this is the number of primes in the
 given interval */
-uint64_t ers_count_prime(bool sieve[], uint64_t n) {
+uint64_t ers_count_prime(bool sieve[], uint64_t max) {
     uint64_t count = 0;
     
-    for(uint64_t i = 2; i <= n; i++) { if(sieve[i]) count++; }
+    for(uint64_t i = 2; i <= max; i++) { if(sieve[i]) count++; }
 
     cout << "debug: count of primes: " << count << endl;                //temp print, removed later
     return count;

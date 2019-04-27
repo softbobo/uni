@@ -6,5 +6,5 @@ contains function declarations */
 #include<iostream>
 
 uint64_t ers_input();
-
-uint64_t ers_count_prime(bool sieve[], uint64_t n);
+bool* ers_strike(bool sieve[], uint64_t max);
+uint64_t ers_count_prime(bool sieve[], uint64_t max);
