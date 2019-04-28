@@ -62,7 +62,10 @@ int main() {
     sieve[1] = false;
     for(uint64_t i = 2; i <= max; i++) { sieve[i] = true; }
 
-    ers_strike(sieve, max);
+    uint64_t strike_count = 0;
+    uint64_t* p_strike_count = &strike_count;
+
+    ers_strike(sieve, max, p_strike_count);
 
     delete[] sieve;
     return 0;
@@ -87,20 +90,25 @@ uint64_t ers_input() {
 
 /* probably single most important function in here:
     - counts the number of strikes (multiples count multiple times)
-
- */
-bool* ers_strike(bool sieve[], uint64_t max) {
-    uint64_t strike_count = 0;
-
+    - checks all the values in the array if they are prime
+    - if yes, changes val of their multiples to false
+*/
+bool* ers_strike(bool sieve[], uint64_t max, uint64_t* p_strike_count) {
+    /* works as follows:
+        - outer loop enters for every single number starting at two
+        - checks, if number is prime
+        - if yes, inner loop is entered, all multiples of i are set to false
+        - for every number set to false, strike-count gets incremented
+    */
     for(uint64_t i = 2; i <= sqrt(max); i++) {
         if(ers_is_prime(i)) {
-            for(uint64_t j = i*i; j <= sqrt(max); (j+i)) {
+            for(uint64_t j = i*i; j <= max; (j+i)) {
                 sieve[j] = false;
-                strike_count++;
+                *p_strike_count++;
             }
         }
     }
-    cout << "debug. count of strikethroughs is: " << strike_count << endl;     //temp. to remove later
+    cout << "debug. count of strikethroughs is: " << &p_strike_count << endl;     //temp. to remove later
     return sieve;
 }
 
