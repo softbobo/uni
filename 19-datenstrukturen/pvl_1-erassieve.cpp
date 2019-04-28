@@ -105,11 +105,10 @@ bool* ers_strike(bool sieve[], uint64_t max, uint64_t* p_strike_count) {
         if(ers_is_prime(i)) {
             for(uint64_t j = i*i; j <= max; j+=i) {
                 sieve[j] = false;
-                *p_strike_count++;
+                (*p_strike_count)++;
             }
         }
     }
-    cout << "debug. count of strikethroughs is: " << &p_strike_count << endl;     //temp. to remove later
     return sieve;
 }
 
@@ -126,12 +125,14 @@ bool ers_is_prime(uint64_t num) {
     return true;
 }
 
+/* this is going to be the properly formatted output later */
 void ers_output(bool sieve[], uint64_t max, uint64_t* p_strike_count) {
     uint64_t prime_count = ers_count_prime(sieve, max);
     
     for(uint64_t i = 0; i <= max; i++) {
         cout << "debug. number " << i << " is " << sieve[i] << endl;    //temp. removed later
     }
+    cout << "num of strikes is: " << *p_strike_count << endl;           //temp. make proper output formatting later.
 }
 
 
