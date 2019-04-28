@@ -60,10 +60,11 @@ int main() {
     vals, which are not prime, will be changed to false later in ers_strike() */ 
     sieve[0] = false;
     sieve[1] = false;
-    for(uint64_t i = 0; i <= max; i++) { sieve[i] = true; }
+    for(uint64_t i = 2; i <= max; i++) { sieve[i] = true; }
 
-    ers_count_prime(sieve, max);                              //temp function call, for testing purpose
+    ers_strike(sieve, max);
 
+    delete[] sieve;
     return 0;
 }
 
@@ -91,12 +92,29 @@ uint64_t ers_input() {
 bool* ers_strike(bool sieve[], uint64_t max) {
     uint64_t strike_count = 0;
 
-
     for(uint64_t i = 2; i <= sqrt(max); i++) {
-        for(uint64_t j = i*i; j <= sqrt(max); j++) {
-
+        if(ers_is_prime(i)) {
+            for(uint64_t j = i*i; j <= sqrt(max); (j+i)) {
+                sieve[j] = false;
+                strike_count++;
+            }
         }
     }
+    cout << "debug. count of strikethroughs is: " << strike_count << endl;     //temp. to remove later
+    return sieve;
+}
+
+/* checks, if passed arg is prime; no need to check for args < 2, since no 
+smaller ints are going to be passed by ers_strike() (calling function) */
+bool ers_is_prime(uint64_t num) {
+    if(num == 2) { return true; }
+    else {
+        for(uint64_t i = 2; i <= sqrt(num); i++) {
+            if(num % i == 0) { return false; }
+        }
+    }
+    cout << "debug. " << num << " is prime." << endl;               //temp. gonna be removed later
+    return true;
 }
 
 
