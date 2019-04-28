@@ -66,6 +66,7 @@ int main() {
     uint64_t* p_strike_count = &strike_count;
 
     ers_strike(sieve, max, p_strike_count);
+    ers_output(sieve, max, p_strike_count);
 
     delete[] sieve;
     return 0;
@@ -102,7 +103,7 @@ bool* ers_strike(bool sieve[], uint64_t max, uint64_t* p_strike_count) {
     */
     for(uint64_t i = 2; i <= sqrt(max); i++) {
         if(ers_is_prime(i)) {
-            for(uint64_t j = i*i; j <= max; (j+i)) {
+            for(uint64_t j = i*i; j <= max; j+=i) {
                 sieve[j] = false;
                 *p_strike_count++;
             }
@@ -123,6 +124,14 @@ bool ers_is_prime(uint64_t num) {
     }
     cout << "debug. " << num << " is prime." << endl;               //temp. gonna be removed later
     return true;
+}
+
+void ers_output(bool sieve[], uint64_t max, uint64_t* p_strike_count) {
+    uint64_t prime_count = ers_count_prime(sieve, max);
+    
+    for(uint64_t i = 0; i <= max; i++) {
+        cout << "debug. number " << i << " is " << sieve[i] << endl;    //temp. removed later
+    }
 }
 
 
