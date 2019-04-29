@@ -14,11 +14,12 @@ int main() {
     /* array is passed to the ers_sieve() function and passed back,
     filled with the desired values */
     unsigned output[3];
-    for(int i = 0; i <= 3; i++) { output[i] = 0; }
+    for(int i = 0; i <= 2; i++) { output[i] = 0; }
 
     unsigned const two = 2;
 
     cout << right << setw(8) << "N" << setw(8) << "P" << setw(8) << "S" << endl; 
+    
     /* call function for 2^i with 2<=i<=20 */
     for(unsigned i = 2; i <= 20; i++) {
         output[0] = i;
@@ -29,7 +30,7 @@ int main() {
         }
         
         ers_sieve(max, output);
-        cout << right << setw(8) << output[0] << setw(8) << output[1] << setw(8) << output[2] << endl; 
+        cout << right << setw(3) << output[0] << setw(8) << output[1] << setw(8) << output[2] << endl; 
     }
 
     return 0;
@@ -85,4 +86,3 @@ unsigned* ers_sieve(unsigned max, unsigned* output) {
     delete[] sieve;
     return output;
 }
-
