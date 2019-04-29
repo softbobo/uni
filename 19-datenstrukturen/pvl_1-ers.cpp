@@ -28,6 +28,8 @@ int main() {
         for(unsigned j = 0; j < i; j++) {
             max *= two;
         }
+
+        output[0] = max;
         
         ers_sieve(max, output);
         cout << right << setw(8) << output[0] << setw(8) << output[1] << setw(8) << output[2] << endl; 
