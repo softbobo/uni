@@ -1,5 +1,10 @@
 //Robert Schulze 26 April 2019
 
+/*Note: This code is being recycled in pvl1_ers.cpp (along with the written header)
+b/c I'm too stupid to read the task that we musn't write more than one function
+except main() to so the work */
+
+
 /*
 First lab assignment for the data structures lecture. Task specified in pdf:
 a)  - write a function, that takes 'n' as an arg 
