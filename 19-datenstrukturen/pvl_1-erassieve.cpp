@@ -47,6 +47,7 @@ d)  - find a function that finds the minimal upper border in time complexity
 #include<iostream>
 #include"pvl_1-erassieve.h"
 #include<cmath>
+#include<iomanip>
 
 using namespace std;
 
@@ -64,6 +65,9 @@ int main() {
     uint64_t* p_strike_count = &strike_count;
 
     ers_strike(sieve, max, p_strike_count);
+
+    /* setw(7) is because we ought to test up to 2^20, ergo 1048576 */
+    cout << right << setw(7) << "N" << setw(7) << "P" << setw(7) << "S" << endl; 
     ers_output(sieve, max, p_strike_count);
 
     delete[] sieve;
@@ -119,18 +123,14 @@ bool ers_is_prime(uint64_t num) {
             if(num % i == 0) { return false; }
         }
     }
-    cout << "debug. " << num << " is prime." << endl;               //temp. gonna be removed later
     return true;
 }
 
 /* this is going to be the properly formatted output later */
 void ers_output(bool sieve[], uint64_t max, uint64_t* p_strike_count) {
     uint64_t prime_count = ers_count_prime(sieve, max);
-    
-    for(uint64_t i = 0; i <= max; i++) {
-        cout << "debug. number " << i << " is " << sieve[i] << endl;    //temp. removed later
-    }
-    cout << "num of strikes is: " << *p_strike_count << endl;           //temp. make proper output formatting later.
+
+    cout << right << setw(7) << max << setw(7) << prime_count << setw(7) << *p_strike_count << endl;
 }
 
 
@@ -141,6 +141,5 @@ uint64_t ers_count_prime(bool sieve[], uint64_t max) {
     
     for(uint64_t i = 2; i <= max; i++) { if(sieve[i]) count++; }
 
-    cout << "debug: count of primes: " << count << endl;                //temp print, removed later
     return count;
 }
