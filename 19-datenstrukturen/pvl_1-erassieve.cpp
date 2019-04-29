@@ -14,8 +14,6 @@ d)  - find a function that finds the minimal upper border in time complexity
 */
 
 /* catch:
-    - set max (uintmax) and min (2) for n 
-
 */
 
 /* algo:
@@ -53,8 +51,8 @@ d)  - find a function that finds the minimal upper border in time complexity
 using namespace std;
 
 int main() {
-    uint64_t max = ers_input() + 1;
-    bool* sieve = new bool[max];
+    uint64_t max = ers_input();
+    bool* sieve = new bool[max + 1];
 
     /* initialise all values of the array to true except the first two -
     vals, which are not prime, will be changed to false later in ers_strike() */ 
