@@ -48,6 +48,7 @@ unsigned* ers_sieve(unsigned max, unsigned* output) {
     sieve[1] = false;
     for(unsigned i = 2; i <= max; i++) { sieve[i] = true; }
 
+    /* re-initialize output values to 0 each time the function runs */
     output[1] = 0;
     output[2] = 0;    
 
