@@ -15,12 +15,12 @@ set logscale xy                     # set both scales logarithmic
 # --- plot a for the number of primes 'p' in interval [2,n]
 set xlabel "N (obere Grenze im Intervall [2, N])"
 set ylabel "P (Anzahl der Primzahlen im Intervall [2,N])"
-plot "<(sed -n '2,20p' ers.txt)" using 1:2 with lines # first plot for number of primes
+plot "<(sed -n '2,20p' ers.txt)" using 1:2 with lines notitle # first plot for number of primes
 
 # --- plot b for the number of strikestroughs 's' needed to calculate 'p' 
 set xlabel "N (obere Grenze im Intervall [2, N])"
 set ylabel "S (Anzahl der Streichungen im Sieb)"
-plot "<(sed -n '2,20p' ers.txt)" using 1:3 with lines # second plot number of strokes
+plot "<(sed -n '2,20p' ers.txt)" using 1:3 with lines notitle # second plot number of strokes
 
 # specify the input
 unset multiplot                     # exit multiplot mode in order to display the output
