@@ -33,7 +33,7 @@ int main() {
         ers_sieve(max, output);
         cout << right << setw(8) << output[0] << setw(8) << output[1] << setw(8) << output[2] << endl; 
     }
-
+    delete[] output;
     return 0;
 }
 
