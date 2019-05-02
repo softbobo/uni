@@ -58,3 +58,15 @@ node* recurSearch(node* head, int val) {
     if(head->data == val) { return head; }
     return recurSearch(head->next, val);
 }
+
+//inserts int data into sorted linked list
+void insertSorted(node* head, int val) {
+        //if(head == NULL) { insertAtTail(head, val); }
+        if(val >= head->data) { return insertSorted(head->next, val); }
+        else {
+            node* temp = new node;
+            temp->data = val;
+            temp->next = head;
+            
+        }
+}
