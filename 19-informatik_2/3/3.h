@@ -16,4 +16,4 @@ void ll_print(lelem* head);                             //3.1
 
 
 
-void insert_front(lelem* &head, int val);               //3.5
+void ll_insert_front(lelem* &head, int val);               //3.5
