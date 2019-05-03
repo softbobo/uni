@@ -12,4 +12,8 @@ struct lelem {
 };
 
 /* function declarations */
-void ll_print(lelem* head);
+void ll_print(lelem* head);                             //3.1
+
+
+
+void insert_front(lelem* &head, int val);               //3.5
