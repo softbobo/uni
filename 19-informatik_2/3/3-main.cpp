@@ -13,7 +13,7 @@ int main() {
     int data = 5;
     lelem* head = NULL;
 
-    while(data) {
+    for(int i = 0; i <= data; i++) {
         ll_insert_front(head, data);
     }
 
