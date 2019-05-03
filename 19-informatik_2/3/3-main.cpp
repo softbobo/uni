@@ -6,7 +6,16 @@ softbobo 03 May 2019
 
 using namespace std;
 
+#include"3.h"
+#include<iostream>
 
 int main() {
+    int data = 5;
+    lelem* head = NULL;
+
+    while(data) {
+        ll_insert_front(head, data);
+    }
+
     return 0;
 }
