@@ -10,3 +10,6 @@ struct lelem {
     int data;
     lelem* next;
 };
+
+/* function declarations */
+void ll_print(lelem* head);
