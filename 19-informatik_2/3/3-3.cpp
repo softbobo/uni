@@ -7,6 +7,12 @@ softbobo 03 May 2019
 #include"3.h"
 #include<iostream>
 
-int ll_sum(int* head) {
+int ll_sum(lelem* head) {
+    int sum = 0;
     
+    for(;;head++) {
+        sum += head->data;
+    }
+
+    return sum;
 }
