@@ -17,5 +17,7 @@ int main() {
         ll_insert_front(head, data);
     }
 
+    cout << ll_sum(head) << endl;
+
     return 0;
 }
