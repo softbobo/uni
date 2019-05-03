@@ -19,6 +19,7 @@ beleg
 cutpoints
 basenum
 erassieve
+list
 #ignore vscode specifics
 /.vscode/
 uni.code-workspace
