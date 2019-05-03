@@ -14,6 +14,6 @@ struct lelem {
 /* function declarations */
 void ll_print(lelem* head);                                //3.1
 
-int ll_sum(lelem* head);                                     //3.3
+int ll_sum(lelem* head, int max);                                     //3.3
 
 void ll_insert_front(lelem* &head, int val);               //3.5

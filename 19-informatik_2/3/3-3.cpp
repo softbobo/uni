@@ -7,10 +7,10 @@ softbobo 03 May 2019
 #include"3.h"
 #include<iostream>
 
-int ll_sum(lelem* head) {
+int ll_sum(lelem* head, int max) {
     int sum = 0;
     
-    for(;;head++) {
+    for(int i = 0; i < max; i++) {
         sum += head->data;
     }
 
