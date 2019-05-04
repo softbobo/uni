@@ -2,7 +2,7 @@
 #
 # softbobo 03 May 2019
 
-CPPFLAGS= -pedantic -Wextra -Wall 
+CPPFLAGS= -pedantic -Wextra -Wall -g
 OBJECTS= 3-main.o 3-1.cpp 3-3.cpp 3-5.cpp 3-7.cpp 3-9.cpp
 
 all: $(OBJECTS)
