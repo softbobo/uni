@@ -5,13 +5,15 @@ Softbobo
 03 May 2019
 */
 
-/* this one was given, didn't think of the name myself */
-struct lelem {
-    int data;
-    lelem* next;
-};
 
 #include<iostream>
+
+/* this one was given, didn't think of the name myself */
+struct lelem {
+    int data = 0;
+    lelem* next = NULL;
+};
+
 
 /* function declarations */
 void ll_print(lelem* head);                                //3.1
