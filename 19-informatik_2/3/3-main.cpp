@@ -9,11 +9,11 @@ using namespace std;
 #include"3.h"
 
 int main() {
-    int data = 5;
+    int data = -5;
     lelem* head = NULL;
 
-    for(int i = 0; i <= data; i++) {
-        ll_insert_front(head, data);
+    for(int i = 0; i >= data; i--) {
+        ll_insert_front(head, i);
     }
 
     cout << "tot count of all list elements: " << ll_size(head) << endl;
