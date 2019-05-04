@@ -19,6 +19,6 @@ float ll_negrelation(lelem* head) {
         head = head->next;
     }
 
-    return total/negs;
+    return (total/negs);
 }
 
