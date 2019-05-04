@@ -17,6 +17,8 @@ int main() {
     }
 
     cout << "tot count of all list elements: " << ll_size(head) << endl;
+    cout << "percentage of negative values in th list is " << ll_negrelation(head)
+    << "%" << endl; 
     cout << "sum of all list elements: " << ll_sum(head, data) << endl;
 
     ll_remove(head);
