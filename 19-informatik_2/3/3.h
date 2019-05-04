@@ -19,7 +19,7 @@ struct lelem {
 void ll_print(lelem* head);                                //3.1
 unsigned ll_size(lelem* head);                             //3.2
 int ll_sum(lelem* head, int max);                          //3.3
-
+float ll_negrelation(lelem* head);                          //3.4
 void ll_insert_front(lelem* &head, int val);               //3.5
 
 void ll_remove_front(lelem*& head);                        //3.7
