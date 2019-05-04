@@ -18,6 +18,8 @@ int ll_sum(lelem* head, int max);                          //3.3
 
 void ll_insert_front(lelem* &head, int val);               //3.5
 
-void ll_remove_front(lelem*& head, unsigned len);          //3.7
+void ll_remove_front(lelem*& head);                        //3.7
+
+void ll_remove(lelem* &head)                               //3.9
 
 
