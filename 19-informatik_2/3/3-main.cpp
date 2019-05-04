@@ -16,7 +16,8 @@ int main() {
         ll_insert_front(head, data);
     }
 
-    cout << ll_sum(head, data) << endl;
+    cout << "tot count of all list elements: " << ll_size(head) << endl;
+    cout << "sum of all list elements: " << ll_sum(head, data) << endl;
 
     ll_remove(head);
 
