@@ -11,6 +11,14 @@ using namespace std;
 #include"3.h"
 
 float ll_negrelation(lelem* head) {
-    
+    float negs = 0.0;
+    float total = float(ll_size(head));
+
+    while(head != NULL) {
+        if(head->data < 0) { negs += 1.0; }
+        head = head->next;
+    }
+
+    return total/negs;
 }
 
