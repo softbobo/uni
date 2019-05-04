@@ -11,5 +11,5 @@ using namespace std;
 
 
 void ll_remove(lelem* &head) {
-    if(head != NULL) { ll_remove_front(head); }
+    while(head != NULL) { ll_remove_front(head); }
 }
