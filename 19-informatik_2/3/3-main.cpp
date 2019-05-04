@@ -7,7 +7,6 @@ softbobo 03 May 2019
 using namespace std;
 
 #include"3.h"
-#include<iostream>
 
 int main() {
     int data = 5;
@@ -18,6 +17,8 @@ int main() {
     }
 
     cout << ll_sum(head, data) << endl;
+
+    ll_remove(head);
 
     return 0;
 }

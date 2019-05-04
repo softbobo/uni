@@ -15,6 +15,8 @@ also, technically, we have to operations less per call of the function since
 2. head doesn't need to be updated with the return value of the function
 */
 
+using namespace std;
+
 #include"3.h"
 
 void ll_insert_front(lelem* &head, int val) {

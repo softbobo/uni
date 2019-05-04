@@ -8,7 +8,6 @@ softbobo 04 May 2019
 using namespace std;
 
 #include"3.h"
-#include<iostream>
 
 
 void ll_remove(lelem* &head) {
