@@ -3,7 +3,7 @@
 # softbobo 03 May 2019
 
 CPPFLAGS= -pedantic -Wextra -Wall -g
-OBJECTS= 3-main.o 3-1.cpp 3-3.cpp 3-5.cpp 3-7.cpp 3-9.cpp
+OBJECTS= 3-main.o 3-1.cpp 3-2.cpp 3-3.cpp 3-5.cpp 3-7.cpp 3-9.cpp
 
 all: $(OBJECTS)
 	g++ $(CPPFLAGS) -o list $(OBJECTS)
@@ -13,6 +13,9 @@ all: $(OBJECTS)
 
 3-1.o: 3-1.cpp
 	g++ $(CPPFLAGS) -c 3-1.cpp
+
+3-2.o: 3-2.cpp	
+	g++ $(CPPFLAGS) -c 3.2.cpp
 
 3-3.o: 3-3.cpp
 	g++ $(CPPFLAGS) -c 3-3.cpp
