@@ -17,5 +17,5 @@ void ll_remove_front(lelem* &head, unsigned len) {
 
     lelem* temp = head->next;
     delete head;
-    head = &temp;
+    head = temp;
 }
