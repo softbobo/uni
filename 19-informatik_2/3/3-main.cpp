@@ -16,6 +16,8 @@ int main() {
         ll_insert_front(head, i);
     }
 
+    ll_insert_back(head, 5);
+
     cout << "tot count of all list elements: " << ll_size(head) << endl;
     cout << "percentage of negative values in th list is " << 100 * ll_negrelation(head)
     << "%" << endl; 
