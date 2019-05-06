@@ -4,6 +4,11 @@ Main function for the whole task block three
 softbobo 03 May 2019
 */
 
+/* TO DO:
+- fix ll_negrelation: puts out vals > 100%, output also wrong for 
+- review ll_insert_back, seems to fuck up the list
+*/
+
 using namespace std;
 
 #include"3.h"
