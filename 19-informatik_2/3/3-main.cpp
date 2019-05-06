@@ -18,6 +18,14 @@ int main() {
 
     ll_insert_back(head, 5);
 
+    cout << "list elements iterative: ";
+    ll_print(head);
+    cout << endl;
+    
+    cout << "list elements recursive: "; 
+    ll_print_recursive(head);
+    cout << endl;
+
     cout << "tot count of all list elements: " << ll_size(head) << endl;
     cout << "percentage of negative values in th list is " << 100 * ll_negrelation(head)
     << "%" << endl; 
