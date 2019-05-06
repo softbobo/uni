@@ -11,11 +11,13 @@ using namespace std;
 /* so this is a pretty dumb way to insert somethin at the back of the list,
 i know. but i am too lazy atm to implement a tail pointer - maybe later */
 void ll_insert_back(lelem* &head, int data) {
-    while(head->next != NULL) {
-        head = head->next;
+    lelem* tail = head;
+    
+    while(tail->next != NULL) {
+        tail = tail->next;
     }
 
     lelem* temp = new lelem;
     temp->data = data;
-    head->next = temp;
+    tail->next = temp;
 }
