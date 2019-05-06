@@ -28,7 +28,7 @@ void ll_remove(lelem* &head);                              //3.9
 
 
 
-
+bool ll_remove_data(lelem* head, int val);                 //3.13
 
 
 void ll_print_recursive(lelem* &head);                     //3.16
