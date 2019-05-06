@@ -37,6 +37,11 @@ int main() {
     << "%" << endl; 
     cout << "sum of all list elements: " << ll_sum(head, data) << endl;
 
+    ll_remove_data(head, 0);
+    cout << "list entries after removal: ";
+    ll_print(head);
+    cout << endl;
+
     ll_remove(head);
 
     return 0;
