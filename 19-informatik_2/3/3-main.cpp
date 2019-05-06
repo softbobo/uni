@@ -7,6 +7,7 @@ softbobo 03 May 2019
 /* TO DO:
 - fix ll_negrelation: puts out vals > 100%, output also wrong for no negative values at all
 - remove formatting in ll_print()
+- review ll_sum() function, puts out weird values ('0' for list with -5 -4 -3 -2 -1 0 5)
 */
 
 using namespace std;
