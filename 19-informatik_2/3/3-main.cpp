@@ -5,8 +5,9 @@ softbobo 03 May 2019
 */
 
 /* TO DO:
-- fix ll_negrelation: puts out vals > 100%, output also wrong for 
+- fix ll_negrelation: puts out vals > 100%, output also wrong for no negative values at all
 - review ll_insert_back, seems to fuck up the list
+- remove formatting in ll_print()
 */
 
 using namespace std;
@@ -21,7 +22,7 @@ int main() {
         ll_insert_front(head, i);
     }
 
-    ll_insert_back(head, 5);
+    //ll_insert_back(head, 5);
 
     cout << "list elements iterative: ";
     ll_print(head);
