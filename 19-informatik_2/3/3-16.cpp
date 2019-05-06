@@ -8,6 +8,9 @@ using namespace std;
 
 #include"3.h"
 
-void ll_print_list(lelem* &head) {
-
+void ll_print_recursive(lelem* &head) {
+    if(head != NULL) {
+        cout << head->data << " ";
+        return ll_print_recursive(head->next);
+    }
 }
