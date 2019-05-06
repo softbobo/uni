@@ -8,6 +8,8 @@ softbobo 03 May 2019
 - fix ll_negrelation: puts out vals > 100%, output also wrong for no negative values at all
 - remove formatting in ll_print()
 - review ll_sum() function, puts out weird values ('0' for list with -5 -4 -3 -2 -1 0 5)
+- review ll_remove_data(), seems to get caught in endless loop and assignment of previous
+list entry to the one after the deleted one doesnt work properly
 */
 
 using namespace std;
