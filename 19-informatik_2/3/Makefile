@@ -26,6 +26,9 @@ all: $(OBJECTS)
 3-5.o: 3-5.cpp
 	g++ $(CPPFLAGS) -c 3-5.cpp
 
+3-6.o: 3-6.cpp
+	g++ $(CPPFLAGS) -c 3-6.cpp
+
 3-7.o: 3-7.cpp
 	g++ $(CPPFLAGS) -c 3-7.cpp
 
