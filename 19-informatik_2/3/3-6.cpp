@@ -8,8 +8,6 @@ using namespace std;
 
 #include"3.h"
 
-/* so this is a pretty dumb way to insert somethin at the back of the list,
-i know. but i am too lazy atm to implement a tail pointer - maybe later */
 void ll_insert_back(lelem* &head, int data) {
     lelem* tail = head;
     
