@@ -1,3 +1,4 @@
+#!usr/bin/python
 # written by Robert Schulze 25th April 2019
 
 """ First lab assignment for networks. Set as follows:
@@ -16,6 +17,12 @@
 """ 
 
 """ Algo:
+    - create vars for time (parse directly into what format?), latitude, longitude,
+    and height (2x - for preceding and actual line)
     - open file
-
+    - read in vars line by line and perform ops
+    - write line by line to output file
 """ 
+
+import cmath as cm
+import os
