@@ -24,7 +24,28 @@
     - write line by line to output file
 """ 
 
+""" TO DO:
+- sanitize input (remove first lines)
+"""
+
 import cmath as cm
 import os
+import datetime as dt
 
 
+infile = open('data.txt', 'r')
+outfile = open('output.plt', 'w')
+
+# sanitize input
+
+
+
+for line in infile: 
+    sline = line.split()
+    time = sline[1]
+    lat = sline[2]
+    lon = sline[3]
+    height = sline[4]
+    print(time,lat,lon,height)
+
+ 
