@@ -1,4 +1,4 @@
-#!usr/bin/python
+#!usr/bin/python2
 # written by Robert Schulze 25th April 2019
 
 """ First lab assignment for networks. Set as follows:
@@ -26,3 +26,5 @@
 
 import cmath as cm
 import os
+
+
