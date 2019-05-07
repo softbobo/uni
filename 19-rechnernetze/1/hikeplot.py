@@ -25,19 +25,30 @@
 """ 
 
 """ TO DO:
-- sanitize input 
+- wirte the calculations section
+- organize into application logic
 """
 
 import cmath as cm
 import os
-import datetime as dt
 
-
+#basif file i/o
 infile = open('data.txt', 'r')
 outfile = open('output.plt', 'w')
 
+#get input
+index = 0
 
+#calculations
 
+# ouput
+def write_to_file(dataset, index):
+    outfile.write(str(index))
+    outfile.write('\t')
+    for item in dataset:
+        outfile.write(item)
+        outfile.write('\t')
+    outfile.write('\n')
 
 for line in infile: 
     if not '\t' in line:
@@ -48,4 +59,11 @@ for line in infile:
     lat = sline[2]
     lon = sline[3]
     height = sline[4].replace('\n', '')
-    print(time,lat,lon,height)          #only for debugging
+    dataset = [time, lat, lon, height]
+    write_to_file(dataset, index)
+    index += 1
+
+
+
+
+
