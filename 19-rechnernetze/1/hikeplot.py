@@ -25,7 +25,7 @@
 """ 
 
 """ TO DO:
-- sanitize input (remove first lines)
+- sanitize input 
 """
 
 import cmath as cm
@@ -36,16 +36,16 @@ import datetime as dt
 infile = open('data.txt', 'r')
 outfile = open('output.plt', 'w')
 
-# sanitize input
 
 
 
 for line in infile: 
-    sline = line.split()
-    time = sline[1]
+    if not '\t' in line:
+        continue
+    sline = line.split('\t')
+    time = str(sline[1]).split()
+    time = time[1]
     lat = sline[2]
     lon = sline[3]
-    height = sline[4]
-    print(time,lat,lon,height)
-
- 
+    height = sline[4].replace('\n', '')
+    print(time,lat,lon,height)          #only for debugging
