@@ -31,8 +31,9 @@
 
 import cmath as cm
 import os
+import datetime as dt
 
-#basif file i/o
+#basic file i/o
 infile = open('data.txt', 'r')
 outfile = open('output.plt', 'w')
 
@@ -40,6 +41,10 @@ outfile = open('output.plt', 'w')
 index = 0
 
 #calculations
+def calc_time(time_prev, time_act):
+    return dt.timedelta(time_prev, time_act)
+
+
 
 # ouput
 def write_to_file(dataset, index):
