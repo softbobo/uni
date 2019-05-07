@@ -42,3 +42,6 @@ err.txt
 
 #ignore object files
 *.o
+
+#python-specific stuff
+venv/
