@@ -28,6 +28,12 @@ def dist_diff(lat_prev, lon_prev, lat_act, lon_act):
     a = math.sin(latdiff/2.0)**2 + math.cos(lat_prev) * math.cos(lat_act) * math.sin(londiff/2.0)**2
     b = 2.0 * math.asin(min(1, math.sqrt(a)))
     return 6396.0 * b 
+
+
+""" parses a coordinate in minute and second-format into decimal format """
+def coord_convert(coord):
+    coord = coord.split()
+    return (float(coord[0]) * 3600  + float(coord[1]) * 60 + float(coord[2])) / 1000
     
 
 # ouput
