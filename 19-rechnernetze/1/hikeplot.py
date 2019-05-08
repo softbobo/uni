@@ -91,7 +91,7 @@ for line in infile:
     dataset.append(height)
     
 
-    write_to_file(dataset)
+    write_to_file(dataset, outfile)
 
     # increment index right away for the next line
     index += 1

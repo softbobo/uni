@@ -19,7 +19,7 @@ def dist_diff(lat_prev, lon_prev, lat_act, lon_act):
     
 
 # ouput
-def write_to_file(dataset):
+def write_to_file(dataset, outfile):
     for item in dataset:
         outfile.write(item)
         outfile.write('\t')
