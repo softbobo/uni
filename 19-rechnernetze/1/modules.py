@@ -15,6 +15,13 @@ def time_diff(time_prev, time_act):
     secs = int(time_act[2]) - int(time_prev[2])
     return str(hours) + ':' + str(mins) + ':' + str(secs)
 
+def time_add(tot_time, time_act):
+    tot_time = tot_time.split(':')
+    time_act = time_act.split(':')
+    hours = int(time_act[0]) + int(tot_time[0])
+    mins = int(time_act[1]) + int(tot_time[1])
+    secs = int(time_act[2]) + int(tot_time[2])
+    return str(hours) + ':' + str(mins) + ':' + str(secs)
 
 # this function is ugly and surely can be optimized
 # taken from the task however
