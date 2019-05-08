@@ -22,10 +22,15 @@
     - open file
     - read in vars line by line and perform ops
     - write line by line to output file
+    - implement section speed
+    - add current lat and lon to dataset
 """ 
 
 """ TO DO:
-    - make variables for main for loop global
+    - fix length of distance corvered in output file (number of decimals)
+    - fix total distance (huge number gets added in first loop execution)
+    - fix time_difference (negative numbers)
+    - fix total time (values total rubbish)
     - parse in- and output files from cli
 """
 
