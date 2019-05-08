@@ -34,18 +34,21 @@ def dist_diff(lat_prev, lon_prev, lat_act, lon_act):
     londiff = lon_act - lon_prev
     a = math.sin(latdiff/2.0)**2 + math.cos(lat_prev) * math.cos(lat_act) * math.sin(londiff/2.0)**2
     b = 2.0 * math.asin(min(1, math.sqrt(a)))
-    return 6396.0 * b 
+    return round(6396.0 * b, 3) 
 
 
 """ parses a coordinate in minute and second-format into decimal format """
 def coord_convert(coord):
-    coord = coord.split()
-    return (float(coord[0]) * 3600  + float(coord[1]) * 60 + float(coord[2])) / 1000
+    if coord != '0':
+        coord = coord.split()
+        return (float(coord[0]) * 3600  + float(coord[1]) * 60 + float(coord[2])) / 1000
+    else:
+        return float(coord)
     
 
 # ouput
 def write_to_file(dataset, outfile):
     for item in dataset:
-        outfile.write(item)
+        outfile.write(str(item))
         outfile.write('\t')
     outfile.write('\n')
