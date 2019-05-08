@@ -2,7 +2,7 @@
 # written by Robert Schulze 25th April 2019
 
 """ First lab assignment for networks. Set as follows:
-    - take gps data from a file, it contains date, time, lat, lon and height
+    - take gps data from a file, it contains date, time, lat, lon and height_act
     - create output file that contains:
         - index
         - distance to preceding point
@@ -10,23 +10,23 @@
         - time difference to preceding point
         - total time
         - pace/speed for last section covered
-        - height above sea level
+        - height_act above sea level
         - lat
         - lon
-    - plot a profile graph with gnuplot (distance on x- height on y-axes)
+    - plot a profile graph with gnuplot (distance on x- height_act on y-axes)
 """ 
 
 """ Algo:
     - create vars for time (parse directly into what format?), latitude, longitude,
-    and height (2x - for preceding and actual line)
+    and height_act (2x - for preceding and actual line)
     - open file
     - read in vars line by line and perform ops
     - write line by line to output file
 """ 
 
 """ TO DO:
-- wirte the calculations section
-- organize into application logic
+- conversion to decimal degrees in dist_diff
+- make variables for main for loop global
 """
 
 import math
@@ -40,12 +40,12 @@ outfile = open('output.plt', 'w')
 index = 0
 
 #calculations
-def timediff(time_prev, time_act):
+def time_diff(time_prev, time_act):
     return dt.timedelta(time_prev, time_act)
 
 # this function is ugly and surely can be optimized
 # taken from the task however
-def distdiff(lat_prev, lon_prev, lat_act, lon_act):
+def dist_diff(lat_prev, lon_prev, lat_act, lon_act):
     lat_prev = math.radians(lat_prev)
     lon_prev = math.radians(lon_prev)
     lat_act = math.radians(lat_act)
@@ -65,6 +65,12 @@ def write_to_file(dataset):
     outfile.write('\n')
 
 index = 0
+tot_distance = 0
+tot_time = "00:00:00"
+lat_act = 0
+lon_act = 0
+lat_prev = 0
+lon_prev = 0
 
 # this is the whole logic in a single for loop - urgh
 for line in infile: 
@@ -79,15 +85,42 @@ for line in infile:
     # write index to dataset 
     dataset.append(index)
     
-    # parse input
-    sline = line.split('\t')
-    time = str(sline[1]).split()
-    time = time[1]
-    lat = sline[2]
-    lon = sline[3]
-    height = sline[4].replace('\n', '')
-    dataset = [time, lat, lon, height]
-    write_to_file(dataset, index)
+    # parse input to list
+    line = line.split('\t')
+
+    
+    # same here: first check for the previous value,
+    # then parse input of current line,
+    # calculate difference in distance,
+    # write to dataset(),
+    # add to total dist covered and write to dataset(), too
+    if lat_act != 0 and lon_act != 0:
+        lat_prev = lat_act
+        lon_prev = lon_act
+    lat_act = line[2]
+    lon_act = line[3]
+    dist_delta = dist_diff(lat_prev, lon_prev, lat_act, lon_act)
+    tot_distance += dist_delta
+    dataset.append(dist_delta)
+    dataset.append(tot_distance)
+
+    # check first, if we already have a time value (i.e. not first line of input)
+    # then find actual time in current line
+    # call time_diff and write return val to dataset
+    if time_act != 0:
+        time_prev = time_act
+    time_act = str(line[1]).split()
+    time_act = time_act[1]
+    dataset.append(time_diff(time_act, time_prev))
+
+
+
+    # height is ez
+    height = line[4].replace('\n', '')
+    dataset.append(height)
+    
+
+    write_to_file(dataset)
 
     # increment index right away for the next line
     index += 1
