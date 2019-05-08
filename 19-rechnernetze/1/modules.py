@@ -1,8 +1,20 @@
 import math
 import datetime as dt
+from time import strptime
 
+""" 
+takes two time strings, splits those and calcs the difference
+gives back string 
+pretty ugly, but didn't get my head around timedelta objects
+"""
 def time_diff(time_prev, time_act):
-    return dt.timedelta(time_prev, time_act)
+    time_prev = time_prev.split(':')
+    time_act = time_act.split(':')
+    hours = int(time_act[0]) - int(time_prev[0])
+    mins = int(time_act[1]) - int(time_prev[1])
+    secs = int(time_act[2]) - int(time_prev[2])
+    return str(hours) + ':' + str(mins) + ':' + str(secs)
+
 
 # this function is ugly and surely can be optimized
 # taken from the task however
