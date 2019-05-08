@@ -25,13 +25,11 @@
 """ 
 
 """ TO DO:
-    - conversion to decimal degrees in dist_diff
     - make variables for main for loop global
-    - parse in- and output from cli
-    - convert time-parameters from str to what?? in time_diff
+    - parse in- and output files from cli
 """
 
-from modules import time_diff, dist_diff, write_to_file
+from modules import time_diff, dist_diff, write_to_file, time_add
 
 #basic file i/o
 infile = open('data.txt', 'r')
@@ -39,11 +37,14 @@ outfile = open('output.plt', 'w')
 
 index = 0
 tot_distance = 0
+dist_delta = 0
+lat_act = '0'
+lon_act = '0'
+lat_prev = '0'
+lon_prev = '0'
 tot_time = "00:00:00"
-lat_act = 0
-lon_act = 0
-lat_prev = 0
-lon_prev = 0
+time_act = "00:00:00"
+time_prev = "00:00:00"
 
 # this is the whole logic in a single for loop - urgh
 for line in infile: 
@@ -72,7 +73,8 @@ for line in infile:
         lon_prev = lon_act
     lat_act = line[2]
     lon_act = line[3]
-    dist_delta = dist_diff(lat_prev, lon_prev, lat_act, lon_act)
+    if lat_prev != 0 and lon_prev != 0:
+        dist_delta = dist_diff(lat_prev, lon_prev, lat_act, lon_act)
     tot_distance += dist_delta
     dataset.append(dist_delta)
     dataset.append(tot_distance)
@@ -84,9 +86,10 @@ for line in infile:
         time_prev = time_act
     time_act = str(line[1]).split()
     time_act = time_act[1]
-    dataset.append(time_diff(time_act, time_prev))
-
-
+    time_taken = time_diff(time_act, time_prev)
+    tot_time = time_add(tot_time, time_act)
+    dataset.append(time_taken)
+    dataset.append(tot_time)
 
     # height is ez
     height = line[4].replace('\n', '')
