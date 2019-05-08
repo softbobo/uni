@@ -25,8 +25,10 @@
 """ 
 
 """ TO DO:
-- conversion to decimal degrees in dist_diff
-- make variables for main for loop global
+    - conversion to decimal degrees in dist_diff
+    - make variables for main for loop global
+    - parse in- and output from cli
+    - convert time-parameters from str to what?? in time_diff
 """
 
 from modules import time_diff, dist_diff, write_to_file
