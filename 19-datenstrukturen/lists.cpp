@@ -99,7 +99,7 @@ void removeIterative(node* &head, int val) {
 }
 
 node* mirrorRecursive(node* head, node* prev) {
-    if(!head) { return; }
+    if(!head) { return NULL; }
     
     if(head->next == NULL) { return head; }
 
@@ -110,4 +110,14 @@ node* mirrorRecursive(node* head, node* prev) {
         head = temp;
         return mirrorRecursive(head, prev);
     }
+}
+
+node* mirrorRec(node* head) {
+    if(!head) { return NULL; }
+    
+    if(head->next == NULL) { return head; }
+
+    node* newhead = mirrorRec(head->next);
+    head->next->next = head;
+    return newhead;
 }
