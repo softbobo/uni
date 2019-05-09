@@ -25,8 +25,8 @@
 """ 
 
 """ TO DO:
-    - fix length of distance corvered in output file (number of decimals)
-    - fix total distance (huge number gets added in first loop execution)
+    - check back on distance covered, dunno if values are true
+    - revisit round, maybe better change it so some kind of width statement
     - fix time_difference (negative numbers)
     - fix total time (values total rubbish)
     - implement section speed
@@ -90,11 +90,11 @@ for line in infile:
     # check first, if we already have a time value (i.e. not first line of input)
     # then find actual time in current line
     # call time_diff and write return val to dataset
-    if time_act != 0:
+    if time_act != "00:00:00":
         time_prev = time_act
     time_act = str(line[1]).split()
     time_act = time_act[1]
-    time_taken = time_diff(time_act, time_prev)
+    time_taken = time_diff(time_prev, time_act)
     tot_time = time_add(tot_time, time_act)
     dataset.append(time_taken)
     dataset.append(tot_time)
