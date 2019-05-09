@@ -72,9 +72,21 @@ void insertSorted(node* head, int val) {
 }
 
 //write a function to remove the first element of the list
-
 void removeFirst(node* head) {
+    if(head == NULL) { return; }
+    
     node* temp = head;
     head = head->next;
     delete temp;
+}
+
+
+//write a functon that removes first item with a given val - recursive
+void removeRecursive() {
+
+}
+
+//write a functon that removes first item with a given val - iterative
+void removeIterative() {
+
 }
