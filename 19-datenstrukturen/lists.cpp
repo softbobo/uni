@@ -82,8 +82,19 @@ void removeFirst(node* &head) {
 
 
 //write a functon that removes first item with a given val - recursive
-void removeRecursive() {
+void removeRecursive(node* head, int val) {
+    if(val != head->data) { return removeRecursive(head->next, val); }
 
+    else if(head->data == val) {
+        node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+    // this ain't needed, i guess
+    else if (head->next->data == val) {
+        head->next = head->next->next;
+        delete head->next;
+    }
 }
 
 //write a functon that removes first item with a given val - iterative
