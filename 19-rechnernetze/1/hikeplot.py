@@ -1,6 +1,11 @@
 #!/usr/bin/python2
 # written by Robert Schulze 25th April 2019
 
+"""
+IMPORTANT: THIS VERSION IS DEPRECATED (and incomplete), find the actual 
+implementation in parsegps.py and parsegps_modules.py
+"""
+
 """ First lab assignment for networks. Set as follows:
     - take gps data from a file, it contains date, time, lat, lon and height_act
     - create output file that contains:

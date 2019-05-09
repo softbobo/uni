@@ -1,6 +1,12 @@
+"""
+IMPORTANT: THIS VERSION IS DEPRECATED (and incomplete), find the actual 
+implementation in parsegps.py and parsegps_modules.py
+"""
+
 import math
 import datetime as dt
 from time import strptime
+
 
 """ 
 takes two time strings, splits those and calcs the difference
