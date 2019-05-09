@@ -45,3 +45,4 @@ err.txt
 
 #python-specific stuff
 venv/
+*.pyc
