@@ -25,8 +25,8 @@
 """ 
 
 """ TO DO:
-    - check back on distance covered, dunno if values are true
-    - revisit round, maybe better change it so some kind of width statement
+    - check back on distance covered, values are not plausible (366 kms total now)
+    - revisit rounding, maybe better change it so some kind of width statement
     - fix time_difference (negative numbers)
     - fix total time (values total rubbish)
     - implement section speed
