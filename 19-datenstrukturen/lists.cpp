@@ -70,3 +70,11 @@ void insertSorted(node* head, int val) {
             
         }
 }
+
+//write a function to remove the first element of the list
+
+void removeFirst(node* head) {
+    node* temp = head;
+    head = head->next;
+    delete temp;
+}
