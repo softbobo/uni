@@ -8,6 +8,8 @@ gives back string
 pretty ugly, but didn't get my head around timedelta objects
 """
 def time_diff(time_prev, time_act):
+    if time_prev == '00:00:00':
+        return time_prev
     time_prev = time_prev.split(':')
     time_act = time_act.split(':')
     hours = int(time_act[0]) - int(time_prev[0])
@@ -34,7 +36,7 @@ def dist_diff(lat_prev, lon_prev, lat_act, lon_act):
     londiff = lon_act - lon_prev
     a = math.sin(latdiff/2.0)**2 + math.cos(lat_prev) * math.cos(lat_act) * math.sin(londiff/2.0)**2
     b = 2.0 * math.asin(min(1, math.sqrt(a)))
-    return round(6396.0 * b, 3) 
+    return round((6396.0 * b), 3) 
 
 
 """ parses a coordinate in minute and second-format into decimal format """
