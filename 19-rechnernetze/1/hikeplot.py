@@ -1,4 +1,4 @@
-#!usr/bin/python2
+#!/usr/bin/python2
 # written by Robert Schulze 25th April 2019
 
 """ First lab assignment for networks. Set as follows:
@@ -22,8 +22,6 @@
     - open file
     - read in vars line by line and perform ops
     - write line by line to output file
-    - implement section speed
-    - add current lat and lon to dataset
 """ 
 
 """ TO DO:
@@ -31,6 +29,8 @@
     - fix total distance (huge number gets added in first loop execution)
     - fix time_difference (negative numbers)
     - fix total time (values total rubbish)
+    - implement section speed
+    - add current lat and lon to dataset
     - parse in- and output files from cli
 """
 
@@ -41,8 +41,8 @@ infile = open('data.txt', 'r')
 outfile = open('output.plt', 'w')
 
 index = 0
-tot_distance = 0
-dist_delta = 0
+tot_distance = 0.0
+dist_delta = 0.0
 lat_act = '0'
 lon_act = '0'
 lat_prev = '0'
@@ -50,6 +50,7 @@ lon_prev = '0'
 tot_time = "00:00:00"
 time_act = "00:00:00"
 time_prev = "00:00:00"
+speed = 0.0
 
 # this is the whole logic in a single for loop - urgh
 for line in infile: 
@@ -73,13 +74,15 @@ for line in infile:
     # calculate difference in distance,
     # write to dataset(),
     # add to total dist covered and write to dataset(), too
-    if lat_act != 0 and lon_act != 0:
+    if lat_act != '0' and lon_act != '0':
         lat_prev = lat_act
         lon_prev = lon_act
     lat_act = line[2]
     lon_act = line[3]
-    if lat_prev != 0 and lon_prev != 0:
+    if lat_prev != '0' and lon_prev != '0':
         dist_delta = dist_diff(lat_prev, lon_prev, lat_act, lon_act)
+    else:
+        dist_delta = 0.0
     tot_distance += dist_delta
     dataset.append(dist_delta)
     dataset.append(tot_distance)
@@ -96,11 +99,18 @@ for line in infile:
     dataset.append(time_taken)
     dataset.append(tot_time)
 
+    # here the function still needs to be implemented
+    dataset.append(speed)
+
     # height is ez
     height = line[4].replace('\n', '')
     dataset.append(height)
     
+    # lat and lon are the last values to be written to each line
+    dataset.append(lat_act)
+    dataset.append(lon_act)
 
+    # call output function
     write_to_file(dataset, outfile)
 
     # increment index right away for the next line
