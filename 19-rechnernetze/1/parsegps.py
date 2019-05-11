@@ -37,10 +37,10 @@ def logic():
         height = line[4]
 
         distance_section = data.calc_distance(data.lat, data.lon, data.lat_prev, data.lon_prev)
-        data.write_to_file(distance_section, outfile)
+        data.write_to_file(round(distance_section, 3), outfile)
 
         data.tot_distance += distance_section
-        data.write_to_file(data.tot_distance, outfile)
+        data.write_to_file(round(data.tot_distance, 3), outfile)
 
         
         data.write_to_file(data.lat, outfile)
