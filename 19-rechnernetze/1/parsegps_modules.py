@@ -3,6 +3,7 @@
 # 09 Mai 2019
 
 from math import sin, cos, acos, sqrt
+import datetime
 
 class instance():
     index = 0
@@ -42,6 +43,12 @@ class instance():
         return distance
 
 
+    def convert_time(self, argument):
+        format = '%d-%b-%Y %H:%M:%S'
+        argument = datetime.datetime.strptime(argument, format)
+        return argument
+
     def write_to_file(self, argument, outfile):
         outfile.write(str(argument))
         outfile.write('\t\t')
+
