@@ -43,7 +43,7 @@ class instance():
         lon_prev = self.sexages_to_dec(lon_prev)
         zeta = acos(sin(lat)*sin(lat_prev) + cos(lat)*cos(lat_prev)*cos(lon_prev - lon))
         distance = (zeta/360) * 40000
-        return distance
+        return distance * 1000
 
 
     def calc_timediff(self, time, time_prev):
@@ -60,7 +60,16 @@ class instance():
         self.tot_time += timediff
         return str(self.tot_time)
 
+    def speed(self, timediff, distance_section):
+        if timediff == "00:00:00":
+            return 0.0
+        format = '%H:%M:%S'
+        timediff = dt.datetime.strptime(timediff, format)
+        timediff = dt.timedelta(minutes=timediff.minute, seconds=timediff.second, microseconds=timediff.microsecond)
+        return (distance_section / timediff.total_seconds()) * 3.6
+
     def write_to_file(self, argument, outfile):
         outfile.write(str(argument))
-        outfile.write('\t\t')
+        if argument != "\n":
+            outfile.write('\t\t')
 
