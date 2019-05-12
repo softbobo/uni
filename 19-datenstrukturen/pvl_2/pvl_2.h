@@ -13,6 +13,11 @@ class pvl2_students {
 
 public:
 
+    pvl2_students();
+    void pvl2_add_student(unsigned regnum, char** courses);
+    bool pvl2_is_registered(unsigned regnum);
+    void pvl2_exmat(unsigned regnum);
+
 };
 
 #endif
