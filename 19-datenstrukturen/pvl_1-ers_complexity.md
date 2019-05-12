@@ -5,10 +5,27 @@
 Robert Schulze
 Matrikelnummer: 555625
 
-## Zeitkomplexität meiner Implementierung des Sieb des Erastosthenes
+## Zeitkomplexität meiner Implementierung des Sieb des Eratosthenes
 
-### Teil-Komplexität für Anzahl der Primzahlen P
+### Ermittlung der Anzahl der Primzahlen P in Abhängigkeit von N
 
-### Teil-Komplexität für Anzahl der Streichungen S
+
+```c++
+    for(unsigned i = 0; i <= max; i++) {
+        if(sieve[i] == true) { output[1]++; }
+    }
+```
+
+### Ermittlung der Anzahl der Streichungen in Abhängigkeit von N
+```c++
+    for(unsigned i = 2; (i*i <= max); i++) {
+        if(sieve[i] == true) {
+            for(unsigned j = i*i; j <= max; j += i) {
+                sieve[j] = false;
+                output[2]++;
+            }
+        }
+    }
+```
 
 ### Gesamtkomplexität
