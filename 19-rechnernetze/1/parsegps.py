@@ -5,8 +5,9 @@
 
 """
 next steps:
-- fix section distance output for first value (needs to be 0.0)
-- fix distance formatting for distance outputs
+- fix timediff output for first value (needs to be 00:00:00)
+- implement total time
+- fix indentation for all lines after line 1
 - write lat and lon to file
 """
 
@@ -29,19 +30,34 @@ def logic():
         data.write_to_file(data.index, outfile)
         data.index += 1
 
-        if data.index is not 0:
-            data.lat_prev = data.lat
-            data.lon_prev = data.lon
+        data.lat_prev = data.lat
+        data.lon_prev = data.lon
         data.lat = line[2]
         data.lon = line[3]
         height = line[4]
 
-        distance_section = data.calc_distance(data.lat, data.lon, data.lat_prev, data.lon_prev)
+        if data.lat_prev is "0":
+            distance_section = 0.0
+        else: 
+            distance_section = data.calc_distance(data.lat, data.lon, data.lat_prev, data.lon_prev)
         data.write_to_file(round(distance_section, 3), outfile)
+       
 
         data.tot_distance += distance_section
         data.write_to_file(round(data.tot_distance, 3), outfile)
 
+        data.prev_time = data.curr_time
+        data.curr_time = line[1].split()
+        data.curr_time = data.curr_time[1]
+
+        if data.prev_time == "00:00:00":
+            timediff = "00:00:00"
+            data.write_to_file(timediff, outfile)
+        else:
+            timediff = data.calc_timediff(data.curr_time, data.prev_time)
+            data.write_to_file(timediff, outfile)
+
+        data.write_to_file(data.timeadd(timediff, data.tot_time_temp), outfile)
         
         data.write_to_file(data.lat, outfile)
         data.write_to_file(data.lon, outfile)

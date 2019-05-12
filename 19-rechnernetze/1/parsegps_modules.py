@@ -3,7 +3,7 @@
 # 09 Mai 2019
 
 from math import sin, cos, acos, sqrt
-import datetime
+import datetime as dt 
 
 class instance():
     index = 0
@@ -12,7 +12,10 @@ class instance():
     lat_prev = "0"
     lon_prev = "0"
     tot_distance = 0.0
-
+    curr_time = "00:00:00"
+    prev_time = "00:00:00"
+    tot_time = "00:00:00"
+    tot_time_temp = "00:00:00"
 
     def __init__(self):
         pass
@@ -43,10 +46,21 @@ class instance():
         return distance
 
 
-    def convert_time(self, argument):
-        format = '%d-%b-%Y %H:%M:%S'
-        argument = datetime.datetime.strptime(argument, format)
-        return argument
+    def calc_timediff(self, time, time_prev):
+        format = '%H:%M:%S'
+        time = dt.datetime.strptime(time, format)
+        time_prev = dt.datetime.strptime(time_prev, format) 
+        timediff = time - time_prev
+        return str(timediff)
+
+    def timeadd(self, timediff, tot_time_temp):
+        format = '%H:%M:%S'
+        timediff = dt.datetime.strptime(timediff, format)
+        tot_time_temp = dt.datetime.strptime(tot_time_temp, format)
+        timediff = dt.timedelta(minutes=timediff.minute, seconds=timediff.second, microseconds=timediff.microsecond)
+        tot_time_temp = dt.timedelta(minutes=tot_time_temp.minute, seconds=tot_time_temp.second, microseconds=tot_time_temp.microsecond)
+        self.tot_time = tot_time_temp + timediff
+        return str(self.tot_time)
 
     def write_to_file(self, argument, outfile):
         outfile.write(str(argument))
