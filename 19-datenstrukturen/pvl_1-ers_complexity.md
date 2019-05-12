@@ -29,3 +29,5 @@ Matrikelnummer: 555625
 ```
 
 ### Gesamtkomplexität
+
+Der gesamte Algorithmus hat eine Zeitomplexität von $O(n\log{} log{}n)$. 
