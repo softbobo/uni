@@ -14,8 +14,8 @@ class instance():
     tot_distance = 0.0
     curr_time = "00:00:00"
     prev_time = "00:00:00"
-    tot_time = "00:00:00"
-    tot_time_temp = "00:00:00"
+    tot_time = dt.timedelta(seconds = 0)
+    
 
     def __init__(self):
         pass
@@ -53,13 +53,11 @@ class instance():
         timediff = time - time_prev
         return str(timediff)
 
-    def timeadd(self, timediff, tot_time_temp):
+    def timeadd(self, timediff, tot_time):
         format = '%H:%M:%S'
         timediff = dt.datetime.strptime(timediff, format)
-        tot_time_temp = dt.datetime.strptime(tot_time_temp, format)
         timediff = dt.timedelta(minutes=timediff.minute, seconds=timediff.second, microseconds=timediff.microsecond)
-        tot_time_temp = dt.timedelta(minutes=tot_time_temp.minute, seconds=tot_time_temp.second, microseconds=tot_time_temp.microsecond)
-        self.tot_time = tot_time_temp + timediff
+        self.tot_time += timediff
         return str(self.tot_time)
 
     def write_to_file(self, argument, outfile):
