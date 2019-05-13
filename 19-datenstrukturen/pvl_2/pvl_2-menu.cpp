@@ -43,14 +43,14 @@ void pvl_2_menu() {
             unsigned regnum;
             cout << "Bitte gesuchte Matrikelnummer eingeben" << endl;
             cin >> regnum;
-            list.pvl2_regnum_is_valid(regnum);                    
+            list.pvl2_regnum_is_valid(regnum, input);                    
             break;
         
         case 'L':
             unsigned regnum;
             cout << "Bitte Matrikelnummer des zu loeschenden Eintrags eingeben" << endl;
             cin >> regnum;
-            list.pvl2_regnum_is_valid(regnum);
+            list.pvl2_regnum_is_valid(regnum, input);
             break;
         
         default:
