@@ -35,7 +35,7 @@ public:
     stud* pvl2_find_prev(stud* head);
     bool pvl2_is_registered(unsigned regnum);
     void pvl2_exmat(unsigned regnum);
-    bool pvl2_regnum_is_valid(unsigned regnum);
+    unsigned pvl2_regnum_is_valid(unsigned regnum, char opt);
 
 };
 
