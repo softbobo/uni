@@ -34,21 +34,25 @@ void pvl_2_menu() {
         cin >> input;
 
         switch (input) {
+        
         case 'A':
             list.pvl2_add_student();
             break;
+        
         case 'S':
             unsigned regnum;
             cout << "Bitte gesuchte Matrikelnummer eingeben" << endl;
             cin >> regnum;
             list.pvl2_regnum_is_valid(regnum);                    
             break;
+        
         case 'L':
             unsigned regnum;
             cout << "Bitte Matrikelnummer des zu loeschenden Eintrags eingeben" << endl;
             cin >> regnum;
             list.pvl2_regnum_is_valid(regnum);
             break;
+        
         default:
             cout << "unzulaessige Eingabe!" << endl;
             break;
