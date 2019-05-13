@@ -23,6 +23,7 @@ struct stud {
 class pvl2_students {
 
     stud* head = NULL;
+    stud* tail = NULL;
     unsigned count = 0;
     const unsigned MAX = 1000;
     
