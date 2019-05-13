@@ -8,7 +8,8 @@ May 2019
 
 /* to do:
 - implement pvl_2-add_student:
-    write check for last entry in list and add var for highest regnum
+    - write check for validity of regnum
+    - write check for last entry in list and add var for highest regnum
 */
 
 #include"pvl_2.h"
@@ -28,9 +29,9 @@ public:
 
     void pvl2_add_student() {
         stud* temp = new stud;
-        unsigned regnum = 0;
         
         /* first copy data to new entry */
+        unsigned regnum = 0;
         cout << "Bitte Matrikelnummer des Studierenden eingeben: ";
         cin >> regnum;
         temp->regnum = regnum;
@@ -56,11 +57,21 @@ public:
             temp->next = pos->next;
             pos->next->prev = temp;
             pos->next = temp;
+
+            count += 1;
         }
 
     }
 
+    /* needs to work like this:
+    1. enter big for-loop to count up to 30 
+    2. allocate char variable, enter while-loop with getchar()
+    3. write string to memory and direct pointer in array to it
+    4. ask user for next input
+    */
     void pvl2_add_course(char** courses) {
+        
+        
         return;
     }
 
@@ -72,6 +83,14 @@ public:
 
     bool pvl2_is_registered(unsigned regnum);
     void pvl2_exmat(unsigned regnum);
-    bool pvl2_regnum_is_valid(unsigned regnum);
+
+    /* this gotta work like this:
+    1. checks if regnum is within given borders
+    2. if yes, passes regnum to next function, determined via option and switch statement
+    3. if no, prints out error message, lets user enter new regnum and calls 
+    itself recursively with new regnum
+    4. add escape option to end program?
+    */
+    unsigned pvl2_regnum_is_valid(unsigned regnum, char opt);
 
 };
