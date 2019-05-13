@@ -32,6 +32,7 @@ public:
     void pvl2_add_student(unsigned regnum, char** courses);
     bool pvl2_is_registered(unsigned regnum);
     void pvl2_exmat(unsigned regnum);
+    bool pvl2_regnum_is_valid(unsigned regnum);
 
 };
 
