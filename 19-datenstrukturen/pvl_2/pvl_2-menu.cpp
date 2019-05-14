@@ -52,6 +52,10 @@ void pvl_2_menu() {
             cin >> regnum;
             list.pvl2_regnum_is_valid(regnum, input);
             break;
+
+        case 'E':
+            cout << "Programm wird beendet" << endl;
+            return;
         
         default:
             cout << "unzulaessige Eingabe!" << endl;
