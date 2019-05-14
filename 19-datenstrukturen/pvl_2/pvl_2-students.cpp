@@ -7,15 +7,13 @@ May 2019
 /* functions declarations for 2nd lab assignment */
 
 /* to do:
-- implement pvl_2-add_student:
-    - write check for validity of regnum
-    - write check for last entry in list and add var for highest regnum
+- check bacl on add_course, doubt it will work like that
 - change name of pvl2_exmat() to pvl2_delete() for clarity
 - check back in break/continue clause in add_course() for error input
 */
 
 #include"pvl_2.h"
-#include<stdio.h>
+#include"pvl_2-menu.h"
 
 using namespace std;
 
@@ -102,7 +100,10 @@ void pvl2_students::pvl2_add_course(char** courses) {
 }
 
 stud* pvl2_students::pvl2_find_prev(stud* head) {
+    
     stud* pos = NULL;
+    
+
 
     return pos;
 }
@@ -140,12 +141,8 @@ unsigned pvl2_students::pvl2_regnum_is_valid(unsigned regnum, char opt) {
 
     else {
         cout << "Unzulaessige Eingabe! Die Matrikelnummer muss sich zwischen " <<
-        "1 und 999999 befiden! " << endl;
-        cout << "Bitte erneut eingeben " << endl;
-        cin >> regnum;
+            "1 und 999999 befinden! " << endl;
 
-        return pvl2_regnum_is_valid(regnum, opt);
+        pvl_2_menu();
     }
-    
-    return regnum;
 }
