@@ -21,8 +21,6 @@ important:
 */
 
 /* to do:
-- construct an students-object
-- how to implement the interface? - maybe put into extra module?
 */
 
 using namespace std;
