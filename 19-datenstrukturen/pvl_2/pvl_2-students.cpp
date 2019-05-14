@@ -16,81 +16,79 @@ May 2019
 
 using namespace std;
 
-class pvl2_students {
 
-    stud* head = NULL;
-    stud* tail = NULL;
-    unsigned count = 0;
-    const unsigned MAX = 1000;
-    
-public:
+pvl2_students::pvl2_students() {
 
-    pvl2_students();
+}                          
 
-    void pvl2_add_student() {
-        stud* temp = new stud;
+void pvl2_students::pvl2_add_student() {
+    stud* temp = new stud;
         
-        /* first copy data to new entry */
-        unsigned regnum = 0;
-        cout << "Bitte Matrikelnummer des Studierenden eingeben: ";
-        cin >> regnum;
-        temp->regnum = regnum;
-        pvl2_add_course(temp->courses);
+    /* first copy data to new entry */
+    unsigned regnum = 0;
+    cout << "Bitte Matrikelnummer des Studierenden eingeben: ";
+    cin >> regnum;
+    temp->regnum = regnum;
+    pvl2_add_course(temp->courses);
 
-        /* then integrate list entry sorted */
-        /* if entry is the first in the list */
-        if(head == NULL) {
-            head = temp;
+    /* then integrate list entry sorted */
+    /* if entry is the first in the list */
+    if(head == NULL) {
+        head = temp;
+        tail = temp;
+        count += 1;
+    }
+    /* for all other entries no need to check for NULL, already done in previous if-statement */
+    else {
+        stud* pos = pvl2_find_prev(head);
+        
+        // re-route tail if previous entry is the last of the list
+        if(pos->next == NULL) {
             tail = temp;
-            count += 1;
         }
-        /* for all other entries no need to check for NULL, already done in previous if-statement */
-        else {
-            stud* pos = pvl2_find_prev(head);
-            
-            // re-route tail if previous entry is the last of the list
-            if(pos->next == NULL) {
-                tail = temp;
-            }
-            
-            temp->prev = pos;
-            temp->next = pos->next;
-            pos->next->prev = temp;
-            pos->next = temp;
-
-            count += 1;
-        }
-
+        
+        temp->prev = pos;
+        temp->next = pos->next;
+        pos->next->prev = temp;
+        pos->next = temp;
+        
+        count += 1;
     }
 
-    /* needs to work like this:
-    1. enter big for-loop to count up to 30 
-    2. allocate char variable, enter while-loop with getchar()
-    3. write string to memory and direct pointer in array to it
-    4. ask user for next input
-    */
-    void pvl2_add_course(char** courses) {
+}
+
+/* needs to work like this:
+1. enter big for-loop to count up to 30 
+2. allocate char variable, enter while-loop with getchar()
+3. write string to memory and direct pointer in array to it
+4. ask user for next input
+*/
+void pvl2_students::pvl2_add_course(char** courses) {
         
         
-        return;
-    }
+    return;
+}
 
-    stud* pvl2_find_prev(stud* head) {
-        stud* pos = NULL;
+stud* pvl2_students::pvl2_find_prev(stud* head) {
+    stud* pos = NULL;
 
-        return pos;
-    }
+    return pos;
+}
 
-    bool pvl2_is_registered(unsigned regnum);
-    void pvl2_exmat(unsigned regnum);
+bool pvl2_students::pvl2_is_registered(unsigned regnum) {
+    return false;
+}
+void pvl2_students::pvl2_exmat(unsigned regnum) {
 
-    /* this gotta work like this:
-    1. checks if regnum is within given borders
-    2. if yes, passes regnum to next function, determined via option and switch statement
-    3. if no, prints out error message, lets user enter new regnum and calls 
-    itself recursively with new regnum
-    4. add escape option to end program?
-    */
-    unsigned pvl2_regnum_is_valid(unsigned regnum, char opt);
+}
 
-};
+/* this gotta work like this:
+1. checks if regnum is within given borders
+2. if yes, passes regnum to next function, determined via option and switch statement
+3. if no, prints out error message, lets user enter new regnum and calls 
+itself recursively with new regnum
+4. add escape option to end program?
+*/
+unsigned pvl2_students::pvl2_regnum_is_valid(unsigned regnum, char opt) {
+    return regnum;
+}
