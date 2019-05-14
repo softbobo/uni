@@ -5,7 +5,7 @@ May 2019
 */
 
 /* to do:
-- add validity check for regnums
+
 */
 
 /* menu implementation to control function execution for part e) */
@@ -33,6 +33,8 @@ void pvl_2_menu() {
 
         cin >> input;
 
+        unsigned regnum = 0;
+
         switch (input) {
         
         case 'A':
@@ -40,14 +42,12 @@ void pvl_2_menu() {
             break;
         
         case 'S':
-            unsigned regnum;
             cout << "Bitte gesuchte Matrikelnummer eingeben" << endl;
             cin >> regnum;
             list.pvl2_regnum_is_valid(regnum, input);                    
             break;
         
         case 'L':
-            unsigned regnum;
             cout << "Bitte Matrikelnummer des zu loeschenden Eintrags eingeben" << endl;
             cin >> regnum;
             list.pvl2_regnum_is_valid(regnum, input);
