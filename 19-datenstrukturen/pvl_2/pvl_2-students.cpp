@@ -10,6 +10,7 @@ May 2019
 - implement pvl_2-add_student:
     - write check for validity of regnum
     - write check for last entry in list and add var for highest regnum
+- change name of pvl2_exmat() to pvl2_delete() for clarity
 */
 
 #include"pvl_2.h"
@@ -28,7 +29,10 @@ void pvl2_students::pvl2_add_student() {
     unsigned regnum = 0;
     cout << "Bitte Matrikelnummer des Studierenden eingeben: ";
     cin >> regnum;
-    temp->regnum = regnum;
+
+    /* this is a bit hacky: passes regnum to validity check, gets back same num 
+    if valid, else gets back a new one from the validity check */
+    temp->regnum = pvl2_regnum_is_valid(regnum, 'R');
     pvl2_add_course(temp->courses);
 
     /* then integrate list entry sorted */
@@ -90,5 +94,21 @@ itself recursively with new regnum
 4. add escape option to end program?
 */
 unsigned pvl2_students::pvl2_regnum_is_valid(unsigned regnum, char opt) {
+    
+    if(regnum > 0 && regnum < 1000000) {
+        switch (opt) {
+        case 'R':
+            return regnum;
+        case 'S':
+            pvl2_is_registered(regnum);
+            break;
+        case 'L':
+            pvl2_exmat(regnum);
+            break;
+        default:
+            break;
+        }
+    }
+    
     return regnum;
 }
