@@ -11,9 +11,11 @@ May 2019
     - write check for validity of regnum
     - write check for last entry in list and add var for highest regnum
 - change name of pvl2_exmat() to pvl2_delete() for clarity
+- check back in break/continue clause in add_course() for error input
 */
 
 #include"pvl_2.h"
+#include<stdio.h>
 
 using namespace std;
 
@@ -69,9 +71,34 @@ void pvl2_students::pvl2_add_student() {
 4. ask user for next input
 */
 void pvl2_students::pvl2_add_course(char** courses) {
+    
+    /* do this, then that:
+    1. write input message
+    2. read getline() from cli
+    3. determine length of input in buffer
+    4. allocate string this length +1 
+    5. write buffer to new string
+    6. direct pointer at prosition i to the string
+    7. ask, if more input should be given
+    */
+    for(unsigned i = 0; i < 30; i++) {
         
-        
-    return;
+        cout << "Bitte Namen des Kurses eingeben und mit Enter bestätigen" << endl;
+
+        char* buffer = NULL;
+        size_t size = 10000;
+        cin.getline(buffer, size);
+        cout << "debug. entered course was: " << buffer << endl;
+
+        courses[i] = buffer;
+
+        char answer = 0;
+
+        cout << "Weiteren Kurs hinzufügen? [J/N]" << endl;
+        cin >> answer;
+        if(answer == 'N') { break; }
+        else if(answer == 'J') { continue; }
+    }
 }
 
 stud* pvl2_students::pvl2_find_prev(stud* head) {
