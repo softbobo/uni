@@ -33,6 +33,7 @@ void pvl2_students::pvl2_add_student() {
     /* this is a bit hacky: passes regnum to validity check, gets back same num 
     if valid, else gets back a new one from the validity check */
     temp->regnum = pvl2_regnum_is_valid(regnum, 'R');
+    
     pvl2_add_course(temp->courses);
 
     /* then integrate list entry sorted */
@@ -108,6 +109,15 @@ unsigned pvl2_students::pvl2_regnum_is_valid(unsigned regnum, char opt) {
         default:
             break;
         }
+    }
+
+    else {
+        cout << "Unzulaessige Eingabe! Die Matrikelnummer muss sich zwischen " <<
+        "1 und 999999 befiden! " << endl;
+        cout << "Bitte erneut eingeben " << endl;
+        cin >> regnum;
+
+        return pvl2_regnum_is_valid(regnum, opt);
     }
     
     return regnum;
