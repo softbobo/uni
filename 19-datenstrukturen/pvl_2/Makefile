@@ -1,6 +1,13 @@
 # Makefile for second assignment for data structures
 
-CPPFLAGS= -g -Wall -Wextra -pedantic
-OBJECTS= pvl_2-students.o
+CPPFLAGS= g++ -g -Wall -Wextra -pedantic
+OBJECTS= pvl_2-main.cpp pvl_2-students.cpp pvl_2-menu.cpp
 
-all: 
+all: $(OBJECTS)
+	$(CPPFLAGS) -o pvl_2 $(OBJECTS)
+
+pvl_2-students.o: pvl_2-students.cpp
+	$(CPPFLAGS) -c pvl_2-students.cpp
+
+pvl_2-menu.o: pvl_2-menu.cpp
+	$(CPPFLAGS) -c pvl_2-menu.cpp
