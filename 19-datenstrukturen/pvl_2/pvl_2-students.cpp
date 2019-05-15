@@ -19,7 +19,10 @@ using namespace std;
 
 
 pvl2_students::pvl2_students() {
-
+    
+    for(int i = 0; i < 1000; i++) {
+        registry[i] = NULL;
+    }
 }                          
 
 void pvl2_students::pvl2_add_student() {
