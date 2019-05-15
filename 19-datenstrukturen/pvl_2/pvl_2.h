@@ -6,13 +6,24 @@ May 2019
 
 /* header for second lab assignment */
 
+/* Functions I need:
+- constructor
+- destructor
+- search entry
+- add entry
+- regnum validity check
+- delete entry
+- add courses
+- 
+
+*/
+
 #ifndef PVL_2_H
 #define PVL_2_H
 
 #include<iostream>
 
-/* data structure for a) - doubly linked list that contains all the
-student data */
+/* data structure for a) - simple struct that gets pointed to by class' array */
 struct stud {
     unsigned regnum = 0;
     char* courses[30];
@@ -24,13 +35,9 @@ class pvl2_students {
     
 public:
 
-    pvl2_students();
-    void pvl2_add_student();
-    void pvl2_add_course(char** courses);
-    stud* pvl2_find_prev(stud* head);
-    bool pvl2_is_registered(unsigned regnum);
-    void pvl2_exmat(unsigned regnum);
-    unsigned pvl2_regnum_is_valid(unsigned regnum, char opt);
+    pvl2_students();                                        //constructor
+    void pvl2_add_entry();                                  //task b)
+
 
 };
 
