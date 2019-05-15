@@ -16,17 +16,12 @@ student data */
 struct stud {
     unsigned regnum = 0;
     char* courses[30];
-    stud* prev = NULL;
-    stud* next = NULL;
 };
 
 class pvl2_students {
 
-    stud* head = NULL;
-    stud* tail = NULL;
+    stud* registry[1000];
     unsigned count = 0;
-    const unsigned MAX = 1000;
-
     
 public:
 
