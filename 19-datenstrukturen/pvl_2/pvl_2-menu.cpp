@@ -5,7 +5,7 @@ May 2019
 */
 
 /* to do:
-
+- change function calls in switch()-statement after rwriting data structure and algo
 */
 
 /* menu implementation to control function execution for part e) */
