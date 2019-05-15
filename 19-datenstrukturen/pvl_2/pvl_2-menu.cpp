@@ -6,6 +6,7 @@ May 2019
 
 /* to do:
 - change function calls in switch()-statement after rwriting data structure and algo
+- add destructor call for End Program-option
 */
 
 /* menu implementation to control function execution for part e) */
