@@ -21,7 +21,6 @@ struct stud {
 class pvl2_students {
 
     stud* registry[1000];
-    unsigned count = 0;
     
 public:
 
