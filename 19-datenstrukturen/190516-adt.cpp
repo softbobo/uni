@@ -105,3 +105,14 @@ int List::count() {
 
     return count;
 }
+
+int main() {
+    List test;
+
+    test.insert_node(42);
+
+    test.print_list();
+
+
+    return 0;
+}
