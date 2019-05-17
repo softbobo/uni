@@ -139,3 +139,12 @@ void pvl2_students::pvl2_stringcopy(char buffer[], char temp[]) {
         buffer[i] = temp[i];
     }
 }
+/* simple recursive function: tests, if regnum-1 - which is previous - is to be found
+else returns to itself so long til previous is found 
+actually this is rubbish - i don't need the value of the previous entry but its position
+in the array
+*/
+unsigned pvl2_students::pvl2_find_prev(unsigned regnum, unsigned previous) {
+    if(pvl2_search_entry(previous, 0, regnum)) { return previous; }
+    else { return pvl2_find_prev(regnum, previous - 1); }
+}
