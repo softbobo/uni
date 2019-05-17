@@ -25,6 +25,8 @@ pvl2_students::pvl2_students() {
     for(int i = 0; i < 1000; i++) {
         registry[i] = NULL;
     }
+
+    count = 0;
 }                          
 
 void pvl2_students::pvl2_add_entry() {
@@ -36,3 +38,7 @@ void pvl2_students::pvl2_add_entry() {
     cin >> regnum;
 }
 
+void pvl2_students::pvl2_validity_check(unsigned regnum) {
+
+
+}

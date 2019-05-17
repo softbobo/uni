@@ -23,20 +23,25 @@ May 2019
 
 #include<iostream>
 
-/* data structure for a) - simple struct that gets pointed to by class' array */
-struct stud {
-    unsigned regnum = 0;
-    char* courses[30];
-};
+
+
 
 class pvl2_students {
+    
+    /* data structure for a) - simple struct that gets pointed to by class' array */
+    struct stud {
+        unsigned regnum = 0;
+        char* courses[30];
+    };
 
     stud* registry[1000];
+    unsigned count;
     
 public:
 
     pvl2_students();                                        //constructor
     void pvl2_add_entry();                                  //task b)
+    void pvl2_students::pvl2_validity_check(unsigned regnum);
 
 
 };
