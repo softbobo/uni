@@ -125,7 +125,7 @@ unsigned pvl2_students::pvl2_stringsize(char buffer[]) {
     unsigned count = 0;
     
     for(int i = 0; i < 1000; i++) {
-        while(buffer[i] != ' \0') { count += 1; } 
+        while(buffer[i] != '\0') { count += 1; } 
     }
 
     return count;
