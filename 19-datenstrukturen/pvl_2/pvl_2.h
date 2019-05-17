@@ -46,8 +46,7 @@ public:
     void pvl2_add_courses(struct stud* entry);
     unsigned pvl2_stringsize(char buffer[]);
     void pvl2_stringcopy(char buffer[], char temp[]);
-    unsigned pvl2_find_prev(unsigned regnum);
-
+    unsigned pvl2_students::pvl2_find_prev(unsigned regnum, unsigned previous);
 };
 
 #endif
