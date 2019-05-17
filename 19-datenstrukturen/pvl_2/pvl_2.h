@@ -42,7 +42,7 @@ public:
     pvl2_students();                                        //constructor
     void pvl2_add_entry();                                  //task b)
     unsigned pvl2_students::pvl2_validity_check(unsigned regnum);
-
+    stud* pvl2_search_entry(unsigned regnum);
 
 };
 
