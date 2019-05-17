@@ -45,6 +45,7 @@ public:
     struct stud* pvl2_students::pvl2_search_entry(unsigned regnum, unsigned start, unsigned end);
     void pvl2_students::pvl2_add_courses(struct stud* entry);
     unsigned pvl2_students::pvl2_stringsize(char buffer[]);
+    void pvl2_students::pvl2_stringcopy(char buffer[], char temp[]);
 
 };
 
