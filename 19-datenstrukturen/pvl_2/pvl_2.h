@@ -44,6 +44,7 @@ public:
     unsigned pvl2_validity_check(unsigned regnum);
     struct stud* pvl2_students::pvl2_search_entry(unsigned regnum, unsigned start, unsigned end);
     void pvl2_students::pvl2_add_courses(struct stud* entry);
+    unsigned pvl2_students::pvl2_stringsize(char buffer[]);
 
 };
 
