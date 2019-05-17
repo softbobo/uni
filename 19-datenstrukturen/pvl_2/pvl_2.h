@@ -34,15 +34,16 @@ class pvl2_students {
         char* courses[30];
     };
 
-    stud* registry[1000];
+    struct stud* registry[1000];
     unsigned count;
     
 public:
 
     pvl2_students();                                        //constructor
     void pvl2_add_entry();                                  //task b)
-    unsigned pvl2_students::pvl2_validity_check(unsigned regnum);
-    stud* pvl2_search_entry(unsigned regnum);
+    unsigned pvl2_validity_check(unsigned regnum);
+    struct stud* pvl2_students::pvl2_search_entry(unsigned regnum, unsigned start, unsigned end);
+    void pvl2_students::pvl2_add_courses(struct stud* entry);
 
 };
 
