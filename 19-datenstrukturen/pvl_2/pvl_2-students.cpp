@@ -108,6 +108,8 @@ void pvl2_students::pvl2_add_courses(stud* entry) {
         char temp[stringsize];
         pvl2_stringcopy(buffer, temp);
 
+        entry->courses[i] = temp;
+
         char answer = 0;
         cout << "Weiteren Kurs eingeben? [Y/N]" << endl;
         cin >> answer;
