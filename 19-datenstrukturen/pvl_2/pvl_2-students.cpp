@@ -38,8 +38,14 @@ void pvl2_students::pvl2_add_entry() {
     cin >> regnum;
     temp->regnum = pvl2_validity_check(regnum);
 
-    /* next are courses */
+    /* next is adding courses to the new entry*/
+    cout << "Bitte den ersten Kurs in die Datenbank eingeben" << endl;
+    pvl2_add_courses(temp);
 
+    /* now insert the entry sorted */
+
+
+    count += 1;
 
 }
 
@@ -94,5 +100,40 @@ struct stud* pvl2_students::pvl2_search_entry(unsigned regnum, unsigned start, u
 }
 
 void pvl2_students::pvl2_add_courses(stud* entry) {
+    char buffer[1000];
+
+    for(int i = 0; i < 30; i++) {
+        cin.getline(buffer, 1000);
+        unsigned stringsize = pvl2_stringsize(buffer);
+        char temp[stringsize];
+        pvl2_stringcopy(buffer, temp);
+
+        char answer = 0;
+        cout << "Weiteren Kurs eingeben? [Y/N]" << endl;
+        cin >> answer;
+        
+        if(answer == 'Y') { continue; }
+        else if (answer == 'N') { break; }
+        else {
+            cout << "Unklare Eingabe, Kurs-Eingabe wird abgebrochen!" << endl;
+            break;
+        }
+    }
+}
+/* just counts the length of the 0-terminated string in buffer */
+unsigned pvl2_students::pvl2_stringsize(char buffer[]) {
+    unsigned count = 0;
     
+    for(int i = 0; i < 1000; i++) {
+        while(buffer[i] != ' \0') { count += 1; } 
+    }
+
+    return count;
+}
+/* just copies every single character stored in buffer into new array */
+void pvl2_students::pvl2_stringcopy(char buffer[], char temp[]) {
+    for(int i = 0; i < 1000; i++) {
+        if(buffer[i] == '\0') { break; }
+        buffer[i] = temp[i];
+    }
 }
