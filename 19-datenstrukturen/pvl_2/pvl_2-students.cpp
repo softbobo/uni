@@ -7,11 +7,8 @@ May 2019
 /* functions declarations for 2nd lab assignment */
 
 /* to do:
-- re-implement add_student for array
-- re-implement regnum validity check (unique && within bounds)
-- implement binary search function
--
-- implement destructor that explicitly deletes all entries and array  
+- implement deletion function
+- rewrite function calls in menu
 */
 
 #include"pvl_2.h"
@@ -27,7 +24,13 @@ pvl2_students::pvl2_students() {
     }
 
     count = 0;
-}                          
+}  
+
+pvl2_students::~pvl2_students() {
+    for(unsigned i = 0; i < count; i++) {
+        delete registry[i];
+    }
+}
 
 void pvl2_students::pvl2_add_entry() {
     stud* temp = new stud;
@@ -45,8 +48,7 @@ void pvl2_students::pvl2_add_entry() {
     /* now insert the entry sorted */
     unsigned pos = pvl2_find_prev(regnum, regnum-1) + 1;
     pvl2_resort(temp, pos);
-
-
+ 
     count += 1;
 
 }
@@ -158,7 +160,7 @@ void pvl2_students::pvl2_resort(stud* entry, unsigned pos) {
     
     unsigned after = count - pos;
     
-    for(int i = 1; i <= after; i++) {
+    for(unsigned i = 1; i <= after; i++) {
         registry[pos + i] = registry[pos + i + 1];
     }
     
