@@ -43,6 +43,8 @@ void pvl2_students::pvl2_add_entry() {
     pvl2_add_courses(temp);
 
     /* now insert the entry sorted */
+    unsigned pos = pvl2_find_prev(regnum, regnum-1) + 1;
+    pvl2_resort(temp, pos);
 
 
     count += 1;
@@ -144,7 +146,21 @@ else returns to itself so long til previous is found
 gets back position of value from search-entry and passes it to add_entry()
 */
 unsigned pvl2_students::pvl2_find_prev(unsigned regnum, unsigned previous) {
+    
     unsigned position = pvl2_search_entry(previous, 0, regnum);
         
     return previous ? position : pvl2_find_prev(regnum, previous - 1);
+}
+/* this function reroutes all pointers after an entry, if it is inserted inmidst
+other entries. gets the entry and its position, finds out, how many entries are
+after (by subtracting position from count) and redirects */ 
+void pvl2_students::pvl2_resort(stud* entry, unsigned pos) {
+    
+    unsigned after = count - pos;
+    
+    for(int i = 1; i <= after; i++) {
+        registry[pos + i] = registry[pos + i + 1];
+    }
+    
+    registry[pos] = entry;
 }
