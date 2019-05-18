@@ -40,13 +40,16 @@ class pvl2_students {
 public:
 
     pvl2_students();                                        //constructor
+    ~pvl2_students();                                       //destructor
     void pvl2_add_entry();                                  //task b)
     unsigned pvl2_validity_check(unsigned regnum);
     unsigned pvl2_search_entry(unsigned regnum, unsigned start, unsigned end);
     void pvl2_add_courses(struct stud* entry);
     unsigned pvl2_stringsize(char buffer[]);
     void pvl2_stringcopy(char buffer[], char temp[]);
-    unsigned pvl2_students::pvl2_find_prev(unsigned regnum, unsigned previous);
+    unsigned pvl2_find_prev(unsigned regnum, unsigned previous);
+    void pvl2_resort(stud* entry, unsigned pos);
+    void pvl2_delete_entry(unsigned regnum);                //task d)
 };
 
 #endif
