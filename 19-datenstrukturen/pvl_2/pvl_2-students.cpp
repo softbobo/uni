@@ -80,15 +80,15 @@ unsigned pvl2_students::pvl2_validity_check(unsigned regnum) {
 }
 
 /* recursive binary search through the array */
-struct stud* pvl2_students::pvl2_search_entry(unsigned regnum, unsigned start, unsigned end) {
+unsigned pvl2_students::pvl2_search_entry(unsigned regnum, unsigned start, unsigned end) {
     
     /* no matching value found */
-    if(end < start) { return NULL; }
+    if(end < start) { return 0; }
     
     unsigned middle = ((start + end) / 2);
 
     if(registry[middle]->regnum == regnum) {
-        return registry[middle];
+        return middle;
     }
     else if(registry[middle]->regnum <= regnum) {
         return pvl2_search_entry(regnum, middle + 1, end);
@@ -141,10 +141,10 @@ void pvl2_students::pvl2_stringcopy(char buffer[], char temp[]) {
 }
 /* simple recursive function: tests, if regnum-1 - which is previous - is to be found
 else returns to itself so long til previous is found 
-actually this is rubbish - i don't need the value of the previous entry but its position
-in the array
+gets back position of value from search-entry and passes it to add_entry()
 */
 unsigned pvl2_students::pvl2_find_prev(unsigned regnum, unsigned previous) {
-    if(pvl2_search_entry(previous, 0, regnum)) { return previous; }
-    else { return pvl2_find_prev(regnum, previous - 1); }
+    unsigned position = pvl2_search_entry(previous, 0, regnum);
+        
+    return previous ? position : pvl2_find_prev(regnum, previous - 1);
 }
