@@ -42,7 +42,7 @@ public:
     pvl2_students();                                        //constructor
     void pvl2_add_entry();                                  //task b)
     unsigned pvl2_validity_check(unsigned regnum);
-    struct stud* pvl2_search_entry(unsigned regnum, unsigned start, unsigned end);
+    unsigned pvl2_search_entry(unsigned regnum, unsigned start, unsigned end);
     void pvl2_add_courses(struct stud* entry);
     unsigned pvl2_stringsize(char buffer[]);
     void pvl2_stringcopy(char buffer[], char temp[]);
