@@ -6,7 +6,7 @@ May 2019
 
 /* to do:
 - change function calls in switch()-statement after rwriting data structure and algo
-- add destructor call for End Program-option
+- write additional function to call search function (doesnt work directly b/c count is private)
 */
 
 /* menu implementation to control function execution for part e) */
@@ -46,13 +46,18 @@ void pvl_2_menu() {
         case 'S':
             cout << "Bitte gesuchte Matrikelnummer eingeben" << endl;
             cin >> regnum_temp;
-            regnum = list.pvl2_validity_check(regnum_temp);                    
+            regnum = list.pvl2_validity_check(regnum_temp);  
+            if(list.pvl2_search_entry(regnum, 0, list.count)) {
+                cout << "Eintrag ist vorhanden."
+            } 
+
             break;
         
         case 'L':
             cout << "Bitte Matrikelnummer des zu loeschenden Eintrags eingeben" << endl;
             cin >> regnum_temp;
             regnum = list.pvl2_validity_check(regnum_temp);   
+            list.pvl2_delete_entry(regnum);
             break;
 
         case 'E':
