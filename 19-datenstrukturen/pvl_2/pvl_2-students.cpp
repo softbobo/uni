@@ -166,3 +166,24 @@ void pvl2_students::pvl2_resort(stud* entry, unsigned pos) {
     
     registry[pos] = entry;
 }
+/* simple as that: queries the search func for the position
+of the entry via its regnum. if sth else than 0 is returned,
+deletes the entry and redirects the following ones. if 0 is
+returned, the function is sorry, but it can't help you */
+void pvl2_students::pvl2_delete_entry(unsigned regnum) {
+    unsigned pos = pvl2_search_entry(regnum, 0, count);
+
+    if(pos) {
+        delete registry[pos];
+        for(unsigned i = pos+1; i < count; i++) {
+            registry[i-1] = registry[i];
+        }
+        registry[count] = NULL;
+    }
+
+    else {
+        cout << "Der angegebene Eintrag konnte nicht gefunden werden." << endl;
+        return;
+    }
+
+}
