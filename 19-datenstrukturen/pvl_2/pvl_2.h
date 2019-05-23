@@ -50,6 +50,7 @@ public:
     unsigned pvl2_find_prev(unsigned regnum, unsigned previous);
     void pvl2_resort(stud* entry, unsigned pos);
     void pvl2_delete_entry(unsigned regnum);                //task d)
+    bool pvl2_call_search(unsigned regnum);
 };
 
 #endif
