@@ -171,6 +171,7 @@ of the entry via its regnum. if sth else than 0 is returned,
 deletes the entry and redirects the following ones. if 0 is
 returned, the function is sorry, but it can't help you */
 void pvl2_students::pvl2_delete_entry(unsigned regnum) {
+    
     unsigned pos = pvl2_search_entry(regnum, 0, count);
 
     if(pos) {
@@ -186,4 +187,11 @@ void pvl2_students::pvl2_delete_entry(unsigned regnum) {
         return;
     }
 
+}
+
+bool pvl2_students::pvl2_call_search(unsigned regnum) {
+    if(pvl2_search_entry(regnum, 0, count)) {
+        return true;
+    }
+    return false;
 }
