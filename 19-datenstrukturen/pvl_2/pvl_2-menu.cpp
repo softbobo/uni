@@ -47,8 +47,8 @@ void pvl_2_menu() {
             cout << "Bitte gesuchte Matrikelnummer eingeben" << endl;
             cin >> regnum_temp;
             regnum = list.pvl2_validity_check(regnum_temp);  
-            if(list.pvl2_search_entry(regnum, 0, list.count)) {
-                cout << "Eintrag ist vorhanden."
+            if(list.pvl2_call_search(regnum)) {
+                cout << "Eintrag ist vorhanden.";
             } 
 
             break;
