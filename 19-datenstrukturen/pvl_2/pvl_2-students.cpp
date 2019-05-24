@@ -86,6 +86,11 @@ unsigned pvl2_students::pvl2_validity_check(unsigned regnum) {
 /* recursive binary search through the array */
 unsigned pvl2_students::pvl2_search_entry(unsigned regnum, unsigned start, unsigned end) {
     
+    /*first entry exception*/
+    if(count == 0) {
+        return 0;
+    }
+
     /* no matching value found */
     if(end < start) { return 0; }
     
