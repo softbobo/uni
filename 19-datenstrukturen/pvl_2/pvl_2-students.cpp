@@ -43,8 +43,11 @@ void pvl2_students::pvl2_add_entry() {
 
     /* next is adding courses to the new entry*/
     for(int i = 1; i < 31; i++) {
+        char answer = 0;
         cout << "Kurs Nr. " << i << " eingeben? (J/N)" << endl;
-        if(getchar() == 'J') { temp->courses[i-1] = pvl2_add_courses(); }
+        cin >> answer;
+        cin.ignore();
+        if(answer == 'J') { temp->courses[i-1] = pvl2_add_courses(); }
         else { break; }
     }
 
@@ -112,7 +115,7 @@ unsigned pvl2_students::pvl2_search_entry(unsigned regnum, unsigned start, unsig
 }
 
 char* pvl2_students::pvl2_add_courses() {
-    
+
     char buffer[1000];
     for(int i = 0; i < 1000; i++) {
         buffer[i] = 0;
@@ -120,7 +123,7 @@ char* pvl2_students::pvl2_add_courses() {
 
     cout << "Name des Kurses: ";
     cin.getline(buffer, 1000);
-    cout << endl;
+    cout << "debug. entered course is : " << buffer << endl;
     unsigned stringsize = pvl2_stringsize(buffer);
     char temp[stringsize];
     pvl2_stringcopy(buffer, temp);
