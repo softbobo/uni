@@ -42,7 +42,11 @@ void pvl2_students::pvl2_add_entry() {
     temp->regnum = pvl2_validity_check(regnum);
 
     /* next is adding courses to the new entry*/
-    pvl2_add_courses(temp);
+    for(int i = 1; i < 31; i++) {
+        cout << "Kurs Nr. " << i << " eingeben? (J/N)" << endl;
+        if(getchar() == 'J') { temp->courses[i-1] = pvl2_add_courses(); }
+        else { break; }
+    }
 
     /* now insert the entry sorted */
     unsigned pos = pvl2_find_prev(regnum, regnum-1) + 1;
@@ -107,30 +111,21 @@ unsigned pvl2_students::pvl2_search_entry(unsigned regnum, unsigned start, unsig
 
 }
 
-void pvl2_students::pvl2_add_courses(stud* entry) {
+char* pvl2_students::pvl2_add_courses() {
     
     char buffer[1000];
-
-    for(int i = 0; i < 30; i++) {
-        
-        char answer = 0;
-        cout << "Kurs eingeben? [Y/N]" << endl;
-        cin >> answer;
-        if(answer == 'Y') { continue; }
-        else if (answer == 'N') { break; }
-        else {
-            cout << "Unklare Eingabe, Kurs-Eingabe wird abgebrochen!" << endl;
-            break;
-        }
-        cout << "Name des Kurses: ";
-        cin.getline(buffer, 1000);
-        cout << endl;
-        unsigned stringsize = pvl2_stringsize(buffer);
-        char temp[stringsize];
-        pvl2_stringcopy(buffer, temp);
-
-        entry->courses[i] = temp;        
+    for(int i = 0; i < 1000; i++) {
+        buffer[i] = 0;
     }
+
+    cout << "Name des Kurses: ";
+    cin.getline(buffer, 1000);
+    cout << endl;
+    unsigned stringsize = pvl2_stringsize(buffer);
+    char temp[stringsize];
+    pvl2_stringcopy(buffer, temp);
+
+    return temp;
 }
 /* just counts the length of the 0-terminated string in buffer */
 unsigned pvl2_students::pvl2_stringsize(char buffer[]) {

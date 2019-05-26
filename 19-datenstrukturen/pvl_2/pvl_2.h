@@ -44,7 +44,7 @@ public:
     void pvl2_add_entry();                                  //task b)
     unsigned pvl2_validity_check(unsigned regnum);
     unsigned pvl2_search_entry(unsigned regnum, unsigned start, unsigned end);
-    void pvl2_add_courses(struct stud* entry);
+    char* pvl2_add_courses();
     unsigned pvl2_stringsize(char buffer[]);
     void pvl2_stringcopy(char buffer[], char temp[]);
     unsigned pvl2_find_prev(unsigned regnum, unsigned previous);
