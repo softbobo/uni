@@ -7,8 +7,8 @@ May 2019
 /* functions declarations for 2nd lab assignment */
 
 /* to do:
-- implement deletion function
-- rewrite function calls in menu
+- check for course assignment after returning from add_course() to add_entry()
+
 */
 
 #include"pvl_2.h"
@@ -52,9 +52,13 @@ void pvl2_students::pvl2_add_entry() {
     }
 
     /* now insert the entry sorted */
-    unsigned pos = pvl2_find_prev(regnum, regnum-1) + 1;
-    pvl2_resort(temp, pos);
- 
+    if(count == 0) {
+        registry[0] = temp;
+    }
+    else {
+        unsigned pos = pvl2_find_prev(regnum, regnum-1) + 1;
+        pvl2_resort(temp, pos);
+    }
     count += 1;
 
 }
@@ -123,7 +127,6 @@ char* pvl2_students::pvl2_add_courses() {
 
     cout << "Name des Kurses: ";
     cin.getline(buffer, 1000);
-    cout << "debug. entered course is : " << buffer << endl;
     unsigned stringsize = pvl2_stringsize(buffer);
     char temp[stringsize];
     pvl2_stringcopy(buffer, temp);
