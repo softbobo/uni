@@ -18,11 +18,16 @@ what the script needs to do:
 
 from sys import stdin
 
+""" input function, takes string from CLI, puts it into list """
 def polydiv_input():
     line = raw_input("Bitte binäre Zeichenkette eingeben: ")
-    [line[i:i+1] for i in range(0, len(line), 1)]
+    line = [line[i:i+1] for i in range(0, len(line), 1)]
     print(line)                                                 # this is for debugging only
 
+""" central function of the bunch, processes the list passed down from 
+polydiv_input() with the 10011 crc-vector """
+def polydiv_div(list):
+    pass
 
 def main():
     """ script launcher """
