@@ -16,6 +16,9 @@ using namespace std;
 #include<iostream>
 #include<fstream>
 
+void pvl3_input(char* filename, stone* &head);
+void pvl3_print_list(stone* head, unsigned len);
+
 /* data structure representing a single stone */
 struct stone{
     unsigned l_field = 0;       //left value
