@@ -41,13 +41,12 @@ void pvl3_input(char* filename, stone* &head) {
     }
     
     /* read in first argument from file, number of blocks */
-    char* b_count_tmp = 0;
     unsigned b_count;
     infile >> b_count;
-    cout << "debug. read in number of blocks is: " << b_count;
+    cout << "debug. read in number of blocks is: " << b_count << endl;
 
     stone* prev = NULL;
-    for(unsigned i = 0; i <= b_count; i++) {
+    for(unsigned i = 0; i < b_count; i++) {
         
         stone* temp = new stone;
         infile >> temp->l_field;
@@ -70,9 +69,8 @@ void pvl3_print_list(stone* head, unsigned len) {
     /* could also use pointer arithmetic, i kno*/
     for(unsigned i = 0; i < len; i++) {
         cout << head->l_field << " " << head->r_field << endl;
-        head++;
+        head = head->next;
     }
-
 }
 
 
@@ -85,11 +83,8 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-
     stone* head = NULL;         
     pvl3_input(argv[1], head);
-
-
 
     return 0;
 }
