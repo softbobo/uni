@@ -26,7 +26,9 @@ struct stone{
 
 void pvl3_input(char* filename, stone* &data_head, unsigned &b_count);
 void pvl3_print_list(stone* data_head, unsigned len);
-void pvl3_ringlist_master(stone* data_head, unsigned len);
+stone* pvl3_ringlist_master(stone* data_head, unsigned len);
+void pvl3_make_ringlist(stone* data_head, stone* ringlist_head, unsigned len);
+
 
 /* reads in data from file and populates singly linked data list */
 void pvl3_input(char* filename, stone* &data_head, unsigned &b_count) {
@@ -72,9 +74,41 @@ void pvl3_print_list(stone* data_head, unsigned len) {
     }
 }
 
-/* traverses the data listfor unused entries (til all booleans in the structs
+/* traverses the data list for unused entries (til all booleans in the structs
 are true) and delegates found entries towards the ringlist function */
-void pvl3_ringlist_master(stone* data_head, unsigned len) {
+stone* pvl3_ringlist_master(stone* data_head, unsigned len) {
+    
+    stone* llist_head = NULL;
+    stone* llist_prev = NULL;
+
+    for(unsigned i = 0; i < len; i++) {
+
+        if(!data_head->is_used) { 
+            stone* temp = new stone;
+            
+            if(i == 0) { llist_head = temp; }           //assign head pointer for first entry
+            pvl3_make_ringlist(data_head, temp, len);
+            
+            if(llist_prev) { llist_prev->next  = temp; } //connect list-heads which point to ringlists
+        }        
+    }
+
+    return llist_head;
+}
+
+void pvl3_make_ringlist(stone* data_head, stone* ringlist_head, unsigned len) {
+
+    ringlist_head->is_used = true;
+
+    for(unsigned i = 0; i < len; i++) {
+
+        if(ringlist_head->r_field == data_head->)
+
+
+        data_head = data_head->next;
+    }
+
+
 
 }
 
