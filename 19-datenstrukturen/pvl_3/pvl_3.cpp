@@ -6,7 +6,6 @@ Matrikelnummer: 555625
 */
 
 /*to do:
-- make head pointer const?
 
 */
 
@@ -21,6 +20,7 @@ using namespace std;
 struct stone{
     unsigned l_field = 0;       //left value
     unsigned r_field = 0;       //right value
+    bool is_used = false;       //turn to true, if stone is part of circ list
     stone* next = NULL;
 };
 
