@@ -16,8 +16,6 @@ using namespace std;
 #include<iostream>
 #include<fstream>
 
-void pvl3_input(char* filename, stone* &head);
-void pvl3_print_list(stone* head, unsigned len);
 
 /* data structure representing a single stone */
 struct stone{
@@ -25,6 +23,10 @@ struct stone{
     unsigned r_field = 0;       //right value
     stone* next = NULL;
 };
+
+void pvl3_input(char* filename, stone* &head);
+void pvl3_print_list(stone* head, unsigned len);
+
 
 void pvl3_input(char* filename, stone* &head) {
 
@@ -77,7 +79,7 @@ void pvl3_print_list(stone* head, unsigned len) {
 int main(int argc, char** argv) {
 
     /* just one parameter (filename) given? */ 
-    if(argc != 1) {
+    if(argc != 2) {
         cout << "Es darf nur ein Argument (der Dateiname) als Parameter übergeben werden."
         "Bitte Programm erneut mit korrekter Eingabe starten!";
         return 1;
@@ -85,7 +87,7 @@ int main(int argc, char** argv) {
 
 
     stone* head = NULL;         
-    pvl3_input(argv[0], head);
+    pvl3_input(argv[1], head);
 
 
 
