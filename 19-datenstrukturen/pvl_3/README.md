@@ -19,14 +19,33 @@ algo:
 2. read in first value as lists length
 3. allocate/initialize as many structs AND fill them with data
 
-
 ### 1.1 Control Output
 print out list for control reasons
 
 algo:
 1. traverse list and print out every list entry
 
-## 2. order the stones in one or several ringlists
+## 2. order the stones in one or several circular lists
+stones _may be turned_ to fit into circular list, heads of all circular lists 
+are stored in a singly linked list; _every number exists exactly two times_
+
+__main algo:__
+0. create HEAD for 'master-list' (which stores the heads of circular lists)
+
+
+__circular list:__
+possible cases:
+0. no value of current point in lists matches - nothing to do, just increment
+1. l/r val of data entry match __r val__ of circle - redirect next pointer of circle
+entry to new entry, rotate vals if r val is the one which matches
+2. l/r val of data entry match __l val__ of circle - redirect next pointer of data 
+entry to circle entry, rotate if l val of data entry matches
+
+when do i know circle is finished????
+
+
+pitfalls i can think of:
+
 
 ## 3. Print the Ring Lists
 
