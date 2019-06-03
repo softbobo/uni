@@ -24,11 +24,12 @@ struct stone{
     stone* next = NULL;
 };
 
-void pvl3_input(char* filename, stone* &data_head);
+void pvl3_input(char* filename, stone* &data_head, unsigned &b_count);
 void pvl3_print_list(stone* data_head, unsigned len);
+void pvl3_ringlist_master(stone* data_head, unsigned len);
 
-
-void pvl3_input(char* filename, stone* &data_head) {
+/* reads in data from file and populates singly linked data list */
+void pvl3_input(char* filename, stone* &data_head, unsigned &b_count) {
 
     ifstream infile; 
     infile.open(filename);
@@ -41,7 +42,6 @@ void pvl3_input(char* filename, stone* &data_head) {
     }
     
     /* read in first argument from file, number of blocks */
-    unsigned b_count;
     infile >> b_count;
     cout << "debug. read in number of blocks is: " << b_count << endl;
 
@@ -63,14 +63,19 @@ void pvl3_input(char* filename, stone* &data_head) {
 
     pvl3_print_list(data_head, b_count);
 }
-
+/* just prints the list of input data */
 void pvl3_print_list(stone* data_head, unsigned len) {
 
-    /* could also use pointer arithmetic, i kno*/
     for(unsigned i = 0; i < len; i++) {
         cout << data_head->l_field << " " << data_head->r_field << endl;
         data_head = data_head->next;
     }
+}
+
+/* traverses the data listfor unused entries (til all booleans in the structs
+are true) and delegates found entries towards the ringlist function */
+void pvl3_ringlist_master(stone* data_head, unsigned len) {
+
 }
 
 
@@ -83,8 +88,9 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    unsigned b_count = 0;
     stone* data_head = NULL;         
-    pvl3_input(argv[1], data_head);
+    pvl3_input(argv[1], data_head, b_count);
 
     return 0;
 }
