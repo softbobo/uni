@@ -24,11 +24,11 @@ struct stone{
     stone* next = NULL;
 };
 
-void pvl3_input(char* filename, stone* &head);
-void pvl3_print_list(stone* head, unsigned len);
+void pvl3_input(char* filename, stone* &data_head);
+void pvl3_print_list(stone* data_head, unsigned len);
 
 
-void pvl3_input(char* filename, stone* &head) {
+void pvl3_input(char* filename, stone* &data_head) {
 
     ifstream infile; 
     infile.open(filename);
@@ -57,19 +57,19 @@ void pvl3_input(char* filename, stone* &head) {
         if(prev) { prev->next = temp; }
         prev = temp;
 
-        /* set head to the first list entry */
-        if(i == 0) { head = temp; }
+        /* set data_head to the first list entry */
+        if(i == 0) { data_head = temp; }
     }
 
-    pvl3_print_list(head, b_count);
+    pvl3_print_list(data_head, b_count);
 }
 
-void pvl3_print_list(stone* head, unsigned len) {
+void pvl3_print_list(stone* data_head, unsigned len) {
 
     /* could also use pointer arithmetic, i kno*/
     for(unsigned i = 0; i < len; i++) {
-        cout << head->l_field << " " << head->r_field << endl;
-        head = head->next;
+        cout << data_head->l_field << " " << data_head->r_field << endl;
+        data_head = data_head->next;
     }
 }
 
@@ -83,8 +83,8 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    stone* head = NULL;         
-    pvl3_input(argv[1], head);
+    stone* data_head = NULL;         
+    pvl3_input(argv[1], data_head);
 
     return 0;
 }
