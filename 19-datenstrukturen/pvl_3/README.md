@@ -41,10 +41,14 @@ entry to new entry, rotate vals if r val is the one which matches
 2. l/r val of data entry match __l val__ of circle - redirect next pointer of data 
 entry to circle entry, rotate if l val of data entry matches
 
-when do i know circle is finished????
+when do i know circle is finished???? answer: _when both ends match to the stone in question_
 
 
 pitfalls i can think of:
+- traverse data list always from the beginning when starting to make a circle
+- heads of ringlists need two pointers - one pointing to the first list entry 
+and one pointing to the next entry of its own list
+
 
 
 ## 3. Print the Ring Lists
