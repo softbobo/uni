@@ -9,25 +9,30 @@ Matrikelnummer: 555625
 
 */
 
-
 using namespace std;
 
 #include<iostream>
 #include<fstream>
 
-
 /* data structure representing a single stone */
-struct stone{
+struct stone {
     unsigned l_field = 0;       //left value
     unsigned r_field = 0;       //right value
     bool is_used = false;       //turn to true, if stone is part of circ list
     stone* next = NULL;
 };
 
+struct rhead {
+    stone* rlist = NULL;
+    rhead* next = NULL;
+    unsigned rlist_len = 0;
+};
+
 void pvl3_input(char* filename, stone* &data_head, unsigned &b_count);
 void pvl3_print_list(stone* data_head, unsigned len);
-stone* pvl3_ringlist_master(stone* data_head, unsigned len);
-void pvl3_make_ringlist(stone* data_head, stone* ringlist_head, unsigned len);
+rhead* pvl3_ringlist_master(stone* data_head, unsigned len);
+void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len);
+void pvl3_print_rlists(rhead* ringlist_head);
 
 
 /* reads in data from file and populates singly linked data list */
@@ -76,40 +81,74 @@ void pvl3_print_list(stone* data_head, unsigned len) {
 
 /* traverses the data list for unused entries (til all booleans in the structs
 are true) and delegates found entries towards the ringlist function */
-stone* pvl3_ringlist_master(stone* data_head, unsigned len) {
+rhead* pvl3_ringlist_master(stone* data_head, unsigned len) {
     
-    stone* llist_head = NULL;
-    stone* llist_prev = NULL;
+    rhead* llist_head = NULL;
+    rhead* llist_prev = NULL;
 
     for(unsigned i = 0; i < len; i++) {
 
         if(!data_head->is_used) { 
-            stone* temp = new stone;
+            
+            rhead* temp = new rhead;
+            temp->rlist = data_head;
             
             if(i == 0) { llist_head = temp; }           //assign head pointer for first entry
             pvl3_make_ringlist(data_head, temp, len);
             
-            if(llist_prev) { llist_prev->next  = temp; } //connect list-heads which point to ringlists
+            temp->rlist_len += 1;
+            
+            if(llist_prev) { llist_prev->next = temp; } //connect list-heads which point to ringlists
+            llist_prev = temp;
+            
+            data_head = data_head->next;                //traverse 'original' list
         }        
     }
 
     return llist_head;
 }
 
-void pvl3_make_ringlist(stone* data_head, stone* ringlist_head, unsigned len) {
+void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len) {
 
-    ringlist_head->is_used = true;
+    //ringlist_head->is_used = true;
+    stone* prev = NULL;
 
     for(unsigned i = 0; i < len; i++) {
 
-        if(ringlist_head->r_field == data_head->)
+        if(!data_head->is_used) {                               //check is prob unnecessary, since each num exists only twice
+            if(ringlist_head->rlist->r_field == data_head->l_field 
+            || ringlist_head->rlist->r_field == data_head->r_field) {
+                
+                /* change vals in list entry, if necessary */
+                if(ringlist_head->rlist->r_field == data_head->r_field) {
+                    unsigned r_tmp = data_head->r_field;
+                    data_head->r_field = data_head->l_field;
+                    data_head->l_field = r_tmp;
+                }
+                
+                if(prev) { prev->next = ringlist_head->rlist; }
+                prev = ringlist_head->rlist;
 
-
+                ringlist_head->rlist_len += 1;
+                ringlist_head->rlist = data_head;
+                data_head->is_used = true;
+            }
+        }
         data_head = data_head->next;
     }
+}
 
+void pvl3_print_rlists(rhead* ringlist_head) {
 
-
+    while(ringlist_head) {
+        
+        for(unsigned i = 0; i < ringlist_head->rlist_len; i++) {
+            cout << "[" << ringlist_head->rlist->l_field << ":" << 
+            ringlist_head->rlist->l_field << "]";
+        }
+        cout << endl;
+        ringlist_head = ringlist_head->next;
+    }
 }
 
 
