@@ -165,5 +165,9 @@ int main(int argc, char** argv) {
     stone* data_head = NULL;         
     pvl3_input(argv[1], data_head, b_count);
 
+    rhead* rlists_master = pvl3_ringlist_master(data_head, b_count);
+
+    pvl3_print_rlists(rlists_master);
+
     return 0;
 }
