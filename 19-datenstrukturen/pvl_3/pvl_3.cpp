@@ -6,8 +6,6 @@ Matrikelnummer: 555625
 */
 
 /*to do:
-- write deletion function for data list, ringlists, more?
-- do a valgrind check
 - make output of data list print look like in the task
 */
 
@@ -77,9 +75,10 @@ void pvl3_input(char* filename, stone* &data_head, unsigned &b_count) {
 void pvl3_print_list(stone* data_head, unsigned len) {
 
     for(unsigned i = 0; i < len; i++) {
-        cout << data_head->l_field << " " << data_head->r_field << endl;
+        cout << "[" << data_head->l_field << ":" << data_head->r_field << "]";
         data_head = data_head->next;
     }
+    cout << endl;
 }
 
 /* traverses the data list for unused entries (til all booleans in the structs
