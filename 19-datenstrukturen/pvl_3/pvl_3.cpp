@@ -134,6 +134,9 @@ void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len, st
     /* flag for complete ringlists */
     bool is_complete = false;
 
+    /*pointer to very first domino, to be able to properly close ringlist */
+    stone* begin = ringlist_head->rlist;
+
     while(!is_complete) {
         
         for(unsigned i = 0; i < len; i++) {
@@ -162,11 +165,12 @@ void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len, st
                     prev->next = temp;
                     prev = temp;
                     ringlist_head->rlist_len += 1;
+                    ringlist_head->rlist = ringlist_head->rlist->next;
 
                     /* fourth: if last value in circle matches first, close the 
                     circle and set completion flag */
-                    if(temp->r_field == ringlist_head->rlist->l_field) {
-                        temp->next = ringlist_head->rlist;
+                    if(temp->r_field == begin->l_field) {
+                        temp->next = begin;
                         is_complete = true;
                         break;
                     }
