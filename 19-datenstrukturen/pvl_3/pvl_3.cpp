@@ -6,7 +6,10 @@ Matrikelnummer: 555625
 */
 
 /*to do:
-- copy each entry of the data list into the new ringlist for list integrity
+- change assignment of prev in make_ringlist() - needs to assign first entry 
+allocated in calling function
+- change list traversing in make_ringlist() - needs to traverse data list anew 
+for each and every new entry until circle is complete
 - do a valgrind check
 - write deletio function for data list, ringlists, more?
 - make output of data list print look like in the task
@@ -34,7 +37,7 @@ struct rhead {
 void pvl3_input(char* filename, stone* &data_head, unsigned &b_count);
 void pvl3_print_list(stone* data_head, unsigned len);
 rhead* pvl3_ringlist_master(stone* data_head, unsigned len);
-void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len);
+void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len, stone* prev);
 void pvl3_print_rlists(rhead* ringlist_head);
 
 
@@ -110,7 +113,7 @@ rhead* pvl3_ringlist_master(stone* data_head, unsigned len) {
             if(i == 0) { llist_head = ringlist_head; }
 
             /* fourth: construct ringlist */            
-            pvl3_make_ringlist(data_head, ringlist_head, len);
+            pvl3_make_ringlist(data_head, ringlist_head, len, temp);
             
             /* fifth: connect list-heads which point to ringlists */
             if(llist_prev) { llist_prev->next = ringlist_head; } 
@@ -122,9 +125,7 @@ rhead* pvl3_ringlist_master(stone* data_head, unsigned len) {
     return llist_head;
 }
 
-void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len) {
-
-    stone* prev = NULL;
+void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len, stone* prev) {
 
     for(unsigned i = 0; i < len; i++) {
 
@@ -149,7 +150,7 @@ void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len) {
                 data_head->is_used = true;
                 
                 /* third: connect list entries */
-                if(prev) { prev->next = temp; }
+                prev->next = temp;
                 prev = temp;
                 ringlist_head->rlist_len += 1;
 
