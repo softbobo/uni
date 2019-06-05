@@ -5,10 +5,6 @@ Robert Schulze
 Matrikelnummer: 555625
 */
 
-/*to do:
-- make output of data list print look like in the task
-*/
-
 using namespace std;
 
 #include<iostream>
@@ -51,7 +47,6 @@ void pvl3_input(char* filename, stone* &data_head, unsigned &b_count) {
     
     /* read in first argument from file, number of blocks */
     infile >> b_count;
-    cout << "debug. read in number of blocks is: " << b_count << endl;
 
     stone* prev = NULL;
     for(unsigned i = 0; i < b_count; i++) {
