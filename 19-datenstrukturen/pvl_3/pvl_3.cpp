@@ -92,6 +92,9 @@ rhead* pvl3_ringlist_master(stone* data_head, unsigned len) {
     rhead* llist_head = NULL;
     rhead* llist_prev = NULL;
 
+    /* counts the number of list entries already traversed to change len iterator */
+    unsigned traversed = 1;
+
     for(unsigned i = 0; i < len; i++) {
 
         if(!data_head->is_used) { 
@@ -113,14 +116,15 @@ rhead* pvl3_ringlist_master(stone* data_head, unsigned len) {
             if(i == 0) { llist_head = ringlist_head; }
 
             /* fourth: construct ringlist */            
-            pvl3_make_ringlist(data_head, ringlist_head, len, temp);
+            pvl3_make_ringlist(data_head->next, ringlist_head, len - traversed, temp);
             
             /* fifth: connect list-heads which point to ringlists */
             if(llist_prev) { llist_prev->next = ringlist_head; } 
             llist_prev = ringlist_head;
         }        
         /* traverse list of data entries */
-        data_head = data_head->next;                
+        data_head = data_head->next;
+        traversed += 1;                
     }
     return llist_head;
 }
@@ -131,6 +135,7 @@ void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len, st
     bool is_complete = false;
 
     while(!is_complete) {
+        
         for(unsigned i = 0; i < len; i++) {
 
             if(!data_head->is_used) {                               //check is prob unnecessary, since each num exists only twice
@@ -163,6 +168,7 @@ void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len, st
                     if(temp->r_field == ringlist_head->rlist->l_field) {
                         temp->next = ringlist_head->rlist;
                         is_complete = true;
+                        break;
                     }
                 }
             }
@@ -178,7 +184,7 @@ void pvl3_print_rlists(rhead* ringlist_head) {
         
         for(unsigned i = 0; i < ringlist_head->rlist_len; i++) {
             cout << "[" << ringlist_head->rlist->l_field << ":" << 
-            ringlist_head->rlist->l_field << "]";
+            ringlist_head->rlist->r_field << "]";
             ringlist_head->rlist = ringlist_head->rlist->next;
         }
         cout << endl;
