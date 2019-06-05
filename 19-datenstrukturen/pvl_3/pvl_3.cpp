@@ -6,8 +6,8 @@ Matrikelnummer: 555625
 */
 
 /*to do:
-- change assignment of prev in make_ringlist() - needs to assign first entry 
-allocated in calling function
+- change len-parameter in function call to make_ringlist() - needs to start only with 
+current entry
 - change list traversing in make_ringlist() - needs to traverse data list anew 
 for each and every new entry until circle is complete
 - do a valgrind check
@@ -127,44 +127,50 @@ rhead* pvl3_ringlist_master(stone* data_head, unsigned len) {
 
 void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len, stone* prev) {
 
-    for(unsigned i = 0; i < len; i++) {
+    /* flag for complete ringlists */
+    bool is_complete = false;
 
-        if(!data_head->is_used) {                               //check is prob unnecessary, since each num exists only twice
-            
-            /* first: check, if either the right or left entries match 
-            to the right entry of current domino */
-            if(ringlist_head->rlist->r_field == data_head->l_field 
-            || ringlist_head->rlist->r_field == data_head->r_field) {
-                
-                /* second: make a new entry, copy data, and change vals 
-                if necessary */
-                stone* temp = new stone;
-                if(ringlist_head->rlist->r_field == data_head->r_field) {
-                    temp->r_field = data_head->l_field;
-                    temp->l_field = data_head->r_field;
-                }
-                else {
-                    temp->r_field = data_head->r_field;
-                    temp->l_field = data_head->l_field;
-                }
-                data_head->is_used = true;
-                
-                /* third: connect list entries */
-                prev->next = temp;
-                prev = temp;
-                ringlist_head->rlist_len += 1;
+    while(!is_complete) {
+        for(unsigned i = 0; i < len; i++) {
 
-                /* fourth: if last value in circle matches first, close the 
-                circle and return */
-                if(temp->r_field == ringlist_head->rlist->l_field) {
-                    temp->next = ringlist_head->rlist;
-                    return;
+            if(!data_head->is_used) {                               //check is prob unnecessary, since each num exists only twice
+
+                /* first: check, if either the right or left entries match 
+                to the right entry of current domino */
+                if(ringlist_head->rlist->r_field == data_head->l_field 
+                || ringlist_head->rlist->r_field == data_head->r_field) {
+
+                    /* second: make a new entry, copy data, and change vals 
+                    if necessary */
+                    stone* temp = new stone;
+                    if(ringlist_head->rlist->r_field == data_head->r_field) {
+                        temp->r_field = data_head->l_field;
+                        temp->l_field = data_head->r_field;
+                    }
+                    else {
+                        temp->r_field = data_head->r_field;
+                        temp->l_field = data_head->l_field;
+                    }
+                    data_head->is_used = true;
+
+                    /* third: connect list entries */
+                    prev->next = temp;
+                    prev = temp;
+                    ringlist_head->rlist_len += 1;
+
+                    /* fourth: if last value in circle matches first, close the 
+                    circle and set completion flag */
+                    if(temp->r_field == ringlist_head->rlist->l_field) {
+                        temp->next = ringlist_head->rlist;
+                        is_complete = true;
+                    }
                 }
             }
+            data_head = data_head->next;
         }
-        data_head = data_head->next;
     }
 }
+
 
 void pvl3_print_rlists(rhead* ringlist_head) {
 
