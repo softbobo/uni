@@ -6,7 +6,10 @@ Matrikelnummer: 555625
 */
 
 /*to do:
-
+- copy each entry of the data list into the new ringlist for list integrity
+- do a valgrind check
+- write deletio function for data list, ringlists, more?
+- make output of data list print look like in the task
 */
 
 using namespace std;
@@ -90,48 +93,72 @@ rhead* pvl3_ringlist_master(stone* data_head, unsigned len) {
 
         if(!data_head->is_used) { 
             
-            rhead* temp = new rhead;
-            temp->rlist = data_head;
-            
-            if(i == 0) { llist_head = temp; }           //assign head pointer for first entry
-            pvl3_make_ringlist(data_head, temp, len);
-            
-            temp->rlist_len += 1;
-            
-            if(llist_prev) { llist_prev->next = temp; } //connect list-heads which point to ringlists
-            llist_prev = temp;
-            
-            data_head = data_head->next;                //traverse 'original' list
-        }        
-    }
+            /* first allocate a new entry for the 'master-list' */ 
+            rhead* ringlist_head = new rhead;
 
+            /* second make a new stone and copy data of the found one into it */
+            stone* temp = new stone;
+            temp->l_field = data_head->l_field;
+            temp->r_field = data_head->r_field;
+            data_head->is_used = true;
+            
+            /* third: direct the ringlists head to the new entry */
+            ringlist_head->rlist = temp;
+            ringlist_head->rlist_len += 1;
+            
+            /* assign head pointer for first entry */
+            if(i == 0) { llist_head = ringlist_head; }
+
+            /* fourth: construct ringlist */            
+            pvl3_make_ringlist(data_head, ringlist_head, len);
+            
+            /* fifth: connect list-heads which point to ringlists */
+            if(llist_prev) { llist_prev->next = ringlist_head; } 
+            llist_prev = ringlist_head;
+        }        
+        /* traverse list of data entries */
+        data_head = data_head->next;                
+    }
     return llist_head;
 }
 
 void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len) {
 
-    //ringlist_head->is_used = true;
     stone* prev = NULL;
 
     for(unsigned i = 0; i < len; i++) {
 
         if(!data_head->is_used) {                               //check is prob unnecessary, since each num exists only twice
+            
+            /* first: check, if either the right or left entries match 
+            to the right entry of current domino */
             if(ringlist_head->rlist->r_field == data_head->l_field 
             || ringlist_head->rlist->r_field == data_head->r_field) {
                 
-                /* change vals in list entry, if necessary */
+                /* second: make a new entry, copy data, and change vals 
+                if necessary */
+                stone* temp = new stone;
                 if(ringlist_head->rlist->r_field == data_head->r_field) {
-                    unsigned r_tmp = data_head->r_field;
-                    data_head->r_field = data_head->l_field;
-                    data_head->l_field = r_tmp;
+                    temp->r_field = data_head->l_field;
+                    temp->l_field = data_head->r_field;
                 }
-                
-                if(prev) { prev->next = ringlist_head->rlist; }
-                prev = ringlist_head->rlist;
-
-                ringlist_head->rlist_len += 1;
-                ringlist_head->rlist = data_head;
+                else {
+                    temp->r_field = data_head->r_field;
+                    temp->l_field = data_head->l_field;
+                }
                 data_head->is_used = true;
+                
+                /* third: connect list entries */
+                if(prev) { prev->next = temp; }
+                prev = temp;
+                ringlist_head->rlist_len += 1;
+
+                /* fourth: if last value in circle matches first, close the 
+                circle and return */
+                if(temp->r_field == ringlist_head->rlist->l_field) {
+                    temp->next = ringlist_head->rlist;
+                    return;
+                }
             }
         }
         data_head = data_head->next;
