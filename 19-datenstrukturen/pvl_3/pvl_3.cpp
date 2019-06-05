@@ -42,7 +42,7 @@ void pvl3_input(char* filename, stone* &data_head, unsigned &b_count) {
     if(!infile.is_open()) {
         cout << "Spezifizierte Datei kann nicht geöffnet werden. "
         "Bitte Programm erneut starten.";
-        exit(1);
+        return;
     }
     
     /* read in first argument from file, number of blocks */
