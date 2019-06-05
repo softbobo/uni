@@ -6,12 +6,8 @@ Matrikelnummer: 555625
 */
 
 /*to do:
-- change len-parameter in function call to make_ringlist() - needs to start only with 
-current entry
-- change list traversing in make_ringlist() - needs to traverse data list anew 
-for each and every new entry until circle is complete
+- write deletion function for data list, ringlists, more?
 - do a valgrind check
-- write deletio function for data list, ringlists, more?
 - make output of data list print look like in the task
 */
 
@@ -39,6 +35,7 @@ void pvl3_print_list(stone* data_head, unsigned len);
 rhead* pvl3_ringlist_master(stone* data_head, unsigned len);
 void pvl3_make_ringlist(stone* data_head, rhead* ringlist_head, unsigned len, stone* prev);
 void pvl3_print_rlists(rhead* ringlist_head);
+void pvl3_cleanup(rhead* rlists_head, stone* data_head);
 
 
 /* reads in data from file and populates singly linked data list */
@@ -196,6 +193,44 @@ void pvl3_print_rlists(rhead* ringlist_head) {
     }
 }
 
+/* like a destructor, frees all allocated memory */ 
+void pvl3_cleanup(rhead* rlists_head, stone* data_head) {
+
+    /* first: free the ringlists */
+    while(rlists_head) {
+        
+        /* save the val at the beginning of the list, so u kno when to stahp! */
+        unsigned stop = rlists_head->rlist->l_field;
+
+        while(rlists_head->rlist) {
+
+            /* first check, is last entry of circle is reached */
+            if(rlists_head->rlist->r_field == stop) {
+                delete rlists_head->rlist;
+                break; 
+            }
+
+            /* if end is not reached store next entry temporary and delete 
+            current */
+            stone* next = rlists_head->rlist->next;
+            delete rlists_head->rlist;
+            rlists_head->rlist = next;
+        }
+
+        /* if entries of cirle are deleted, delete its head */
+        rhead* prev = rlists_head;
+        rlists_head = rlists_head->next;
+        delete prev;
+    }
+
+    /* second: free the data list */
+    while(data_head) {
+        stone* prev = data_head;
+        data_head = data_head->next;
+        delete prev;
+    }
+}
+
 
 int main(int argc, char** argv) {
 
@@ -210,9 +245,11 @@ int main(int argc, char** argv) {
     stone* data_head = NULL;         
     pvl3_input(argv[1], data_head, b_count);
 
-    rhead* rlists_master = pvl3_ringlist_master(data_head, b_count);
+    rhead* rlists_head = pvl3_ringlist_master(data_head, b_count);
 
-    pvl3_print_rlists(rlists_master);
+    pvl3_print_rlists(rlists_head);
+
+    pvl3_cleanup(rlists_head, data_head);
 
     return 0;
 }
