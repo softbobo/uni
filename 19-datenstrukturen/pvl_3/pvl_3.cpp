@@ -172,6 +172,7 @@ void pvl3_print_rlists(rhead* ringlist_head) {
         for(unsigned i = 0; i < ringlist_head->rlist_len; i++) {
             cout << "[" << ringlist_head->rlist->l_field << ":" << 
             ringlist_head->rlist->l_field << "]";
+            ringlist_head->rlist = ringlist_head->rlist->next;
         }
         cout << endl;
         ringlist_head = ringlist_head->next;
