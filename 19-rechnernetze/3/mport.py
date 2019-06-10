@@ -11,12 +11,11 @@ For simplicity adresses range from 1 to 255, 255 being the broadcast address.
 """
 
 """ to do:
-- fix multiple value assignment to single key (currently same value is assigned 6 times)
-- fix output if port is known (currently does output on all ports in every case)
 - fix output formatting
 """
 
 def add_to_sat(sat, port, ip):
+    
     if ip == '255':
         return
     sat[port].append(ip)
@@ -57,9 +56,9 @@ def prompt(sat):
     else:
         # search for the port
         port = search_port(sat, data_in[2])
-
         # add new info to sat
-        add_to_sat(sat, data_in[0], data_in[1])
+        if not search_port(sat, data_in[1]):
+            add_to_sat(sat, data_in[0], data_in[1])
         # output-ip is already mapped to a port
         if port:
             print("switch> Ausgabe auf Port " + port)
