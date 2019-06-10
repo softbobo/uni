@@ -15,11 +15,13 @@ For simplicity adresses range from 1 to 255, 255 being the broadcast address.
 - fix output if port is known (currently does output on all ports in every case)
 - fix output in general (everything is output 6 times)
 - fix output formatting
-- introduce checks for max and min ip vals
 """
 
+def add_to_sat(sat, port, ip):
+    sat[port].append(ip)
+
 def search_port(sat, ip):
-    for keys, values in sat:
+    for keys, values in sat.iteritems():
         if ip == values:
             return keys
         else:
@@ -33,11 +35,9 @@ def prompt(sat):
     if len(data_in) != 1 and len(data_in) != 3:
         print("Invalide Eingabe!")
         return prompt(sat)
-
     if len(data_in) == 3 and data_in[0] < 1 and data_in[0] > 6:
         print("Invalide Eingabe. Portnummer muss sich im Bereich 1-6 befinden!")
         return prompt(sat)
-    
     if len(data_in) == 3 and data_in[1] < 0 and data_in[2] < 0 \
         and data_in[1] > 255 and data_in[2] > 255:
         print("Invalide Eingabe. Es können nur IP-Adressen im Bereich von \
@@ -52,11 +52,12 @@ def prompt(sat):
     elif data_in[0] == 'a':
         for key, values in sat.iteritems():
             print(key + ':' + ' ' + str(values))
-            #print()
         return prompt(sat)
     else:
         # search for the port
         port = search_port(sat, data_in[2])
+        # add new info to sat
+        add_to_sat(sat, data_in[0], data_in[1])
         # output-ip is already mapped to a port
         if port and data_in[2]:
             print("switch> Ausgabe auf Port " + port)
@@ -64,16 +65,6 @@ def prompt(sat):
         else:
             print("switch> Output auf allen Ports")
         return prompt(sat)
-
-        #for key, values in sat.iteritems():
-        #    """output on all ports if target is broadcast or not yet known"""
-        #    if values != data_in[1] or data_in[2] == '255':
-        #        print("switch> Ausgabe auf allen Ports")
-        #        """add adress to sat, if it is not in it yet"""
-        #        if values != data_in[1]:
-        #            sat[data_in[0]].append(data_in[1])
-        #    # print out the port if a values for given address is known
-        #    else:
 
 def main():
     """ script launcher """
