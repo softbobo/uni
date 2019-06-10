@@ -23,10 +23,10 @@ def add_to_sat(sat, port, ip):
 
 def search_port(sat, ip):
     for keys, values in sat.iteritems():
-        if ip == values:
-            return keys
-        else:
-            return 0
+        for v in values:
+            if ip == v:
+                return keys
+    return 0
 
 def prompt(sat):
     data_in = raw_input("switch<: ")
@@ -57,7 +57,6 @@ def prompt(sat):
     else:
         # search for the port
         port = search_port(sat, data_in[2])
-        print("debug. port is ", port)
 
         # add new info to sat
         add_to_sat(sat, data_in[0], data_in[1])
