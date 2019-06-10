@@ -32,7 +32,7 @@ def prompt(sat):
                 print("switch> Ausgabe auf allen Ports")
                 """add adress to sat, if it is not in it yet"""
                 if values != data_in[1]:
-                    sat[data_in[0]].append[data_in[1]]
+                    sat[data_in[0]].append(data_in[1])
             """print out the port if a values for given address is known"""
             #else:
             #    print("switch> Ausgabe auf Port " + key)
@@ -41,9 +41,9 @@ def prompt(sat):
 def main():
     """ script launcher """
     sat = {'1':[], '2':[], '3':[], '4':[], '5':[], '6':[]}                       # empty dict represensting all ports
-    print("Multiport Bridge Simulation. Steuerung: \
-        Pakete verschicken: <Port> <Absenderadresse> <Zieladresse> \
-        Ausgabe der Source-Adress-Table: a \
+    print("Multiport Bridge Simulation. Steuerung: \n \
+        Pakete verschicken: <Port> <Absenderadresse> <Zieladresse> \n \
+        Ausgabe der Source-Adress-Table: a \n \
         Programm beenden: e")
     prompt(sat)
     pass
