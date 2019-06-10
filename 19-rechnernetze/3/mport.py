@@ -10,6 +10,13 @@ the CLI of course. Args are: Input port, sender IP and receiver IP.
 For simplicity adresses range from 1 to 255, 255 being the broadcast address.
 """
 
+""" to do:
+- fix multiple value assignment to single key (currently same value is assigned 6 times)
+- fix output if port is known (currently does output on all ports in every case)
+- fix output in general (everything is output 6 times)
+- fix output formatting
+"""
+
 #def fill_sat(sat, data_in):
 #    return
 
@@ -23,7 +30,7 @@ def prompt(sat):
     # print the whole sat, if input is 'a'
     elif data_in[0] == 'a':
         for key, values in sat.iteritems():
-            print(key + ':' + ' ' + str(values).format())
+            print(key + ':' + ' ' + str(values))
             #print()
         return prompt(sat)
     else:
