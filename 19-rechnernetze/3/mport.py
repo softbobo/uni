@@ -17,9 +17,6 @@ For simplicity adresses range from 1 to 255, 255 being the broadcast address.
 - fix output formatting
 """
 
-#def fill_sat(sat, data_in):
-#    return
-
 def prompt(sat):
     data_in = raw_input("switch<: ")
     data_in = data_in.split()
