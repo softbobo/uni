@@ -23,7 +23,8 @@ def prompt(sat):
     # print the whole sat, if input is 'a'
     elif data_in[0] == 'a':
         for key, values in sat.iteritems():
-            print(key + ":" + values)
+            print(key + ':' + ' ' + str(values).format())
+            #print()
         return prompt(sat)
     else:
         for key, values in sat.iteritems():
@@ -33,9 +34,9 @@ def prompt(sat):
                 """add adress to sat, if it is not in it yet"""
                 if values != data_in[1]:
                     sat[data_in[0]].append(data_in[1])
-            """print out the port if a values for given address is known"""
-            #else:
-            #    print("switch> Ausgabe auf Port " + key)
+            # print out the port if a values for given address is known
+            else:
+                print("switch> Ausgabe auf Port " + key)
         return prompt(sat)
 
 def main():
