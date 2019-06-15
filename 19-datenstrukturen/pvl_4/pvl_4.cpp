@@ -2,12 +2,18 @@
 //Matrikelnummer 555625
 
 #include<iostream>
+#include<fstream>
 
 using namespace std;
 
 /* takes one of the read-in filenames as parameter and returns array with 
 the vals for the matrices */
 int* pvl4_read_in(char* fname) {
+
+    fstream file;
+    file.open(fname);
+
+    /* need to find out array length and copy all data to arr */
 
 }
 
