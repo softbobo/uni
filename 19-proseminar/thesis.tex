@@ -18,6 +18,7 @@
 % set margins to 1 inch
 \usepackage[margin=1in]{geometry}
 
+% natbib for bibliography style
 \usepackage{natbib}
 
 \begin{document}
@@ -31,28 +32,29 @@
             \thetitle \\
             \theauthor \\
             \date{\today}  
-
+            
         \end{large}
         
     \end{center}
 \end{titlepage}
 
-
 % use roman numbering for chapters
 \renewcommand{\thechapter}{\Roman{chapter}}
 
-\maketitle
-\setcounter{page}{1} %Start the actually document on page 1
+\setcounter{page}{1} 
 
 \tableofcontents
 
 \chapter{Introduction}
 
-\cite{zukowski2018generating}
+blblblbblb\cite{zukowski2018generating}
+
+citation 2\cite{goodfellow2016deep}
 
 \chapter{Discussion}
 
 
+\bibliographystyle{plain}
 \bibliography{biblio}
 
 
