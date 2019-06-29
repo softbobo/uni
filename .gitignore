@@ -46,3 +46,14 @@ err.txt
 #python-specific stuff
 venv/
 *.pyc
+
+
+# latex
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+*.toc
