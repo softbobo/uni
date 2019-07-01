@@ -5,8 +5,6 @@
 % to do:
 % check raw text, chapter by chapter
 % insert text chapter by chapter
-    % abstract
-    % introduction
     % samplernn
     % dadabots and its results
     % discussion
@@ -63,7 +61,6 @@
 \tableofcontents
 
 \chapter*{Abstract}
-
 This paper introduces the Dadabots project and uses it as an example for the 
 current status of research on audio synthesis using Artificial Neural 
 Networks. Throughout the text, I am going to explore the SampleRNN architecture 
@@ -93,11 +90,49 @@ this, Carr and Zukowsky’s approach produces music on a sample-based approach,
 one sample at a time\cite{mehri2016samplernn}\cite{zukowski2018generating}.  \\
 For this purpose the researchers adapted an ANN, SampleRNN, and used different 
 albums by bands of the likes of Meshuggah and NOFX as Datasets. The results of 
-this process are publicly available on Bandcamp and in a 24/7 Youtube live 
+this process are publicly available on 
+Bandcamp\footnote{ https://dadabots.bandcamp.com/ } and in a 24/7 
+Youtube\footnote{https://www.youtube.com/watch?v=CNNmBtNcccE } live 
 stream and were first presented on the International Conference on Learning 
 Representations (ICLR) in 2017. 
 
 \chapter{SampleRNN}
+SampleRNN is a \textit{Recurrent Neural Network} architecture that is specifically 
+geared towards audio training data, i.e. speech and music, and the synthesis 
+of such. The project was first presented at ICLR 2017 and is, according to 
+Mehri et al. (2017) %revisit this citation -> apalike?
+, “a novel model for unconditional audio generation 
+based on generating one audio sample at a time”. \\
+Synthesizing actual audio signals is a very recent development in the 
+research on Neural Networks, since the actual computational cost for this 
+task is very high. The authors put the average number of samples per word 
+generated at a sample rate of 16 kHz (which, for example, is far below 
+modern music production standards) at 6000\cite{mehri2016samplernn}. 
+In prior approaches, this 
+challenge would have been tackled with conversions of the raw audio 
+beforehand (e.g. to spectrographs) to extract features which would then 
+have been used as training data. The output then required further 
+adjustment via DSP (‘Digital Signal Processing’) chains. \\
+An additional challenge with this task is in the nature of audio data itself: 
+in speech and music, dependencies between a sample (or a batch of them, as in 
+a word or a musical phrase) and another one are often far apart from another. 
+In orchestral music for example, composers use recurring themes that are 
+used and varied throughout the length of a piece of music. To be able to learn 
+these dependencies an ANN needs to be able to access data it learned much before 
+the information which came immediately prior. In other words, the ANN needs to 
+able to ‘remember’. RNNs (‘Recurrent Neural Networks’), unlike FNNs 
+(Feedforward Neural Networks
+\footnote{The term \textit{Feedforward Neural Networks}, 
+also called \textit{Multilayer Perceptron} (MLP) describes a class of ANNs, 
+which produce different output for each time step based on the the immediate 
+information in the data stream. They do not use any feedback loops that allow 
+information to persist and alter the state of nodes based on a batch of information.
+\cite[p. 164]{goodfellow2016deep}}), 
+have the ability to use these information. Aside 
+from processing audio data, other applications of RNNs include Emotion Recognition
+\cite{ebrahimi2015recurrent}, 
+Gesture Recognition\cite[]{murakami1991gesture}, and Video Translation\cite{venugopalan2014translating}.  \\
+
 
 \chapter{The Results of Dadabots}
 
