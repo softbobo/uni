@@ -10,8 +10,10 @@
     % samplernn
     % dadabots and its results
     % discussion
+% clear up citations of both carr/zukowski papers
 % resolve all missing citations & references
 % style front page
+% make citations apalike
 
 \documentclass[a4paper, 11pt]{report}
 
@@ -60,7 +62,7 @@
 
 \tableofcontents
 
-\chapter{Abstract}
+\chapter*{Abstract}
 
 This paper introduces the Dadabots project and uses it as an example for the 
 current status of research on audio synthesis using Artificial Neural 
@@ -73,8 +75,27 @@ of creativity’ through artificial intelligence as I hope to provide a provide
 a perspective on how Artificial Neural Networks and Deep Learning can 
 provide new ways of artistic expression.
 
-
 \chapter{Introduction}
+Dadabots is an ongoing experiment by Zack Zukowsky and CJ Carr, with the main 
+aim of exploring modern advances in AI (‘Artificial Intelligence’) research on 
+music synthesis in conjunction with popular music, namely Black Metal. They 
+claim, that most training data used in this area of research focuses on 
+classical music which pursues the ideal of the most harmonic composition. 
+In contrast, modern music composition increasingly uses timbre manipulations as 
+creative techniques over explorations of different 
+tonalities\cite{zukowski2018generating}, thus training an 
+ANN (‘Artificial Neural Network’) on this kind of data may yield very different 
+results compared to more traditional approaches. \\
+Moreover, the authors state that most research in the realm of music synthesis 
+produces output in the symbolic domain only\cite{zukowski2018generating}. In this context this typically means 
+the generation of midi notes which represent melodies and rhythms. Opposed to 
+this, Carr and Zukowsky’s approach produces music on a sample-based approach, 
+one sample at a time\cite{mehri2016samplernn}\cite{zukowski2018generating}.  \\
+For this purpose the researchers adapted an ANN, SampleRNN, and used different 
+albums by bands of the likes of Meshuggah and NOFX as Datasets. The results of 
+this process are publicly available on Bandcamp and in a 24/7 Youtube live 
+stream and were first presented on the International Conference on Learning 
+Representations (ICLR) in 2017. 
 
 \chapter{SampleRNN}
 
