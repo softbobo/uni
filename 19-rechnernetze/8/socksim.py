@@ -16,10 +16,7 @@ Die Verbingsungsgeschwindigkeit ist jedoch weniger ausschlaggebend, da hier
 nur erwartbar wenige Daten übermittelt werden.
 """
 
-import socket
-
-def client():
-
+import server, client
 
 def calc(op, var_1, var_2):
     """ does the calculations """
