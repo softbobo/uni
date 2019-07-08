@@ -6,9 +6,12 @@
 
 import socket
 
+HOST = "127.0.0.1"
+PORT = 8080
+
 def server():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.bind(('localhost', 8080))
+    sock.bind((HOST, PORT))
     sock.listen(1)
     while True:
         conn, addr = sock.accept()
